@@ -13,12 +13,10 @@
 
 # KEYWORDS:
 # +ADMIN = general admin tools, verbs etc
-# +MENTOR = дает возможность видеть и отвечать на тикеты (F1)
-# +MODERATOR = дает возможность банить на 1440 минут.
 # +FUN = events, other event-orientated actions. Access to the fun secrets in the secrets panel.
 # +BAN = the ability to ban, jobban and fullban
 # +STEALTH = the ability to stealthmin (make yourself appear with a fake name to everyone but other admins
-# +JUDGE = дает возможность скачивать логи.
+# +POSSESS = the ability to possess objects
 # +REJUV (or +REJUVINATE) = the ability to heal, respawn, modify damage and use godmode
 # +BUILD (or +BUILDMODE) = the ability to use buildmode
 # +SERVER = higher-risk admin verbs and abilities, such as those which affect the server configuration.
@@ -29,21 +27,18 @@
 # +SPAWN (or +CREATE) = mob transformations, spawning of most atoms including mobs (high-risk atoms, e.g. blackholes, will require the +FUN flag too)
 # +EVERYTHING (or +HOST or +ALL) = Simply gives you everything without having to type every flag
 
-AdminCandidate	+ADMIN +MENTOR +MODERATOR
-TrialAdmin		+@ +SPAWN +REJUV +VAREDIT +BAN
-Badmin			+@ +BUILDMODE +SERVER +FUN
-GameAdmin		+@ +STEALTH +SOUNDS +DEBUG
-GameMaster		+EVERYTHING
+Admin Observer
+Moderator		+MOD
+Mentor                  +MENTOR
 
-Developer		+DEBUG +VAREDIT +SPAWN +MENTOR +REJUV +SERVER
-SeniorDeveloper	+@ +FUN +BUILDMODE +SOUND +STEALTH
-
-WikiMentor		+MENTOR
-HeadWiki		+@ +RIGHTS
-
-DiscordJudge	+MENTOR
-XenoModer		+@ +MODERATOR
+Admin Candidate	+ADMIN
+Trial Admin		+@ +SPAWN +REJUV +VAREDIT +BAN
+Badmin			+@ +POSSESS +BUILDMODE +SERVER +FUN
+Game Admin		+@ +STEALTH +SOUNDS +DEBUG +PERMISSIONS
+Game Master		+EVERYTHING
+Head Admin		+EVERYTHING
 
 Host			+EVERYTHING
-Project Lead	+@
-Council 05		+@
+
+Developer		+DEBUG +VAREDIT +SERVER +SPAWN +REJUV +POSSESS +BUILDMODE
+Dev Mod			+@ +MOD
