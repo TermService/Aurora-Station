@@ -103,8 +103,8 @@ client/verb/showrevinfo()
 /datum/getrev/proc/testmerge_short_overview(datum/tgs_revision_information/test_merge/tm)
 	. = list()
 
-	. += "<hr><p>PR #[tm.number]: \"[html_encode(tm.title)]\""
-	. += "<br>\tAuthor: [html_encode(tm.author)]"
+	. += "<hr><p>PR #[tm.number]: \"[rhtml_encode(tm.title)]\""
+	. += "<br>\tAuthor: [rhtml_encode(tm.author)]"
 
 	if (config.githuburl)
 		. += "<br>\t<a href='[config.githuburl]pull/[tm.number]'>\[Details...\]</a>"
@@ -116,14 +116,14 @@ client/verb/showrevinfo()
 
 	. = list()
 	. += {"<tr data-toggle="collapse" data-target="#[divid]" class="clickable">"}
-	. += {"<th>PR #[tm.number] - [html_encode(tm.title)]</th>"}
+	. += {"<th>PR #[tm.number] - [rhtml_encode(tm.title)]</th>"}
 	. += {"</tr><tr><td class="hiddenRow"><div id="[divid]" class="collapse">"}
 	. += {"<table class="table">"}
-	. += {"<tr><th>Author:</th><td>[html_encode(tm.author)]</td></tr>"}
+	. += {"<tr><th>Author:</th><td>[rhtml_encode(tm.author)]</td></tr>"}
 	. += {"<tr><th>Merged:</th><td>[tm.time_merged]</td></tr>"}
 
 	if (config.githuburl)
 		. += {"<tr><td colspan="2"><a href="?JSlink=github;pr=[tm.number]">Link to Github</a></td></tr>"}
 
-	. += {"<tr><th>Description:</th><td>[html_encode(tm.body)]</td></tr>"}
+	. += {"<tr><th>Description:</th><td>[rhtml_encode(tm.body)]</td></tr>"}
 	. += {"</table></div></td></tr>"}

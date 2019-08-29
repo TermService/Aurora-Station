@@ -171,8 +171,8 @@
 
 	sanitize(msg)
 
-	post_webhook_event(WEBHOOK_ADMIN_PM, list("title"="Help is requested", "message"="PlayerPM to **[sender]** from **[key_name(src)]**: ```[html_decode(msg)]```"))
-	discord_bot.send_to_admins("PlayerPM to [sender] from [key_name(src)]: [html_decode(msg)]")
+	post_webhook_event(WEBHOOK_ADMIN_PM, list("title"="Help is requested", "message"="PlayerPM to **[sender]** from **[key_name(src)]**: ```[rhtml_decode(msg)]```"))
+	discord_bot.send_to_admins("PlayerPM to [sender] from [key_name(src)]: [rhtml_decode(msg)]")
 
 	to_chat(src, "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "", src) + " to <span class='name'>Discord-[sender]</span>: <span class='message'>[msg]</span></span></span>")
 
