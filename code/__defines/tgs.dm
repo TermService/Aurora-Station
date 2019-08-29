@@ -26,7 +26,7 @@
 #define TGS_PROTECT_DATUM(Path)
 
 //display an announcement `message` from the server to all players
-#define TGS_WORLD_ANNOUNCE(message) world << "[html_encode(##message)]"
+#define TGS_WORLD_ANNOUNCE(message) world << "[rhtml_encode(##message)]"
 
 //Notify current in-game administrators of a string `event`
 #define TGS_NOTIFY_ADMINS(event) message_admins(##event)

@@ -156,7 +156,7 @@ VUEUI_MONITOR_VARS(/obj/machinery/photocopier, photocopiermonitor)
 		info = "<font color = #101010>"
 	else			//no toner? shitty copies for you!
 		info = "<font color = #808080>"
-	var/copied = html_decode(copy.info)
+	var/copied = rhtml_decode(copy.info)
 	copied = replacetext(copied, "<font face=\"[c.deffont]\" color=", "<font face=\"[c.deffont]\" nocolor=")	//state of the art techniques in action
 	copied = replacetext(copied, "<font face=\"[c.crayonfont]\" color=", "<font face=\"[c.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
 	info += copied
