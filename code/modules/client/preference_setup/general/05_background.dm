@@ -127,7 +127,7 @@
 		return TOPIC_REFRESH
 
 	else if(href_list["set_citizenship"])
-		pref.citizenship = (rhtml_decode(href_list["set_citizenship"]))
+		pref.citizenship = (html_decode(href_list["set_citizenship"]))
 		sanitize_character()
 		return TOPIC_REFRESH
 
@@ -139,24 +139,24 @@
 		return TOPIC_REFRESH
 
 	else if(href_list["set_religion"])
-		pref.religion = (rhtml_decode(href_list["set_religion"]))
+		pref.religion = (html_decode(href_list["set_religion"]))
 		sanitize_character()
 		return TOPIC_REFRESH
 
 	else if(href_list["set_medical_records"])
-		var/new_medical = sanitize(input(user,"Enter medical information here.","Character Preference", rhtml_decode(pref.med_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
+		var/new_medical = sanitize(input(user,"Enter medical information here.","Character Preference", html_decode(pref.med_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
 		if(!isnull(new_medical) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.med_record = new_medical
 		return TOPIC_REFRESH
 
 	else if(href_list["set_general_records"])
-		var/new_general = sanitize(input(user,"Enter employment information here.","Character Preference", rhtml_decode(pref.gen_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
+		var/new_general = sanitize(input(user,"Enter employment information here.","Character Preference", html_decode(pref.gen_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
 		if(!isnull(new_general) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.gen_record = new_general
 		return TOPIC_REFRESH
 
 	else if(href_list["set_security_records"])
-		var/sec_medical = sanitize(input(user,"Enter security information here.","Character Preference", rhtml_decode(pref.sec_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
+		var/sec_medical = sanitize(input(user,"Enter security information here.","Character Preference", html_decode(pref.sec_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
 		if(!isnull(sec_medical) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.sec_record = sec_medical
 		return TOPIC_REFRESH
@@ -171,7 +171,7 @@
 		var/list/dat = list("<center><b>[citizenship.name]</center></b>")
 		dat += "<br><br><center><a href='?src=\ref[user.client];JSlink=wiki;wiki_page=[replacetext(citizenship.name, " ", "_")]'>Read the Wiki</a></center>"
 		dat += "<br>[citizenship.description]"
-		dat += "<br><center>\[<a href='?src=\ref[src];set_citizenship=[rhtml_encode(citizenship.name)]'>Select</a>\]</center>"
+		dat += "<br><center>\[<a href='?src=\ref[src];set_citizenship=[html_encode(citizenship.name)]'>Select</a>\]</center>"
 		show_browser(user, dat.Join(), "window=citizenshippreview;size=400x500")
 
 /datum/category_item/player_setup_item/general/background/proc/show_religion_menu(mob/user, selected_religion)
@@ -180,5 +180,5 @@
 	if(religion)
 		var/list/dat = list("<center><b>[religion.name]</center></b>")
 		dat += "<br>[religion.description]"
-		dat += "<br><center>\[<a href='?src=\ref[src];set_religion=[rhtml_encode(religion.name)]'>Select</a>\]</center>"
+		dat += "<br><center>\[<a href='?src=\ref[src];set_religion=[html_encode(religion.name)]'>Select</a>\]</center>"
 		show_browser(user, dat.Join(), "window=religionpreview;size=400x500")
