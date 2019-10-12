@@ -14,7 +14,7 @@
 		new_message = "<center>This is a palceholder. Pester your staff to change it!</center>"
 
 	server_greeting.update_value("motd", new_message)
-	message_admins("[ckey] has edited the message of the day:<br>[html_encode(new_message)]")
+	message_admins("[ckey] has edited the message of the day:<br>[rhtml_encode(new_message)]")
 
 /client/proc/admin_memo_control(task in list("write", "delete"))
 	set name = "Edit Memos"
@@ -38,7 +38,7 @@
 
 	if (server_greeting.update_value("memo_write", list(ckey, new_memo)))
 		to_chat(src, "<span class='notice'>Operation carried out successfully.</span>")
-		message_admins("[ckey] wrote a new memo:<br>[html_encode(new_memo)]")
+		message_admins("[ckey] wrote a new memo:<br>[rhtml_encode(new_memo)]")
 	else
 		to_chat(src, "<span class='danger'>Error carrying out desired operation.</span>")
 

@@ -2,7 +2,6 @@
 	name = "ashtray"
 	icon = 'icons/obj/ashtray.dmi'
 	icon_state = "blank"
-	randpixel = 5
 	force_divisor = 0.1
 	thrown_force_divisor = 0.1
 	var/image/base_image
@@ -14,7 +13,8 @@
 		qdel(src)
 		return
 	max_butts = round(material.hardness/10) //This is arbitrary but whatever.
-	randpixel_xy()
+	src.pixel_y = rand(-5, 5)
+	src.pixel_x = rand(-6, 6)
 	update_icon()
 	return
 

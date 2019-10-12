@@ -3,17 +3,11 @@
 	desc = "Used for advanced medical procedures."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "table2-idle"
-	var/modify_state = "table2"
 	density = 1
-	anchored = 1
+	anchored = 1.0
 	use_power = 1
 	idle_power_usage = 1
 	active_power_usage = 5
-	component_types = list(
-			/obj/item/weapon/circuitboard/optable,
-			/obj/item/weapon/stock_parts/scanning_module = 1
-		)
-	
 	var/mob/living/carbon/human/victim = null
 	var/strapped = 0.0
 
@@ -52,8 +46,6 @@
 		qdel(src)
 	return
 
-
-
 /obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
 
@@ -75,10 +67,10 @@
 		var/mob/living/carbon/human/M = locate(/mob/living/carbon/human, src.loc)
 		if(M.lying)
 			src.victim = M
-			icon_state = M.pulse ? "[modify_state]-active" : "[modify_state]-idle"
+			icon_state = M.pulse ? "table2-active" : "table2-idle"
 			return 1
 	src.victim = null
-	icon_state = "[modify_state]-idle"
+	icon_state = "table2-idle"
 	return 0
 
 /obj/machinery/optable/machinery_process()
@@ -94,13 +86,15 @@
 		C.client.eye = src
 	C.resting = 1
 	C.forceMove(src.loc)
+	for(var/obj/O in src)
+		O.forceMove(src.loc)
 	src.add_fingerprint(user)
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
 		src.victim = H
-		icon_state = H.pulse ? "[modify_state]-active" : "[modify_state]-idle"
+		icon_state = H.pulse ? "table2-active" : "table2-idle"
 	else
-		icon_state = "[modify_state]-idle"
+		icon_state = "table2-idle"
 
 /obj/machinery/optable/MouseDrop_T(mob/target, mob/user)
 
@@ -138,7 +132,7 @@
 
 	take_victim(usr,usr)
 
-/obj/machinery/optable/attackby(obj/item/W as obj, mob/living/carbon/user as mob)
+/obj/machinery/optable/attackby(obj/item/weapon/W as obj, mob/living/carbon/user as mob)
 	if (istype(W, /obj/item/weapon/grab))
 		var/obj/item/weapon/grab/G = W
 		if (src.victim)
@@ -163,12 +157,6 @@
 			take_victim(G.affecting,usr)
 			qdel(W)
 			return
-	if(default_deconstruction_screwdriver(user, W))
-		return
-	if(default_deconstruction_crowbar(user, W))
-		return
-	if(default_part_replacement(user, W))
-		return
 
 /obj/machinery/optable/proc/check_table(mob/living/carbon/patient as mob)
 	check_victim()

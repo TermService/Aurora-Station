@@ -8,10 +8,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
-	selection_color = "#FFD737"
+	selection_color = "#ffeeaa"
 	economic_modifier = 10
-
-	minimum_character_age = 30
 
 	ideal_character_age = 50
 
@@ -62,11 +60,8 @@
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the chief engineer"
-	selection_color = "#FFEA95"
+	selection_color = "#fff5cc"
 	economic_modifier = 5
-
-	minimum_character_age = 25
-
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics)
 	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction)
 	alt_titles = list("Maintenance Technician","Engine Technician","Electrician")
@@ -98,11 +93,8 @@
 	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the chief engineer"
-	selection_color = "#FFEA95"
+	selection_color = "#fff5cc"
 	economic_modifier = 5
-
-	minimum_character_age = 25
-
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_external_airlocks)
 	minimal_access = list(access_eva, access_engine, access_atmospherics, access_maint_tunnels, access_emergency_storage, access_construction, access_external_airlocks)
 	outfit = /datum/outfit/job/atmos
@@ -130,7 +122,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Engineer"
-	selection_color = "#FFEA95"
+	selection_color = "#fff5cc"
 	access = list(access_maint_tunnels, access_construction, access_engine_equip, access_engine)
 	minimal_access = list(access_maint_tunnels, access_construction, access_engine_equip, access_engine)
 	outfit = /datum/outfit/job/intern_eng

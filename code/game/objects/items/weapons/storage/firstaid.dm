@@ -11,7 +11,6 @@
 	name = "first-aid kit"
 	desc = "It's an emergency medical kit for those serious boo-boos."
 	icon_state = "firstaid"
-	center_of_mass = list("x" = 13,"y" = 10)
 	throw_speed = 2
 	throw_range = 8
 	var/empty = 0
@@ -142,7 +141,6 @@
 	icon_state = "pill_canister"
 	icon = 'icons/obj/chemical.dmi'
 	item_state = "contsolid"
-	center_of_mass = list("x" = 16,"y" = 12)
 	w_class = 2.0
 	can_hold = list(/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/dice,/obj/item/weapon/paper)
 	allow_quick_gather = 1

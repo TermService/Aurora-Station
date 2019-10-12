@@ -18,7 +18,7 @@
 	body_parts_covered = HEAD|FACE|EYES
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
-	siemens_coefficient = 0.5
+	siemens_coefficient = 0.9
 	species_restricted = list("exclude","Diona","Vox","Golem")
 	flash_protection = FLASH_PROTECTION_MAJOR
 	allow_hair_covering = FALSE
@@ -64,8 +64,6 @@
 	desc = "A suit that protects against low pressure environments. \"NSS AURORA\" is written in large block letters on the back."
 	icon_state = "space"
 	item_state = "s_suit"
-	randpixel = 0
-	center_of_mass = null
 	w_class = 4//bulky item
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
@@ -77,7 +75,7 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
-	siemens_coefficient = 0.5
+	siemens_coefficient = 0.9
 	species_restricted = list("exclude","Diona","Vox","Golem")
 
 	var/list/supporting_limbs //If not-null, automatically splints breaks. Checked when removing the suit.

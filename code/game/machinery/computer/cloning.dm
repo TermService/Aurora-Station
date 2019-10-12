@@ -4,7 +4,7 @@
 	icon_screen = "dna"
 	light_color = "#315ab4"
 	circuit = /obj/item/weapon/circuitboard/cloning
-	req_access = list(access_genetics)
+	req_access = list(access_heads) //Only used for record deletion right now.
 	var/obj/machinery/dna_scannernew/scanner = null //Linked scanner. For scanning.
 	var/list/pods = list() //Linked cloning pods.
 	var/temp = ""
@@ -104,10 +104,6 @@
 	return attack_hand(user)
 
 /obj/machinery/computer/cloning/attack_hand(mob/user as mob)
-	if(!allowed(user))
-		to_chat(user, "<span class='warning'>Access Denied.</span>")
-		return
-
 	user.set_machine(src)
 	add_fingerprint(user)
 

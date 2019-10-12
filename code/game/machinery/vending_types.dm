@@ -66,7 +66,6 @@
 		/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer = 6,
 		/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale = 6,
 		/obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice = 4,
-		/obj/item/weapon/reagent_containers/food/drinks/bottle/applejuice = 4,
 		/obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice = 4,
 		/obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice = 4,
 		/obj/item/weapon/reagent_containers/food/drinks/bottle/lemonjuice = 4,
@@ -138,8 +137,7 @@
 		/obj/item/weapon/reagent_containers/food/drinks/coffee = 25,
 		/obj/item/weapon/reagent_containers/food/drinks/tea = 25,
 		/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25,
-		/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 20,
-		/obj/item/weapon/reagent_containers/food/drinks/coffee/pslatte = 10
+		/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 20
 	)
 	contraband = list(
 		/obj/item/weapon/reagent_containers/food/drinks/ice = 10
@@ -148,8 +146,7 @@
 		/obj/item/weapon/reagent_containers/food/drinks/coffee = 20,
 		/obj/item/weapon/reagent_containers/food/drinks/tea = 20,
 		/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 22,
-		/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 6,
-		/obj/item/weapon/reagent_containers/food/drinks/coffee/pslatte = 25
+		/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 6
 	)
 	vending_sound = "machines/vending/vending_coffee.ogg"
 	cooling_temperature = T0C + 57 //Optimal coffee temperature
@@ -696,7 +693,6 @@
 	products = list(
 		/obj/item/clothing/glasses/meson = 2,
 		/obj/item/device/multitool = 4,
-		/obj/item/powerdrill = 2,
 		/obj/item/weapon/airlock_electronics = 10,
 		/obj/item/weapon/module/power_control = 10,
 		/obj/item/weapon/airalarm_electronics = 10,

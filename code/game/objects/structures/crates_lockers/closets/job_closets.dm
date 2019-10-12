@@ -86,7 +86,6 @@
 	new /obj/item/weapon/reagent_containers/spray/cleaner(src)
 	new /obj/item/weapon/reagent_containers/glass/rag(src)
 	new /obj/item/weapon/soap/nanotrasen(src)
-	new /obj/item/weapon/reagent_containers/glass/rag/advanced(src)
 
 /*
  * Lawyer

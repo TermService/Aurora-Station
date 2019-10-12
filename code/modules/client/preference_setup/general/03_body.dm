@@ -276,7 +276,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		out += "<br><br>"
 
 	out += "</td><td><b>Preview</b><br>"
-	out += "<div class='statusDisplay'><center><img style=\"background: rgba(255, 255, 255, 0.5);\" src=previewicon.png width=[pref.preview_icon.Width()] height=[pref.preview_icon.Height()]></center></div>"
+	out += "<div class='statusDisplay'><center><img src=previewicon.png width=[pref.preview_icon.Width()] height=[pref.preview_icon.Height()]></center></div>"
 	out += "<br><a href='?src=\ref[src];toggle_clothing=1'>[pref.dress_mob ? "Hide equipment" : "Show equipment"]</a>"
 	out += "</td></tr></table>"
 
@@ -326,7 +326,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		// Actual whitelist checks are handled elsewhere, this is just for accessing the preview window.
 		var/choice = input("Which species would you like to look at?") as null|anything in playable_species
 		if(!choice) return
-		choice = html_decode(choice)
+		choice = rhtml_decode(choice)
 		pref.species_preview = choice
 		SetSpecies(preference_mob())
 		pref.alternate_languages.Cut() // Reset their alternate languages. Todo: attempt to just fix it instead?
@@ -338,7 +338,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_NOACTION
 
 		var/prev_species = pref.species
-		pref.species = html_decode(href_list["set_species"])
+		pref.species = rhtml_decode(href_list["set_species"])
 		if(prev_species != pref.species)
 			mob_species = all_species[pref.species]
 
@@ -654,6 +654,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		pref.species_preview = "Human"
 	var/datum/species/current_species = all_species[pref.species_preview]
 	var/list/dat = list(
+		"<body>",
 		"<center><h2>[current_species.name] \[<a href='?src=\ref[src];show_species=1'>change</a>\]</h2></center><hr/>",
 		"<table padding='8px'>",
 		"<tr>",
@@ -708,11 +709,10 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		else if(restricted == 2)
 			dat += "<font color='red'><b>You cannot play as this species.</br><small>This species is not available for play as a station race.</small></b></font></br>"
 	if(!restricted || check_rights(R_ADMIN, 0))
-		dat += "\[<a href='?src=\ref[src];set_species=[html_encode(pref.species_preview)]'>select</a>\]"
-	dat += "</center>"
+		dat += "\[<a href='?src=\ref[src];set_species=[rhtml_encode(pref.species_preview)]'>select</a>\]"
+	dat += "</center></body>"
 
-	send_theme_resources(user)
-	user << browse(enable_ui_theme(user, dat.Join()), "window=species;size=700x400")
+	user << browse(dat.Join(), "window=species;size=700x400")
 
 /*/datum/category_item/player_setup_item/general/body/proc/reset_limbs()
 

@@ -30,45 +30,43 @@ requireComponent.keys().forEach(fileName => {
 })
 
 Vue.config.productionTip = false
-global.Vue = Vue
+
+var state = JSON.parse(document.getElementById('initialstate').innerHTML)
+
+Store.loadState(state)
 
 global.receiveUIState = (jsonState) => {
-  Store.loadState(JSON.parse(jsonState))
+    Store.loadState(JSON.parse(jsonState))
 }
-if (document.getElementById("app")) {
-  var state = JSON.parse(document.getElementById('initialstate').innerHTML)
 
-  Store.loadState(state)
-  
-  window.__wtimetimer = window.setInterval(() => {
-    Store.state.wtime += 2
-  }, 200)
-  
-  new Vue({
-    data: Store.state,
-    template: "<div><p class='csserror'>Javascript loaded, stylesheets has failed to load. <a href='javascript:void(0)'><vui-button :params='{ vueuiforceresource: 1}'>Click here to load.</vui-button></a></p><component v-if='componentName' :is='componentName'/><component v-if='templateString' :is='{template:templateString}'/></div>",
-    computed: {
-      componentName() {
-        if(this.$root.$data.active.charAt(0) != "?") {
-          return 'view-' + this.$root.$data.active
-        }
-      },
-      templateString() {
-        if(this.$root.$data.active.charAt(0) == "?") {
-          return "<div>" + this.$root.$data.active.substr(1) + "</div>"
-        }
+window.__wtimetimer = window.setInterval(() => {
+  Store.state.wtime += 2
+}, 200)
+
+new Vue({
+  data: Store.state,
+  template: "<div><p class='csserror'>Javascript loaded, stylesheets has failed to load. <a href='javascript:void(0)'><vui-button :params='{ vueuiforceresource: 1}'>Click here to load.</vui-button></a></p><component v-if='componentName' :is='componentName'/><component v-if='templateString' :is='{template:templateString}'/></div>",
+  computed: {
+    componentName() {
+      if(this.$root.$data.active.charAt(0) != "?") {
+        return 'view-' + this.$root.$data.active
       }
     },
-    watch: {
-      state: {
-        handler() {
-          Store.pushState()
-        },
-        deep: true
+    templateString() {
+      if(this.$root.$data.active.charAt(0) == "?") {
+        return "<div>" + this.$root.$data.active.substr(1) + "</div>"
       }
     }
-  }).$mount('#app')
-}
+  },
+  watch: {
+    state: {
+      handler() {
+        Store.pushState()
+      },
+      deep: true
+    }
+  }
+}).$mount('#app')
 
 if (document.getElementById("header")) {
   new Vue({

@@ -113,7 +113,7 @@
 	if(!user.IsAdvancedToolUser())
 		return 0
 	if(src.panelopen) //The maintenance panel is open. Time for some shady stuff
-		dat+= ""
+		dat+= "<HEAD><TITLE>Suit storage unit: Maintenance panel</TITLE></HEAD>"
 		dat+= "<Font color ='black'><B>Maintenance panel controls</B></font><HR>"
 		dat+= "<font color ='grey'>The panel is ridden with controls, button and meters, labeled in strange signs and symbols that <BR>you cannot understand. Probably the manufactoring world's language.<BR> Among other things, a few controls catch your eye.<BR><BR></font>"
 		dat+= text("<font color ='black'>A small dial with a \"ë\" symbol embroidded on it. It's pointing towards a gauge that reads []</font>.<BR> <font color='blue'><A href='?src=\ref[];toggleUV=1'> Turn towards []</A><BR></font>",(src.issuperUV ? "15nm" : "185nm"),src,(src.issuperUV ? "185nm" : "15nm") )
@@ -130,7 +130,7 @@
 
 	else
 		if(!src.isbroken)
-			dat+= ""
+			dat+= "<HEAD><TITLE>Suit storage unit</TITLE></HEAD>"
 			dat+= "<font color='blue'><font size = 4><B>U-Stor-It Suit Storage Unit, model DS1900</B></FONT><BR>"
 			dat+= "<B>Welcome to the Unit control panel.</B></FONT><HR>"
 			dat+= text("<font color='black'>Helmet storage compartment: <B>[]</B></font><BR>",(src.HELMET ? HELMET.name : "</font><font color ='grey'>No helmet detected.") )
@@ -156,14 +156,13 @@
 			//user << browse(dat, "window=Suit Storage Unit;size=400x500")
 			//onclose(user, "Suit Storage Unit")
 		else //Ohhhh shit it's dirty or broken! Let's inform the guy.
-			dat+= ""
+			dat+= "<HEAD><TITLE>Suit storage unit</TITLE></HEAD>"
 			dat+= "<font color='maroon'><B>Unit chamber is too contaminated to continue usage. Please call for a qualified individual to perform maintenance.</font></B><BR><BR>"
 			dat+= text("<HR><A href='?src=\ref[];mach_close=suit_storage_unit'>Close control panel</A>", user)
 			//user << browse(dat, "window=suit_storage_unit;size=400x500")
 			//onclose(user, "suit_storage_unit")
 
-	send_theme_resources(user)
-	user << browse(enable_ui_theme(user, dat), "window=suit_storage_unit;size=400x500")
+	user << browse(dat, "window=suit_storage_unit;size=400x500")
 	onclose(user, "suit_storage_unit")
 	return
 
@@ -496,7 +495,7 @@
 		return
 	if(I.isscrewdriver())
 		src.panelopen = !src.panelopen
-		playsound(src.loc, I.usesound, 100, 1)
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		to_chat(user, text("<font color='blue'>You [] the unit's maintenance panel.</font>",(src.panelopen ? "open up" : "close") ))
 		update_icon()
 		src.updateUsrDialog()
@@ -842,7 +841,7 @@
 
 	usr.set_machine(src)
 
-	var/dat = ""
+	var/dat = "<HEAD><TITLE>Suit Cycler Interface</TITLE></HEAD>"
 
 	if(src.active)
 		dat+= "<br><font color='red'><B>The [model_text ? "[model_text] " : ""]suit cycler is currently in use. Please wait...</b></font>"
@@ -868,13 +867,12 @@
 
 		dat += "<h2>Customisation</h2>"
 		dat += "<b>Target product:</b> <A href='?src=\ref[src];select_department=1'>[target_department]</a>, <A href='?src=\ref[src];select_species=1'>[target_species]</a>."
-		dat += "<br><A href='?src=\ref[src];apply_paintjob=1'>\[apply customisation routine\]</a><br><hr>"
+		dat += "<A href='?src=\ref[src];apply_paintjob=1'><br>\[apply customisation routine\]</a><br><hr>"
 
 	if(panel_open)
 		wires.Interact(user)
 
-	send_theme_resources(user)
-	user << browse(enable_ui_theme(user, dat), "window=suit_cycler")
+	user << browse(dat, "window=suit_cycler")
 	onclose(user, "suit_cycler")
 	return
 
