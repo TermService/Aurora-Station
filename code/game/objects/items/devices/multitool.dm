@@ -62,14 +62,14 @@
 		destroyed_event.unregister(buffer_object, src)
 		buffer_object = null
 
-/obj/item/device/multitool/resolve_attackby(atom/A, mob/user, var/click_parameters)
+/obj/item/device/multitool/resolve_attackby(atom/A, mob/user)
 	if(!isobj(A))
-		return ..(A, user, click_parameters)
+		return ..(A, user)
 
 	var/obj/O = A
 	var/datum/expansion/multitool/MT = LAZYACCESS(O.expansions, /datum/expansion/multitool)
 	if(!MT)
-		return ..(A, user, click_parameters)
+		return ..(A, user)
 
 	user.AddTopicPrint(src)
 	MT.interact(src, user)

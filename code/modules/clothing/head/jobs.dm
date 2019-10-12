@@ -62,26 +62,6 @@
 	desc = "A navy blue beret with an officer's rank emblem. For officers that are more inclined towards style than safety."
 	icon_state = "officerberet"
 
-/obj/item/clothing/head/beret/sec/idris
-	name = "idris security beret"
-	desc = "A beret with the Idris Incorporated insignia emblazoned on it."
-	icon_state = "idrissecberet"
-
-/obj/item/clothing/head/beret/sec/necro
-	name = "necropolis security beret"
-	desc = "A brown beret with the Necropolis Industries insignia emblazoned on it."
-	icon_state = "necrosecberet"
-
-/obj/item/clothing/head/beret/sec/necro/alt
-	name = "necropolis security beret"
-	desc = "A black beret with the Necropolis Industries insignia emblazoned on it."
-	icon_state = "necrosecaltberet"
-
-/obj/item/clothing/head/beret/sec/eri
-	name = "eridani security beret"
-	desc = "A beret with the Eridani PMC insignia emblazoned on it."
-	icon_state = "erisecberet"
-
 /obj/item/clothing/head/beret/sec/cadet
 	name = "cadet beret"
 	desc = "A beret with the security insignia emblazoned on it. This one is for in training security personnel."
@@ -101,11 +81,6 @@
 	name = "engineering beret"
 	desc = "A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety."
 	icon_state = "e_beret_badge"
-
-/obj/item/clothing/head/beret/medical
-	name = "medical beret"
-	desc = "A beret with the medical insignia emblazoned on it. For medical members that want to crush their brains after college left them in massive debt."
-	icon_state = "medberet"
 
 /obj/item/clothing/head/beret/purple
 	name = "purple beret"
@@ -173,7 +148,7 @@
 		)
 	allowed = list(/obj/item/weapon/reagent_containers/food/snacks/candy_corn, /obj/item/weapon/pen)
 	armor = list(melee = 50, bullet = 5, laser = 25,energy = 10, bomb = 0, bio = 0, rad = 0)
-	siemens_coefficient = 0.75
+	siemens_coefficient = 0.7
 
 /obj/item/clothing/head/det/grey
 	icon_state = "grey_fedora"

@@ -90,12 +90,12 @@
 	export_types = list(/obj/item/radio)
 
 
-/datum/export/rfd_construction
+/datum/export/rcd
 	cost = 100
-	unit_name = "Rapid-Fabrication-Device C-Class"
-	export_types = list(/obj/item/weapon/rfd/construction)
+	unit_name = "rapid construction device"
+	export_types = list(/obj/item/weapon/rcd)
 
-/datum/export/rfd_ammo
+/datum/export/rcd_ammo
 	cost = 60
 	unit_name = "compressed matter cartridge"
-	export_types = list(/obj/item/weapon/rfd_ammo)
+	export_types = list(/obj/item/weapon/rcd_ammo)

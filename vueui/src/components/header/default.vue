@@ -1,11 +1,9 @@
 <template>
   <div class="uiTitleWrapper" unselectable="on">
     <slot/>
-    <div style="clear: both;">
-      <div class="uiStatusIcon uiIcon24" :class="statusClass" unselectable="on"/>
-      <div class="uiTitleText" unselectable="on">{{ title }}</div>
-      <div class="uiTitleFluff" unselectable="on"/>
-    </div>
+    <div class="uiStatusIcon uiIcon24" :class="statusClass" unselectable="on"/>
+    <div class="uiTitleText" unselectable="on">{{ title }}</div>
+    <div class="uiTitleFluff" unselectable="on"/>
   </div>
 </template>
 
@@ -31,7 +29,6 @@ export default {
   padding-bottom: 8px;
   float: none;
   background-color: #b9b9b9;
-  clear: both;
 }
 
 .uiTitleText {
@@ -39,6 +36,8 @@ export default {
   display: inline-block;
   top: 4px;
   left: 18px;
+  width: 66%;
+  width: calc(100% - 36px - 42px - 18px);
   font-size: 16px;
   line-height: 20px;
   vertical-align: middle;

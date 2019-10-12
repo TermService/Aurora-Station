@@ -8,10 +8,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#C0C0C0"
-
-	minimum_character_age = 18
-
+	selection_color = "#dddddd"
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_bar)
 	alt_titles = list("Barista")
@@ -36,10 +33,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the head of personnel"
-	selection_color = "#C0C0C0"
-
-	minimum_character_age = 18
-
+	selection_color = "#dddddd"
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_kitchen)
 	alt_titles = list("Cook")
@@ -69,10 +63,7 @@
 	total_positions = 2
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#C0C0C0"
-
-	minimum_character_age = 18
-
+	selection_color = "#dddddd"
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_hydroponics)
 	alt_titles = list("Hydroponicist")
@@ -114,11 +105,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#C0C0C0"
+	selection_color = "#dddddd"
 	economic_modifier = 5
-
-	minimum_character_age = 22
-
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 
@@ -147,10 +135,7 @@
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the quartermaster and the head of personnel"
-	selection_color = "#C0C0C0"
-
-	minimum_character_age = 18
-
+	selection_color = "#dddddd"
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
 	outfit = /datum/outfit/job/cargo_tech
@@ -174,11 +159,8 @@
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the quartermaster and the head of personnel"
-	selection_color = "#C0C0C0"
+	selection_color = "#dddddd"
 	economic_modifier = 5
-
-	minimum_character_age = 18
-
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_mining, access_mining_station, access_mailsorting)
 	outfit = /datum/outfit/job/mining
@@ -213,7 +195,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the head of personnel"
-	selection_color = "#C0C0C0"
+	selection_color = "#dddddd"
 	access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
 	minimal_access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
 	outfit = /datum/outfit/job/janitor
@@ -236,10 +218,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#C0C0C0"
-
-	minimum_character_age = 20
-
+	selection_color = "#dddddd"
 	access = list(access_journalist, access_maint_tunnels)
 	minimal_access = list(access_journalist, access_maint_tunnels)
 	alt_titles = list("Freelance Journalist")
@@ -282,7 +261,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#C0C0C0"
+	selection_color = "#dddddd"
 	access = list(access_library, access_maint_tunnels)
 	minimal_access = list(access_library)
 	outfit = /datum/outfit/job/librarian

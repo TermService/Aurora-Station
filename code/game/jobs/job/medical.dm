@@ -8,11 +8,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
-	selection_color = "#FF56B4"
+	selection_color = "#ffddf0"
 	economic_modifier = 10
-
-	minimum_character_age = 35
-
 	access = list(access_medical, access_medical_equip, access_morgue, access_genetics, access_heads,
 			access_pharmacy, access_virology, access_cmo, access_surgery, access_RC_announce, access_engine, access_construction,
 			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva, access_external_airlocks, access_research,
@@ -53,15 +50,11 @@
 	total_positions = 5
 	spawn_positions = 3
 	supervisors = "the chief medical officer"
-	selection_color = "#FF97D1"
+	selection_color = "#ffeef0"
 	economic_modifier = 7
-
-	minimum_character_age = 30
-
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_pharmacy, access_virology, access_genetics, access_eva)
-	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_genetics, access_eva)
+	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_eva)
 	alt_titles = list("Surgeon","Emergency Physician","Nurse")
-	alt_ages = list("Nurse" = 25)
 	outfit = /datum/outfit/job/doctor
 	alt_outfits = list(
 		"Emergency Physician"=/datum/outfit/job/doctor/emergency_physician,
@@ -120,11 +113,8 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the chief medical officer"
-	selection_color = "#FF97D1"
+	selection_color = "#ffeef0"
 	economic_modifier = 5
-
-	minimum_character_age = 26
-
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_pharmacy, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_medical_equip, access_pharmacy, access_virology)
 	alt_titles = list("Biochemist")
@@ -169,11 +159,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	economic_modifier = 5
-
-	minimum_character_age = 30
-
 	supervisors = "the chief medical officer"
-	selection_color = "#FF97D1"
+	selection_color = "#ffeef0"
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_pharmacy, access_virology, access_genetics, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_psychiatrist)
 	alt_titles = list("Psychologist")
@@ -207,12 +194,8 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the chief medical officer"
-	selection_color = "#FF97D1"
+	selection_color = "#ffeef0"
 	economic_modifier = 4
-
-	minimum_character_age = 24
-	alt_ages = list("Emergency Medical Technician" = 20)
-	
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_pharmacy, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist, access_paramedic)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks, access_paramedic)
 	alt_titles = list("Emergency Medical Technician")
@@ -252,19 +235,17 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Medical Officer"
-	selection_color = "#FF97D1"
+	selection_color = "#ffeef0"
 	access = list(access_medical, access_surgery, access_medical_equip)
 	minimal_access = list(access_medical, access_surgery, access_medical_equip)
-	minimum_character_age = 25
 	alt_titles = list("Medical Intern")
-	alt_ages = list("Medical Intern" = 18)
 	outfit = /datum/outfit/job/intern_med
 
 /datum/outfit/job/intern_med
 	name = "Medical Resident"
 	jobtype = /datum/job/intern_med
 
-	uniform = /obj/item/clothing/under/rank/medical/intern
+	uniform = /obj/item/clothing/under/rank/medical
 	shoes = /obj/item/clothing/shoes/medical
 	l_ear = /obj/item/device/radio/headset/headset_med
 

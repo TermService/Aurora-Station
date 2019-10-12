@@ -58,7 +58,3 @@
 /datum/gear/gloves/fingerless
 	display_name = "fingerless gloves"
 	path = /obj/item/clothing/gloves/fingerless
-
-/datum/gear/gloves/circuitry
-	display_name = "gloves, circuitry (empty)"
-	path = /obj/item/clothing/gloves/circuitry

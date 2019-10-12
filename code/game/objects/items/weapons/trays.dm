@@ -332,8 +332,3 @@
 			spill(user, src.loc)
 
 		safedrop = 0
-
-/obj/item/weapon/tray/resolve_attackby(atom/A, mob/user, var/click_parameters)
-	if(istype(A,/obj/structure/table))
-		safedrop = 1
-	..(A, user, click_parameters)

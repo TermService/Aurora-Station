@@ -18,7 +18,6 @@
 	icon_state = "donutbox6"
 	name = "donut box"
 	var/icon_type = "donut"
-	var/storage_type = "box"
 
 /obj/item/weapon/storage/fancy/update_icon(var/itemremoved = 0)
 	var/total_contents = src.contents.len - itemremoved
@@ -30,11 +29,11 @@
 		return
 
 	if(contents.len <= 0)
-		to_chat(user, "There are no [src.icon_type]s left in the [src.storage_type].")
+		to_chat(user, "There are no [src.icon_type]s left in the box.")
 	else if(contents.len == 1)
-		to_chat(user, "There is one [src.icon_type] left in the [src.storage_type].")
+		to_chat(user, "There is one [src.icon_type] left in the box.")
 	else
-		to_chat(user, "There are [src.contents.len] [src.icon_type]s in the [src.storage_type].")
+		to_chat(user, "There are [src.contents.len] [src.icon_type]s in the box.")
 
 	return
 
@@ -45,7 +44,6 @@
 /obj/item/weapon/storage/fancy/egg_box
 	icon = 'icons/obj/food.dmi'
 	icon_state = "eggbox"
-	center_of_mass = list("x" = 16,"y" = 7)
 	icon_type = "egg"
 	name = "egg box"
 	storage_slots = 12

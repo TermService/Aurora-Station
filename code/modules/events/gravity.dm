@@ -1,7 +1,6 @@
 /datum/event/gravity
 	announceWhen = 5
 	ic_name = "a gravity failure"
-	no_fake = 1
 
 /datum/event/gravity/setup()
 	endWhen = rand(15, 60)

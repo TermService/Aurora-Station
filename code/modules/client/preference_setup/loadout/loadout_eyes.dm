@@ -133,7 +133,3 @@
 /datum/gear/eyes/spiffygogs
 	display_name = "orange goggles"
 	path = /obj/item/clothing/glasses/spiffygogs
-
-/datum/gear/eyes/circuitry
-	display_name = "goggles, circuitry (empty)"
-	path = /obj/item/clothing/glasses/circuitry

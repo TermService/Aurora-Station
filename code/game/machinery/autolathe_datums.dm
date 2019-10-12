@@ -185,9 +185,9 @@
 	path = /obj/item/weapon/module/power_control
 	category = "Engineering"
 
-/datum/autolathe/recipe/rfd_ammo
-	name = "compressed matter cartridge"
-	path = /obj/item/weapon/rfd_ammo
+/datum/autolathe/recipe/rcd_ammo
+	name = "matter cartridge"
+	path = /obj/item/weapon/rcd_ammo
 	category = "Engineering"
 
 /datum/autolathe/recipe/scalpel
@@ -233,16 +233,6 @@
 /datum/autolathe/recipe/vial
 	name = "glass vial"
 	path = /obj/item/weapon/reagent_containers/glass/beaker/vial
-	category = "Medical"
-
-/datum/autolathe/recipe/autoinjector
-	name = "autoinjector"
-	path = /obj/item/weapon/reagent_containers/hypospray/autoinjector
-	category = "Medical"
-
-/datum/autolathe/recipe/autoinhaler
-	name = "autoinhaler"
-	path = /obj/item/weapon/reagent_containers/inhaler
 	category = "Medical"
 
 /datum/autolathe/recipe/syringe
@@ -499,9 +489,9 @@
 	hidden = 1
 	category = "Arms and Ammunition"
 
-/datum/autolathe/recipe/rfd_construction
-	name = "rapid-fabrication-device c-class"
-	path = /obj/item/weapon/rfd/construction
+/datum/autolathe/recipe/rcd
+	name = "rapid construction device"
+	path = /obj/item/weapon/rcd
 	hidden = 1
 	category = "Engineering"
 

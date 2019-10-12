@@ -86,14 +86,8 @@ var/datum/vueui_module/player_panel/global_player_panel
 			VUEUI_SET_CHECK(data["players"][ref]["antag"], special_char, ., data)
 		else
 			VUEUI_SET_CHECK(data["players"][ref]["antag"], -1, ., data)
-		if(isMod && (M.client?.player_age || M.player_age))
-			var/age = "Requires database"
-			if(M.client?.player_age)
-				age = M.client.player_age
-			else if(M.player_age)
-				age = M.player_age
-			else
-				age = "NA"
+		if(isMod && M.client?.player_age)
+			var/age = M.client.player_age
 			if(age == "Requires database")
 				age = "NA"
 			VUEUI_SET_CHECK(data["players"][ref]["age"], age, ., data)
@@ -106,9 +100,7 @@ var/datum/vueui_module/player_panel/global_player_panel
 	if(isrobot(M))
 		return "Cyborg"
 	if(ishuman(M))
-		if(M.real_name)
-			return M.real_name
-		return "Unknown"
+		return M.real_name
 	if(istype(M, /mob/living/silicon/pai))
 		return "pAI"
 	if(istype(M, /mob/abstract/new_player))

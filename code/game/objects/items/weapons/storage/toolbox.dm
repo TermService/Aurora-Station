@@ -4,7 +4,6 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "red"
 	item_state = "toolbox_red"
-	center_of_mass = list("x" = 16,"y" = 11)
 	flags = CONDUCT
 	force = 5
 	throwforce = 10

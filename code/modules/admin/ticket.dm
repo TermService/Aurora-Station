@@ -201,7 +201,7 @@ var/global/list/ticket_panels = list()
 /datum/ticket_msg/New(var/msg_from, var/msg_to, var/msg)
 	src.msg_from = msg_from
 	src.msg_to = msg_to
-	src.msg = msg
+	src.msg = sanitize_ru(msg)
 	src.time_stamp = time_stamp()
 
 /datum/ticket_panel

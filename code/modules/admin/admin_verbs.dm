@@ -134,8 +134,7 @@ var/list/admin_verbs_fun = list(
 	/client/proc/fab_tip,
 	/client/proc/apply_sunstate,
 	/client/proc/cure_traumas,
-	/client/proc/add_traumas,
-	/datum/admins/proc/ccannoucment
+	/client/proc/add_traumas
 	)
 
 var/list/admin_verbs_spawn = list(
@@ -316,8 +315,7 @@ var/list/admin_verbs_hideable = list(
 	/proc/release,
 	/client/proc/toggle_recursive_explosions,
 	/client/proc/cure_traumas,
-	/client/proc/add_traumas,
-	/datum/admins/proc/ccannoucment
+	/client/proc/add_traumas
 	)
 var/list/admin_verbs_mod = list(
 	/client/proc/cmd_admin_pm_context,	// right-click adminPM interface,

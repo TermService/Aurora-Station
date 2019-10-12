@@ -24,9 +24,6 @@
 	wreckage = /obj/effect/decal/mecha_wreckage/tank
 	stepsound = 'sound/mecha/tanktread.ogg'
 	turnsound = 'sound/mecha/tanktread.ogg'
-	description_fluff = "There are currently 133 field armies (or armies for short) in the Republican Army. Most field armies are combined arms armies, which utilize artillery, tank, \
-	and mechanized vehicle divisions to provide support to infantry divisions. However, there are a handful of concentrated tank armies which are used for spearheading massive \
-	offensives. Unlike other contemporary armies in 2458, the Republican Army lacks the ability to have corps level formations."
 
 /obj/mecha/combat/tank/Initialize()
 	.= ..()
@@ -140,7 +137,6 @@
 	health = 950
 	w_class = 45
 	wreckage = /obj/effect/decal/mecha_wreckage/tank/jotun
-	description_fluff = null
 
 /obj/mecha/combat/tank/jotun/Initialize()
 	.= ..()
@@ -160,8 +156,6 @@
 	ME = new /obj/item/mecha_parts/mecha_equipment/armor_booster/antiproj_armor_booster
 	ME.attach(src)
 	return
-
-
 
 #undef NOMINAL
 #undef FIRSTRUN

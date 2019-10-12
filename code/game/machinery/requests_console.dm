@@ -1,12 +1,12 @@
 /******************** Requests Console ********************/
 /** Originally written by errorage, updated by: Carn, needs more work though. I just added some security fixes */
 
-//Requests Console Department Types
+//Request Console Department Types
 #define RC_ASSIST 1		//Request Assistance
 #define RC_SUPPLY 2		//Request Supplies
 #define RC_INFO   4		//Relay Info
 
-//Requests Console Screens
+//Request Console Screens
 #define RCS_MAINMENU 0	// Main menu
 #define RCS_RQASSIST 1	// Request supplies
 #define RCS_RQSUPPLY 2	// Request assistance
@@ -29,11 +29,6 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	anchored = 1
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "req_comp0"
-	component_types = list(
-			/obj/item/weapon/circuitboard/requestconsole,
-			/obj/item/weapon/stock_parts/capacitor,
-			/obj/item/weapon/stock_parts/console_screen,
-		)
 	var/department = "Unknown" //The list of all departments on the station (Determined from this variable on each unit) Set this to the same thing if you want several consoles in one department
 	var/list/message_log = list() //List of all messages
 	var/departmentType = 0 		//Bitflag. Zero is reply-only. Map currently uses raw numbers instead of defines.
@@ -84,17 +79,8 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			else
 				set_light(0)
 
-/obj/machinery/requests_console/Initialize(mapload, var/dir, var/building = 0)
+/obj/machinery/requests_console/Initialize()
 	. = ..()
-
-	if(building)
-		if(dir)
-			src.set_dir(dir)
-
-		pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
-		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
-		update_icon()
-		return
 
 	announcement.title = "[department] announcement"
 	announcement.newscast = 1
@@ -187,7 +173,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "requests_console.tmpl", "[department] Requests Console", 520, 410)
+		ui = new(user, src, ui_key, "request_console.tmpl", "[department] Request Console", 520, 410)
 		ui.set_initial_data(data)
 		ui.open()
 
@@ -303,11 +289,10 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			var/name = query.item[2]
 			var/data = query.item[3]
 			var/obj/item/weapon/paper/C = new()
-			C.color = "#fff9e8"
 
 			//Let's start the BB >> HTML conversion!
 
-			data = html_encode(data)
+			data = rhtml_encode(data)
 			C.set_content("NFC-[id] - [name]", data)
 			print(C)
 
@@ -405,13 +390,12 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 						var/obj/item/weapon/paper/C = O
 						var/obj/item/weapon/paper/P = new /obj/item/weapon/paper()
 						var/info = "<font color = #101010>"
-						var/copied = html_decode(C.info)
+						var/copied = rhtml_decode(C.info)
 						copied = replacetext(copied, "<font face=\"[P.deffont]\" color=", "<font face=\"[P.deffont]\" nocolor=")	//state of the art techniques in action
 						copied = replacetext(copied, "<font face=\"[P.crayonfont]\" color=", "<font face=\"[P.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
 						info += copied
 						info += "</font>"
 						var/pname = C.name
-						P.color = "#fff9e8"
 						P.fields = C.fields
 						P.stamps = C.stamps
 						P.stamped = C.stamped
