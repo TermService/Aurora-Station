@@ -125,7 +125,7 @@ VUEUI_MONITOR_VARS(/obj/machinery/photocopier, photocopiermonitor)
 			flick("photocopier_notoner", src)
 			playsound(loc, 'sound/machines/buzz-two.ogg', 75, 1)
 	else if(O.iswrench())
-		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+		playsound(loc, O.usesound, 50, 1)
 		anchored = !anchored
 		to_chat(user, "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>")
 	return
@@ -156,12 +156,13 @@ VUEUI_MONITOR_VARS(/obj/machinery/photocopier, photocopiermonitor)
 		info = "<font color = #101010>"
 	else			//no toner? shitty copies for you!
 		info = "<font color = #808080>"
-	var/copied = rhtml_decode(copy.info)
+	var/copied = html_decode(copy.info)
 	copied = replacetext(copied, "<font face=\"[c.deffont]\" color=", "<font face=\"[c.deffont]\" nocolor=")	//state of the art techniques in action
 	copied = replacetext(copied, "<font face=\"[c.crayonfont]\" color=", "<font face=\"[c.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
 	info += copied
 	info += "</font>"//</font>
 	pname = copy.name // -- Doohl
+	c.color = "#f0f0f0"
 	c.fields = copy.fields
 	c.stamps = copy.stamps
 	c.stamped = copy.stamped

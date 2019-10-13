@@ -24,6 +24,9 @@
 	var/colour = "black"	//what colour the ink is!
 	drop_sound = 'sound/items/drop/accessory.ogg'
 
+/obj/item/weapon/pen/ispen()
+	return TRUE
+
 /obj/item/weapon/pen/blue
 	desc = "An instrument for writing or drawing with ink. This one is in blue. Ironically used mostly by white-collar workers."
 	icon_state = "pen_blue"
@@ -62,7 +65,7 @@
 /obj/item/weapon/pen/attack(mob/M as mob, mob/user as mob, var/target_zone)
 	if(!ismob(M))
 		return
-	to_chat(user, "<span class='warning'>You stab [M] with the pen.</span>")
+	to_chat(user, "<span class='warning'>You stab [M] with \the [src].</span>")
 //	to_chat(M, "\red You feel a tiny prick!" //That's a whole lot of meta!)
 	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stabbed with [name]  by [user.name] ([user.ckey])</font>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to stab [M.name] ([M.ckey])</font>")

@@ -53,7 +53,7 @@
 	if(title)
 		name = title
 	if (text && length(text))
-		info = rhtml_encode(text)
+		info = html_encode(text)
 		info = parsepencode(text)
 	else
 		info = ""
@@ -317,8 +317,6 @@
 		else if (P.iswelder())
 			var/obj/item/weapon/weldingtool/F = P
 			if (!F.welding)//welding tools are 0 when off
-				return
-			if (!F.remove_fuel(1, user))//This function removes the fuel and does the usual eyedamage checks, if it returns 0 then the welder is out of fuel and cant burn paper
 				return
 		else
 			//If we got here somehow, the item is incompatible and can't burn things

@@ -39,6 +39,8 @@
 				return 1
 			if("Aut'akh Unathi")
 				return 1
+			if ("Unathi Zombie")
+				return 1
 	return 0
 
 /proc/isautakh(A)
@@ -57,11 +59,17 @@
 				return 1
 			if("M'sai Tajara")
 				return 1
+			if ("Tajara Zombie")
+				return 1
 	return 0
 
 /proc/isskrell(A)
-	if(istype(A, /mob/living/carbon/human) && (A:get_species() == "Skrell"))
-		return 1
+	if(istype(A, /mob/living/carbon/human))
+		switch(A:get_species())
+			if ("Skrell")
+				return 1
+			if ("Skrell Zombie")
+				return 1
 	return 0
 
 /proc/isvaurca(A)
@@ -118,6 +126,12 @@
 			if ("Skeleton")
 				return 1
 			if ("Zombie")
+				return 1
+			if ("Tajara Zombie")
+				return 1
+			if ("Unathi Zombie")
+				return 1
+			if ("Skrell Zombie")
 				return 1
 			if ("Apparition")
 				return 1
@@ -315,7 +329,7 @@ var/list/global/organ_rel_size = list(
 	return t
 
 proc/slur(phrase, strength = 100)
-	phrase = rhtml_decode(phrase)
+	phrase = html_decode(phrase)
 	var/leng=lentext(phrase)
 	var/counter=lentext(phrase)
 	var/newphrase=""
@@ -336,7 +350,7 @@ proc/slur(phrase, strength = 100)
 	return newphrase
 
 /proc/stutter(n)
-	var/te = rhtml_decode(n)
+	var/te = html_decode(n)
 	var/t = ""//placed before the message. Not really sure what it's for.
 	n = length(n)//length of the entire word
 	var/p = null
@@ -383,7 +397,7 @@ The difference with stutter is that this proc can stutter more than 1 letter
 The issue here is that anything that does not have a space is treated as one word (in many instances). For instance, "LOOKING," is a word, including the comma.
 It's fairly easy to fix if dealing with single letters but not so much with compounds of letters./N
 */
-	var/te = rhtml_decode(n)
+	var/te = html_decode(n)
 	var/t = ""
 	n = length(n)
 	var/p = 1

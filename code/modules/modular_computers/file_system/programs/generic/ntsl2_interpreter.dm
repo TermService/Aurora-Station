@@ -33,7 +33,7 @@
 		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
 		var/datum/computer_file/data/F = HDD.find_file_by_name(href_list["PRG_execfile"])
 		if(istype(F))
-			var/oldtext = rhtml_decode(F.stored_data)
+			var/oldtext = html_decode(F.stored_data)
 			oldtext = replacetext(oldtext, "\[editorbr\]", "\n")
 			running = ntsl2.new_program(oldtext, src, usr)
 			if(istype(running))
