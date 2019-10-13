@@ -747,11 +747,11 @@
 				src << browse(null, "window=flavor_changes")
 				return
 			if("general")
-				var/msg = sanitize(input(usr,"Update the general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",rhtml_decode(flavor_texts[href_list["flavor_change"]])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Update the general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message, extra = 0)
 				flavor_texts[href_list["flavor_change"]] = msg
 				return
 			else
-				var/msg = sanitize(input(usr,"Update the flavor text for your [href_list["flavor_change"]].","Flavor Text",rhtml_decode(flavor_texts[href_list["flavor_change"]])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Update the flavor text for your [href_list["flavor_change"]].","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message, extra = 0)
 				flavor_texts[href_list["flavor_change"]] = msg
 				set_flavor()
 				return
@@ -1136,10 +1136,7 @@
 						"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>")
 					to_chat(src, msg)
 
-				organ.take_damage(rand(1,3), 0, 0)
-				if(!(organ.status & ORGAN_ROBOT) && !(species.flags & NO_BLOOD)) //There is no blood in protheses.
-					organ.status |= ORGAN_BLEEDING
-					src.adjustToxLoss(rand(1,3))
+				adjustHalLoss(rand(1, 3))
 
 /mob/living/carbon/human/verb/check_pulse()
 	set category = "Object"
@@ -1178,7 +1175,7 @@
 	else
 		to_chat(usr, "<span class='warning'>You failed to check the pulse. Try again.</span>")
 
-/mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour, var/kpg=0)
+/mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour, var/kpg=0, var/change_hair = TRUE)
 	cached_bodytype = null
 	if(!dna)
 		if(!new_species)
@@ -1266,7 +1263,8 @@
 	nutrition_loss = HUNGER_FACTOR * species.nutrition_loss_factor
 	hydration_loss = THIRST_FACTOR * species.hydration_loss_factor
 
-	species.set_default_hair(src)
+	if(change_hair)
+		species.set_default_hair(src)
 
 	if(species)
 		return 1
@@ -1566,6 +1564,13 @@
 /mob/living/carbon/human/get_metabolism(metabolism)
 	return ..() * (species ? species.metabolism_mod : 1)
 
+
+/mob/living/carbon/human/proc/isonlifesupport()
+	if (buckled && istype(buckled, /obj/machinery/optable/lifesupport))
+		var/obj/machinery/optable/lifesupport/A = buckled
+		return A.onlifesupport()
+	else
+		return 0
 /mob/living/carbon/human/is_clumsy()
 	if(CLUMSY in mutations)
 		return TRUE

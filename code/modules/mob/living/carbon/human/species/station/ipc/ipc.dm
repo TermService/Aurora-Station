@@ -18,7 +18,10 @@
 	light_range = 2
 	light_power = 0.5
 	meat_type = /obj/item/stack/material/steel
-	unarmed_types = list(/datum/unarmed_attack/punch)
+	unarmed_types = list(
+		/datum/unarmed_attack/punch, 
+		/datum/unarmed_attack/stomp, 
+		/datum/unarmed_attack/kick)
 	rarity_value = 2
 
 	inherent_eye_protection = FLASH_PROTECTION_MAJOR
@@ -36,7 +39,9 @@
 	brute_mod = 1.0
 	burn_mod = 1.2
 	show_ssd = "flashing a 'system offline' glyph on their monitor"
+
 	death_message = "gives one shrill beep before falling lifeless."
+	death_message_range = 7
 	knockout_message = "encounters a hardware fault and suddenly reboots!"
 	halloss_message = "encounters a hardware fault and suddenly reboots."
 	halloss_message_self = "ERROR: Unrecoverable machine check exception.<BR>System halted, rebooting..."
@@ -56,12 +61,13 @@
 	passive_temp_gain = 10  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/self_diagnostics
+		/mob/living/carbon/human/proc/self_diagnostics,
+		/mob/living/carbon/human/proc/change_monitor
 	)
 
 	flags = IS_IPC
 	appearance_flags = HAS_SKIN_COLOR | HAS_HAIR_COLOR
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = CAN_JOIN | IS_WHITELISTED | NO_AGE_MINIMUM
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
@@ -232,8 +238,60 @@ datum/species/machine/handle_post_spawn(var/mob/living/carbon/human/H)
 		if ("static IPC screen")
 			return "#FFFFFF"
 
+		if ("static2 IPC screen")
+			return "#FFFFFF"
+
+		if ("static3 IPC screen")
+			return "#FFFFFF"
+
 		if ("yellow IPC screen")
 			return LIGHT_COLOR_YELLOW
+
+		if ("eye IPC screen")
+			return LIGHT_COLOR_CYAN
+
+		if ("heartrate IPC screen")
+			return LIGHT_COLOR_BLUE
+
+		if ("cancel IPC screen")
+			return LIGHT_COLOR_RED
+
+		if ("testcard IPC screen")
+			return "#FFFFFF"
+
+		if ("blank IPC screen")
+			return null
+
+		if ("scroll IPC screen")
+			return "#FFFFFF"
+
+		if ("console IPC screen")
+			return "#FFFFFF"
+
+		if ("RGB IPC screen")
+			return "#FFFFFF" //idk
+
+		if ("GoL glider IPC screen")
+			return "#FFFFFF"
+
+		if ("rainbow IPC screen")
+			return "#FFFFFF" //idk 2.0
+
+		if ("smiley IPC screen")
+			return LIGHT_COLOR_YELLOW
+
+		if ("database IPC screen")
+			return "#FFFFFF"
+
+		if ("lumi eyes IPC screen")
+			return "#FFFFFF"
+
+		if ("music IPC screen")
+			return "#FFFFFF"
+
+		if ("waiting IPC screen")
+			return "#FFFFFF"
+
 
 /datum/species/machine/before_equip(var/mob/living/carbon/human/H)
 	. = ..()

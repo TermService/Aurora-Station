@@ -95,7 +95,7 @@
 		if(F.do_not_edit && (alert("WARNING: This file is not compatible with editor. Editing it may result in permanently corrupted formatting or damaged data consistency. Edit anyway?", "Incompatible File", "No", "Yes") == "No"))
 			return 1
 
-		var/oldtext = rhtml_decode(F.stored_data)
+		var/oldtext = html_decode(F.stored_data)
 		oldtext = replacetext(oldtext, "\[editorbr\]", "\n")
 
 		var/newtext = sanitize(replacetext(input(usr, "Editing file [open_file]. You may use most tags used in paper formatting:", "Text Editor", oldtext) as message|null, "\n", "\[editorbr\]"), MAX_TEXTFILE_LENGTH)
@@ -111,7 +111,7 @@
 			// This is mostly intended to prevent people from losing texts they spent lot of time working on due to running out of space.
 			// They will be able to copy-paste the text from error screen and store it in notepad or something.
 			if(!HDD.store_file(F))
-				error = "I/O error: Unable to overwrite file. Hard drive is probably full. You may want to backup your changes before closing this window:<br><br>[rhtml_decode(F.stored_data)]<br><br>"
+				error = "I/O error: Unable to overwrite file. Hard drive is probably full. You may want to backup your changes before closing this window:<br><br>[html_decode(F.stored_data)]<br><br>"
 				HDD.store_file(backup)
 	if(href_list["PRG_printfile"])
 		. = 1
@@ -183,7 +183,7 @@
 /datum/nano_module/program/computer_filemanager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = host.initial_data()
 	var/datum/computer_file/program/filemanager/PRG
-	//var/list/data = program.get_header_data()
+	//var/list/data = list("_PC" = program.get_header_data())
 	PRG = program
 
 	var/obj/item/weapon/computer_hardware/hard_drive/HDD

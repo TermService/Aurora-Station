@@ -65,7 +65,7 @@
 	else if(B.iswrench())
 		anchored = !anchored
 		to_chat(user, "You [anchored ? "attach" : "detach"] the [src] [anchored ? "to" : "from"] the ground")
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+		playsound(src.loc, B.usesound, 75, 1)
 
 
 /obj/machinery/chem_master/Topic(href, href_list)
@@ -740,7 +740,7 @@
 	// Reset the machine.
 	spawn(60)
 		inuse = 0
-		interact(usr)
+		src.updateUsrDialog()
 
 	// Process.
 	for (var/obj/item/O in holdingitems)
