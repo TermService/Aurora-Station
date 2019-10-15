@@ -57,7 +57,7 @@
 				to_chat(M, "<h2 class='alert'>[title]</h2>")
 				to_chat(M, "<span class='alert'>[message]</span>")
 				if (announcer)
-					to_chat(M, "<span class='alert'> -[html_encode(announcer)]</span>")
+					to_chat(M, "<span class='alert'> -[rhtml_encode(announcer)]</span>")
 				if(message_sound && !isdeaf(M) && (M.client.prefs.asfx_togs & ASFX_VOX))
 					sound_to(M, message_sound)
 

@@ -307,7 +307,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 
 			//Let's start the BB >> HTML conversion!
 
-			data = html_encode(data)
+			data = rhtml_encode(data)
 			C.set_content("NFC-[id] - [name]", data)
 			print(C)
 
@@ -405,7 +405,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 						var/obj/item/weapon/paper/C = O
 						var/obj/item/weapon/paper/P = new /obj/item/weapon/paper()
 						var/info = "<font color = #101010>"
-						var/copied = html_decode(C.info)
+						var/copied = rhtml_decode(C.info)
 						copied = replacetext(copied, "<font face=\"[P.deffont]\" color=", "<font face=\"[P.deffont]\" nocolor=")	//state of the art techniques in action
 						copied = replacetext(copied, "<font face=\"[P.crayonfont]\" color=", "<font face=\"[P.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
 						info += copied

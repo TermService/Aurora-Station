@@ -174,17 +174,17 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 				nanoui_data["exploit"] = list()  // Setting this to equal L.fields passes it's variables that are lists as reference instead of value.
 								 // We trade off being able to automatically add shit for more control over what gets passed to json
 								 // and if it's sanitized for html.
-				nanoui_data["exploit"]["nanoui_exploit_record"] = html_encode(L.exploit_record) // Change stuff into html
+				nanoui_data["exploit"]["nanoui_exploit_record"] = rhtml_encode(L.exploit_record) // Change stuff into html
 				nanoui_data["exploit"]["nanoui_exploit_record"] = replacetext(nanoui_data["exploit"]["nanoui_exploit_record"], "\n", "<br>") // change line breaks into <br>
-				nanoui_data["exploit"]["name"] =  html_encode(L.name)
-				nanoui_data["exploit"]["sex"] =  html_encode(L.sex)
-				nanoui_data["exploit"]["age"] =  html_encode(L.age)
-				nanoui_data["exploit"]["species"] =  html_encode(L.species)
-				nanoui_data["exploit"]["rank"] =  html_encode(L.rank)
-				nanoui_data["exploit"]["citizenship"] =  html_encode(L.citizenship)
-				nanoui_data["exploit"]["employer"] =  html_encode(L.employer)
-				nanoui_data["exploit"]["religion"] =  html_encode(L.religion)
-				nanoui_data["exploit"]["fingerprint"] =  html_encode(L.fingerprint)
+				nanoui_data["exploit"]["name"] =  rhtml_encode(L.name)
+				nanoui_data["exploit"]["sex"] =  rhtml_encode(L.sex)
+				nanoui_data["exploit"]["age"] =  rhtml_encode(L.age)
+				nanoui_data["exploit"]["species"] =  rhtml_encode(L.species)
+				nanoui_data["exploit"]["rank"] =  rhtml_encode(L.rank)
+				nanoui_data["exploit"]["citizenship"] =  rhtml_encode(L.citizenship)
+				nanoui_data["exploit"]["employer"] =  rhtml_encode(L.employer)
+				nanoui_data["exploit"]["religion"] =  rhtml_encode(L.religion)
+				nanoui_data["exploit"]["fingerprint"] =  rhtml_encode(L.fingerprint)
 
 				nanoui_data["exploit_exists"] = 1
 				break
@@ -289,10 +289,10 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 					else
 						contract["status"] = "0"
 
-				contract["title"] = html_encode(select_query.item[4])
+				contract["title"] = rhtml_encode(select_query.item[4])
 				contract["description"] = select_query.item[5]
 
-				contract["description"] = html_encode(contract["description"])
+				contract["description"] = rhtml_encode(contract["description"])
 				contract["description"] = replacetext(contract["description"], "\n", "<br>")
 				contract["description"] = replacetext(contract["description"], ascii2text(13), "")
 				contract["reward_other"] = select_query.item[6]

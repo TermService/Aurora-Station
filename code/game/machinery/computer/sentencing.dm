@@ -635,7 +635,7 @@
 			var/list/L = incident.arbiters["Witness"]
 			var/W = locate( href_list["choice"] )
 
-			var/notes  = sanitize( input( usr,"Summarize what the witness said:","Witness Report", html_decode( L[W] )) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
+			var/notes  = sanitize( input( usr,"Summarize what the witness said:","Witness Report", rhtml_decode( L[W] )) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if( notes != null )
 				L[W] = notes
 
@@ -644,7 +644,7 @@
 			var/list/L = incident.evidence
 			var/E = locate( href_list["choice"] )
 
-			var/notes  = sanitize( input( usr,"Describe the relevance of this evidence:","Evidence Report", html_decode( L[E] )) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
+			var/notes  = sanitize( input( usr,"Describe the relevance of this evidence:","Evidence Report", rhtml_decode( L[E] )) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if( notes != null )
 				L[E] = notes
 
@@ -653,7 +653,7 @@
 			if( !incident )
 				return
 
-			var/incident_notes  = sanitize( input( usr,"Describe the incident here:","Incident Report", html_decode( incident.notes )) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
+			var/incident_notes  = sanitize( input( usr,"Describe the incident here:","Incident Report", rhtml_decode( incident.notes )) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 			if( incident_notes != null )
 				incident.notes = incident_notes
 		if( "render_guilty" )

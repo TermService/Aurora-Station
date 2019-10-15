@@ -33,9 +33,9 @@
 /datum/ntsl_program/proc/tc_message(var/datum/signal/signal)
 	if(ntsl2.connected)
 		ntsl2.send(list(action = "message", id = id, sig_ref = "\ref[signal]", signal = list2params(list(
-			content = html_decode(signal.data["message"]),
-			source = html_decode(signal.data["name"]),
-			job = html_decode(signal.data["job"]),
+			content = rhtml_decode(signal.data["message"]),
+			source = rhtml_decode(signal.data["name"]),
+			job = rhtml_decode(signal.data["job"]),
 			freq = signal.frequency,
 			pass = !(signal.data["reject"]),
 			language = signal.data["language"].name,
