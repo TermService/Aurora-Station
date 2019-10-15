@@ -77,6 +77,7 @@
 #include "code\_helpers\sanitize_values.dm"
 #include "code\_helpers\spawn_sync.dm"
 #include "code\_helpers\text.dm"
+#include "code\_helpers\text_ru.dm"
 #include "code\_helpers\time.dm"
 #include "code\_helpers\turfs.dm"
 #include "code\_helpers\type2type.dm"

@@ -1,4 +1,4 @@
-/obj/machinery/camera
+rhtml_encode/obj/machinery/camera
 	name = "security camera"
 	desc = "It's used to monitor rooms."
 	icon = 'icons/obj/monitors.dmi'
@@ -472,4 +472,3 @@
 	wires.MendAll()
 	update_icon()
 	update_coverage()
-
