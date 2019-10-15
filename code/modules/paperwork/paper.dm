@@ -53,7 +53,7 @@
 	if(title)
 		name = title
 	if (text && length(text))
-		info = rhtml_encode(text)
+		info = html_encode(text)
 		info = parsepencode(text)
 	else
 		info = ""

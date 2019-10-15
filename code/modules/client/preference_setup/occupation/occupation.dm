@@ -149,7 +149,7 @@
 	var/list/dat = list(
 		"<center><b>Character faction</b><br>",
 		"<small>This will influence the jobs you can select from, and the starting equipment.</small><br>",
-		"<b><a href='?src=\ref[src];faction_preview=[rhtml_encode(pref.faction)]'>[pref.faction]</a></b></center><br><hr>"
+		"<b><a href='?src=\ref[src];faction_preview=[html_encode(pref.faction)]'>[pref.faction]</a></b></center><br><hr>"
 	)
 
 	dat += list(
@@ -267,12 +267,12 @@
 			return TOPIC_REFRESH
 
 	else if(href_list["faction_preview"])
-		show_faction_menu(user, rhtml_decode(href_list["faction_preview"]))
+		show_faction_menu(user, html_decode(href_list["faction_preview"]))
 		return TOPIC_NOACTION
 
 	else if(href_list["faction_select"])
-		validate_and_set_faction(rhtml_decode(href_list["faction_select"]))
-		show_faction_menu(user, rhtml_decode(href_list["faction_select"]))
+		validate_and_set_faction(html_decode(href_list["faction_select"]))
+		show_faction_menu(user, html_decode(href_list["faction_select"]))
 		return TOPIC_REFRESH
 
 	return ..()
@@ -390,7 +390,7 @@
 		if (faction.name == selected_faction)
 			factions += "[faction.name]"
 		else
-			factions += "<a href='?src=\ref[src];faction_preview=[rhtml_encode(faction.name)]'>[faction.name]</a>"
+			factions += "<a href='?src=\ref[src];faction_preview=[html_encode(faction.name)]'>[faction.name]</a>"
 
 	dat += factions.Join(" | ") + "</b>"
 
@@ -399,7 +399,7 @@
 	if (selected_faction == pref.faction)
 		dat += "<br>\[Faction already selected\]"
 	else if (faction.can_select(pref))
-		dat += "<br>\[<a href='?src=\ref[src];faction_select=[rhtml_encode(selected_faction)]'>Select faction</a>\]"
+		dat += "<br>\[<a href='?src=\ref[src];faction_select=[html_encode(selected_faction)]'>Select faction</a>\]"
 	else
 		dat += "<br><span class='warning'>[faction.get_selection_error(pref)]</span>"
 

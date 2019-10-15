@@ -187,9 +187,9 @@ proc/admin_notice(var/message, var/rights)
 			if(!f) body += " | "
 			else f = 0
 			if(L in M.languages)
-				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[rhtml_encode(k)]' style='color:#006600'>[k]</a>"
+				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#006600'>[k]</a>"
 			else
-				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[rhtml_encode(k)]' style='color:#ff0000'>[k]</a>"
+				body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#ff0000'>[k]</a>"
 
 	body += {"<br>
 		</body></html>
@@ -1374,8 +1374,8 @@ proc/admin_notice(var/message, var/rights)
 		return
 	if(!check_rights(R_SERVER,0))
 		message = sanitize(message, 500, extra = 0)
-
-
+	
+			
 	var/list/sounds = file2list("sound/serversound_list.txt");
 	sounds += "--CANCEL--"
 	sounds += "--LOCAL--"
@@ -1389,7 +1389,7 @@ proc/admin_notice(var/message, var/rights)
 		melody = input("Select a sound to play", "Sound select") as sound
 		if(!melody)
 			return
-
+	
 	command_announcement.Announce(message, title, new_sound = melody)
 	log_and_message_admins("made custom announcement with custom sound", usr)
 	feedback_add_details("admin_verb","ACS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

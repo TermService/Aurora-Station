@@ -282,26 +282,26 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	out += "<b>Hair</b><br>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		out += "<a href='?src=\ref[src];hair_color=1'>Change Color</a> [rhtml_RECT(rgb(pref.r_hair, pref.g_hair, pref.b_hair))] "
+		out += "<a href='?src=\ref[src];hair_color=1'>Change Color</a> [HTML_RECT(rgb(pref.r_hair, pref.g_hair, pref.b_hair))] "
 	out += " Style: <a href='?src=\ref[src];hair_style=1'>[pref.h_style]</a><br>"
 
 	out += "<br><b>Facial</b><br>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		out += "<a href='?src=\ref[src];facial_color=1'>Change Color</a> [rhtml_RECT(rgb(pref.r_facial, pref.g_facial, pref.b_facial))] "
+		out += "<a href='?src=\ref[src];facial_color=1'>Change Color</a> [HTML_RECT(rgb(pref.r_facial, pref.g_facial, pref.b_facial))] "
 	out += " Style: <a href='?src=\ref[src];facial_style=1'>[pref.f_style]</a><br>"
 
 	if(has_flag(mob_species, HAS_EYE_COLOR))
 		out += "<br><b>Eyes</b><br>"
-		out += "<a href='?src=\ref[src];eye_color=1'>Change Color</a> [rhtml_RECT(rgb(pref.r_eyes, pref.g_eyes, pref.b_eyes))] <br>"
+		out += "<a href='?src=\ref[src];eye_color=1'>Change Color</a> [HTML_RECT(rgb(pref.r_eyes, pref.g_eyes, pref.b_eyes))] <br>"
 
 	if(has_flag(mob_species, HAS_SKIN_COLOR))
 		out += "<br><b>Body Color</b><br>"
-		out += "<a href='?src=\ref[src];skin_color=1'>Change Color</a> [rhtml_RECT(rgb(pref.r_skin, pref.g_skin, pref.b_skin))] <br>"
+		out += "<a href='?src=\ref[src];skin_color=1'>Change Color</a> [HTML_RECT(rgb(pref.r_skin, pref.g_skin, pref.b_skin))] <br>"
 
 	out += "<br><a href='?src=\ref[src];marking_style=1'>Body Markings +</a><br>"
 	for(var/M in pref.body_markings)
 		out += "[M] <a href='?src=\ref[src];marking_remove=[M]'>-</a> <a href='?src=\ref[src];marking_color=[M]'>Color</a>"
-		out += rhtml_RECT(pref.body_markings[M])
+		out += HTML_RECT(pref.body_markings[M])
 		out += "<br>"
 
 	. = out.Join()
@@ -326,7 +326,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		// Actual whitelist checks are handled elsewhere, this is just for accessing the preview window.
 		var/choice = input("Which species would you like to look at?") as null|anything in playable_species
 		if(!choice) return
-		choice = rhtml_decode(choice)
+		choice = html_decode(choice)
 		pref.species_preview = choice
 		SetSpecies(preference_mob())
 		pref.alternate_languages.Cut() // Reset their alternate languages. Todo: attempt to just fix it instead?
@@ -338,7 +338,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_NOACTION
 
 		var/prev_species = pref.species
-		pref.species = rhtml_decode(href_list["set_species"])
+		pref.species = html_decode(href_list["set_species"])
 		if(prev_species != pref.species)
 			mob_species = all_species[pref.species]
 
@@ -708,7 +708,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		else if(restricted == 2)
 			dat += "<font color='red'><b>You cannot play as this species.</br><small>This species is not available for play as a station race.</small></b></font></br>"
 	if(!restricted || check_rights(R_ADMIN, 0))
-		dat += "\[<a href='?src=\ref[src];set_species=[rhtml_encode(pref.species_preview)]'>select</a>\]"
+		dat += "\[<a href='?src=\ref[src];set_species=[html_encode(pref.species_preview)]'>select</a>\]"
 	dat += "</center>"
 
 	send_theme_resources(user)
