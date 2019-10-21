@@ -71,7 +71,7 @@ for root, subdirs, files in walk(args.dir):
     for filename in files:
         if filename.endswith('.dm'):
             file_path = path.join(root, filename)
-            with io.open(file_path, 'r') as f:
+            with open(file_path, 'rb') as f:
                 # For each file, generate the match dictionary.
                 matches[file_path] = populate_match_list()
                 for x in f:
