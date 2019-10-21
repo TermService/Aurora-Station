@@ -48,7 +48,7 @@
 	admin_log.Add(text)
 	if (config.log_admin)
 		game_log("ADMIN", text)
-	send_gelf_log(short_message=text, long_message="[time_stamp()]: [text]",level=level,category="ADMIN",additional_data=list("_ckey"=rhtml_encode(ckey),"_admin_key"=rhtml_encode(admin_key),"_ckey_target"=rhtml_encode(ckey_target)))
+	send_gelf_log(short_message=text, long_message="[time_stamp()]: [text]",level=level,category="ADMIN",additional_data=list("_ckey"=html_encode(ckey),"_admin_key"=html_encode(admin_key),"_ckey_target"=html_encode(ckey_target)))
 
 /proc/log_debug(text,level = SEVERITY_DEBUG)
 	if (config.log_debug)
@@ -73,7 +73,7 @@
 		long_message = "[time_stamp()]: [text]",
 		level = level,
 		category = "GAME",
-		additional_data = list("_ckey" = rhtml_encode(ckey), "_admin_key" = rhtml_encode(admin_key), "_target" = rhtml_encode(ckey_target))
+		additional_data = list("_ckey" = html_encode(ckey), "_admin_key" = html_encode(admin_key), "_target" = html_encode(ckey_target))
 	)
 
 /proc/log_vote(text)
@@ -84,27 +84,27 @@
 /proc/log_access(text, level = SEVERITY_NOTICE,ckey="")
 	if (config.log_access)
 		game_log("ACCESS", text)
-	send_gelf_log(short_message=text, long_message="[time_stamp()]: [text]",level=level,category="ACCESS",additional_data=list("_ckey"=rhtml_encode(ckey)))
+	send_gelf_log(short_message=text, long_message="[time_stamp()]: [text]",level=level,category="ACCESS",additional_data=list("_ckey"=html_encode(ckey)))
 
 /proc/log_say(text, level = SEVERITY_NOTICE, ckey = "")
 	if (config.log_say)
 		game_log("SAY", text)
-	send_gelf_log(short_message=text, long_message="[time_stamp()]: [text]",level=level,category="SAY",additional_data=list("_ckey"=rhtml_encode(ckey)))
+	send_gelf_log(short_message=text, long_message="[time_stamp()]: [text]",level=level,category="SAY",additional_data=list("_ckey"=html_encode(ckey)))
 
 /proc/log_ooc(text, level = SEVERITY_NOTICE, ckey = "")
 	if (config.log_ooc)
 		game_log("OOC", text)
-	send_gelf_log(short_message = text, long_message = "[time_stamp()]: [text]", level = level, category = "OOC", additional_data = list("_ckey" = rhtml_encode(ckey)))
+	send_gelf_log(short_message = text, long_message = "[time_stamp()]: [text]", level = level, category = "OOC", additional_data = list("_ckey" = html_encode(ckey)))
 
 /proc/log_whisper(text, level = SEVERITY_NOTICE, ckey = "")
 	if (config.log_whisper)
 		game_log("WHISPER", text)
-	send_gelf_log(short_message = text, long_message = "[time_stamp()]: [text]", level = level, category = "WHISPER", additional_data = list("_ckey" = rhtml_encode(ckey)))
+	send_gelf_log(short_message = text, long_message = "[time_stamp()]: [text]", level = level, category = "WHISPER", additional_data = list("_ckey" = html_encode(ckey)))
 
 /proc/log_emote(text, level = SEVERITY_NOTICE, ckey = "")
 	if (config.log_emote)
 		game_log("EMOTE", text)
-	send_gelf_log(short_message = text, long_message = "[time_stamp()]: [text]",level = level,category = "EMOTE", additional_data = list("_ckey" = rhtml_encode(ckey)))
+	send_gelf_log(short_message = text, long_message = "[time_stamp()]: [text]",level = level,category = "EMOTE", additional_data = list("_ckey" = html_encode(ckey)))
 
 /proc/log_attack(text, level = SEVERITY_NOTICE, ckey = "", ckey_target = "")
 	if (config.log_attack)
@@ -114,7 +114,7 @@
 		long_message = "[time_stamp()]: [text]",
 		level = level,
 		category="ATTACK",
-		additional_data = list("_ckey" = rhtml_encode(ckey), "_ckey_target" = rhtml_encode(ckey_target))
+		additional_data = list("_ckey" = html_encode(ckey), "_ckey_target" = html_encode(ckey_target))
 	)
 
 /proc/log_adminsay(text)
@@ -130,7 +130,7 @@
 		long_message = "[time_stamp()]: [text]",
 		level = level,
 		category="PDA",
-		additional_data = list("_ckey" = rhtml_encode(ckey), "_ckey_target" = rhtml_encode(ckey_target))
+		additional_data = list("_ckey" = html_encode(ckey), "_ckey_target" = html_encode(ckey_target))
 	)
 
 /proc/log_ntirc(text, level = SEVERITY_NOTICE, ckey = "", conversation = "")
@@ -141,7 +141,7 @@
 		long_message="[time_stamp()]: [text]",
 		level = level,
 		category = "NTIRC",
-		additional_data = list("_ckey" = rhtml_encode(ckey), "_ntirc_conversation" = rhtml_encode(conversation))
+		additional_data = list("_ckey" = html_encode(ckey), "_ntirc_conversation" = html_encode(conversation))
 	)
 
 /proc/log_to_dd(text)

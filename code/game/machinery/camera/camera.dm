@@ -472,3 +472,4 @@
 	wires.MendAll()
 	update_icon()
 	update_coverage()
+

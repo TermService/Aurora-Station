@@ -32,16 +32,16 @@
 						L = all_languages[LANGUAGE_TCB]
 					sig.data["message"] = dat["content"]
 					sig.frequency = text2num(dat["freq"]) || PUB_FREQ
-					sig.data["name"] = rhtml_encode(dat["source"])
-					sig.data["realname"] = rhtml_encode(dat["source"])
-					sig.data["job"] = rhtml_encode(dat["job"])
+					sig.data["name"] = html_encode(dat["source"])
+					sig.data["realname"] = html_encode(dat["source"])
+					sig.data["job"] = html_encode(dat["job"])
 					sig.data["reject"] = !dat["pass"]
-					sig.data["verb"] = rhtml_encode(dat["verb"])
+					sig.data["verb"] = html_encode(dat["verb"])
 					sig.data["language"] = L
-					sig.data["vmessage"] = rhtml_encode(dat["content"])
-					sig.data["vname"] = rhtml_encode(dat["source"])
+					sig.data["vmessage"] = html_encode(dat["content"])
+					sig.data["vname"] = html_encode(dat["source"])
 					sig.data["vmask"] = 0
 			else
 				sig = new()
 				sig.data["server"] = running_code.S
-				sig.tcombroadcast(rhtml_encode(dat["content"]), dat["freq"], rhtml_encode(dat["source"]), rhtml_encode(dat["job"]), rhtml_encode(dat["verb"]), dat["language"])
+				sig.tcombroadcast(html_encode(dat["content"]), dat["freq"], html_encode(dat["source"]), html_encode(dat["job"]), html_encode(dat["verb"]), dat["language"])

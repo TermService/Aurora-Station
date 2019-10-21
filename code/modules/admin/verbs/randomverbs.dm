@@ -109,7 +109,7 @@
 		to_chat(src, "Only administrators may use this command.")
 		return
 
-	var/msg = rhtml_decode(sanitize(input("Message:", text("Enter the text you wish to appear to everyone:")) as text))
+	var/msg = html_decode(sanitize(input("Message:", text("Enter the text you wish to appear to everyone:")) as text))
 
 	if (!msg)
 		return
@@ -132,7 +132,7 @@
 	if(!M)
 		return
 
-	var/msg = rhtml_decode(sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text))
+	var/msg = html_decode(sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text))
 
 	if( !msg )
 		return
@@ -751,7 +751,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			to_chat(M, "\red To try to resolve this matter head to http://ss13.donglabs.com/forum/")
 			log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 			message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
-			world.Export("http://216.38.134.132/adminlog.php?type=ban&key=[usr.client.key]&key2=[M.key]&msg=[rhtml_decode(reason)]&time=[mins]&server=[replacetext(config.server_name, "#", "")]")
+			world.Export("http://216.38.134.132/adminlog.php?type=ban&key=[usr.client.key]&key2=[M.key]&msg=[html_decode(reason)]&time=[mins]&server=[replacetext(config.server_name, "#", "")]")
 			del(M.client)
 			qdel(M)
 		else
@@ -766,7 +766,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		to_chat(M, "\red To try to resolve this matter head to http://ss13.donglabs.com/forum/")
 		log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis is a permanent ban.")
 		message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis is a permanent ban.")
-		world.Export("http://216.38.134.132/adminlog.php?type=ban&key=[usr.client.key]&key2=[M.key]&msg=[rhtml_decode(reason)]&time=perma&server=[replacetext(config.server_name, "#", "")]")
+		world.Export("http://216.38.134.132/adminlog.php?type=ban&key=[usr.client.key]&key2=[M.key]&msg=[html_decode(reason)]&time=perma&server=[replacetext(config.server_name, "#", "")]")
 		del(M.client)
 		qdel(M)
 */

@@ -8,12 +8,13 @@
 	food_color = "#A34719"
 	can_burn_food = 1
 	active_power_usage = 6 KILOWATTS
+	heating_power = 6000
 	//Based on a double deck electric convection oven
 
-	resistance = 16000
+	resistance = 30000 // Approx. 12 minutes.
 	idle_power_usage = 2 KILOWATTS
 	//uses ~30% power to stay warm
-	optimal_power = 0.2
+	optimal_power = 1.2
 
 	light_x = 2
 	max_contents = 5
@@ -21,7 +22,7 @@
 
 	stat = POWEROFF	//Starts turned off
 
-	var/open = 1
+	var/open = 0 // Start closed so people don't heat up ovens with the door open
 
 	output_options = list(
 		"Pizza" = /obj/item/weapon/reagent_containers/food/snacks/variable/pizza,
@@ -112,6 +113,7 @@
 /obj/machinery/appliance/cooker/oven/finish_cooking(var/datum/cooking_item/CI)
 	if(CI.combine_target)
 		CI.result_type = 3//Combination type. We're making something out of our ingredients
+		src.visible_message("<span class='notice'>\The [src] pings!</span>")
 		combination_cook(CI)
 		return
 	else

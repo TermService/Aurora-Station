@@ -68,6 +68,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/obj/item/weapon/pen/pen
 	var/list/obj/machinery/requests_console/linked_consoles
 
+	var/flippable = 1
+	var/flipped = 0
+	var/wear_over_suit = 0
+
 /obj/item/device/pda/examine(mob/user)
 	if(..(user, 1))
 		to_chat(user, "The time [worldtime2text()] is displayed in the corner of the screen.")
@@ -692,7 +696,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			if (in_range(src, U) && loc == U)
 				n = sanitizeSafe(n, extra = 0)
 				if (mode == 1)
-					note = rhtml_decode(n)
+					note = html_decode(n)
 					notehtml = note
 					note = replacetext(note, "\n", "<br>")
 			else
@@ -1053,16 +1057,16 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 
 		if (prob(15)) //Give the AI a chance of intercepting the message
-			var/who = src.owner
+			var/who = src.owner // revealing sender
 			if(prob(50))
-				who = P.owner
+				who = P.owner // revealing recipient
 
 			for(var/mob/living/silicon/ai/ai in mob_list)
 				if(ai.aiPDA != P && ai.aiPDA != src)
-					if(who != P.owner)
-						ai.show_message("<i>Intercepted message to <b>[who]</b>: [t]</i>")
-					else
+					if(who != P.owner) // if not revealing the recipient
 						ai.show_message("<i>Intercepted message from <b>[who]</b>: [t]</i>")
+					else // if not revealing the sender
+						ai.show_message("<i>Intercepted message to <b>[who]</b>: [t]</i>")
 
 		P.new_message_from_pda(src, t)
 		SSnanoui.update_user_uis(U, src) // Update the sending user's PDA UI so that they can see the new message
@@ -1111,13 +1115,50 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/ai/new_message(var/atom/movable/sending_unit, var/sender, var/sender_job, var/message)
 	var/track = ""
 	if(ismob(sending_unit.loc) && isAI(loc))
-		track = "(<a href='byond://?src=\ref[loc];track=\ref[sending_unit.loc];trackname=[rhtml_encode(sender)]'>Follow</a>)"
+		track = "(<a href='byond://?src=\ref[loc];track=\ref[sending_unit.loc];trackname=[html_encode(sender)]'>Follow</a>)"
 
 	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;skiprefresh=1;target=\ref[sending_unit]'>Reply</a>) [track]"
 	new_info(message_silent, newstone, reception_message)
 
 	log_pda("[usr] (PDA: [sending_unit]) sent \"[message]\" to [name]",ckey=key_name(usr),ckey_target=key_name(name))
 	new_message = 1
+
+/obj/item/device/pda/proc/mob_icon_update()
+	if (ismob(src.loc))
+		var/mob/M = src.loc
+		M.update_inv_wear_id()
+
+/obj/item/device/pda/verb/verb_flip_id_icon()
+	set category = "Object"
+	set name = "Flip PDA side"
+	set src in usr
+
+	if(use_check_and_message(usr, use_flags = USE_DISALLOW_SILICONS))
+		return
+	if (!flippable)
+		to_chat(usr, "You cannot flip \the [src] as it is not a flippable item.")
+		return
+
+	src.flipped = !src.flipped
+	if(src.flipped)
+		src.overlay_state = "[overlay_state]_flip"
+	else
+		src.overlay_state = initial(overlay_state)
+	to_chat(usr, "You change \the [src] to be on your [src.flipped ? "left" : "right"] side.")
+	mob_icon_update()
+
+/obj/item/device/pda/verb/toggle_icon_layer()
+	set name = "Switch PDA Layer"
+	set category = "Object"
+	set src in usr
+
+	if(use_check_and_message(usr, use_flags = USE_DISALLOW_SILICONS))
+		return
+	if(wear_over_suit == -1)
+		to_chat(usr, "<span class='notice'>\The [src] cannot be worn above your suit!</span>")
+		return
+	wear_over_suit = !wear_over_suit
+	mob_icon_update()
 
 /obj/item/device/pda/verb/verb_reset_pda()
 	set category = "Object"
