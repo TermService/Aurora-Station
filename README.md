@@ -6,7 +6,7 @@
 
 [![Krihelimeter](http://www.krihelinator.xyz/badge/Aurorastation/Aurora.3)](http://www.krihelinator.xyz/repositories/Aurorastation/Aurora.3)
 
-[![Build Status](https://api.travis-ci.org/Aurorastation/Aurora.3.svg?branch=master)](https://travis-ci.org/Aurorastation/Aurora.3)
+[![Build Status](https://travis-ci.org/AltHub-Team/Aurora-Station.svg?branch=master)](https://travis-ci.org/AltHub-Team/Aurora-Station)
 
 ---
 
