@@ -54,7 +54,8 @@
 	dx=(32*end.x+end.pixel_x)-(32*start.x+start.pixel_x)
 	if(!dy)
 		return (dx>=0)?90:270
-	.=arctan(dx/dy)
+//	.=arctan(dx/dy)
+	.=arcsin((dx/dy)/sqrt(1+(dx/dy)*(dx/dy)))
 	if(dy<0)
 		.+=180
 	else if(dx<0)
@@ -558,10 +559,11 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //Makes sure MIDDLE is between LOW and HIGH. If not, it adjusts it. Returns the adjusted value.
 /proc/between(var/low, var/middle, var/high)
 	return max(min(middle, high), low)
-
+/*
 proc/arctan(x)
 	var/y=arcsin(x/sqrt(1+x*x))
 	return y
+*/
 
 //returns random gauss number
 proc/GaussRand(var/sigma)
@@ -1196,4 +1198,3 @@ var/list/wall_items = typecacheof(list(
 	else if (istype(A.loc, /obj/item/rig_module))
 		return 0
 	return 1
-
