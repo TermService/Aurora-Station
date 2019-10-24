@@ -36,18 +36,20 @@ var/list/department_radio_keys = list(
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":ê" = "right ear",	".ê" = "right ear",
-	  ":ä" = "left ear",	".ä" = "left ear",
-	  ":ø" = "intercom",	".ø" = "intercom",
-	  ":ğ" = "department",	".ğ" = "department",
-	  ":ñ" = "Command",		".ñ" = "Command",
-	  ":ò" = "Science",		".ò" = "Science",
-	  ":ü˜" = "Medical",	".ü˜" = "Medical",
-	  ":ó" = "Engineering",	".ó" = "Engineering",
-	  ":û" = "Security",	".û" = "Security",
-	  ":ö" = "whisper",		".ö" = "whisper",
-	  ":å" = "Mercenary",	".ó" = "Mercenary",
-	  ":ã" = "Supply",		".ã" = "Supply"
+	  ":Ğº" = "right ear",	".Ğº" = "right ear",
+	  ":Ğ»" = "left ear",	".Ğ»" = "left ear",
+	  ":Ñˆ" = "intercom",	".Ñˆ" = "intercom",
+	  ":Ñ€" = "department",	".Ñ€" = "department",
+	  ":Ñ" = "Command",		".Ñ" = "Command",
+	  ":Ñ‚" = "Science",		".Ñ‚" = "Science",
+	  ":ÑŒ" = "Medical",		".ÑŒ" = "Medical",
+	  ":Ñƒ" = "Engineering",	".Ñƒ" = "Engineering",
+	  ":Ñ‹" = "Security",	".Ñ‹" = "Security",
+	  ":Ñ†" = "whisper",		".Ñ†" = "whisper",
+	  ":Ğµ" = "Mercenary",	".Ğµ" = "Mercenary",
+	  ":Ğ³" = "Supply",		".Ğ³" = "Supply",
+	  ":Ğ·" = "AI Private",	".Ğ·" = "AI Private",
+	  ":Ñ‡" = "Raider",		".Ñ‡" = "Raider"
 )
 
 

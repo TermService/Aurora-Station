@@ -1,8 +1,8 @@
 /proc/sanitize_ru(var/input)
 	var/ind
-	while((ind  = findtext(input, "ÿ")))
+	while((ind  = findtext(input, "Ñ")))
 		input = copytext(input, 1, ind) + "&#255;" + copytext(input, ind + 1)
-		ind = findtext(input, "ÿ")
+		ind = findtext(input, "Ñ")
 	return input
 
 /proc/rhtml_encode(var/msg, var/html = 0)
@@ -11,7 +11,7 @@
                 rep = "&#x44F;"
         else
                 rep = "&#255;"
-        var/list/c = text2list(msg, "ÿ")
+        var/list/c = text2list(msg, "Ñ")
         if(c.len == 1)
                 c = text2list(msg, rep)
                 if(c.len == 1)
@@ -31,7 +31,7 @@
                 rep = "&#x44F;"
         else
                 rep = "&#255;"
-        var/list/c = text2list(msg, "ÿ")
+        var/list/c = text2list(msg, "Ñ")
         if(c.len == 1)
                 c = text2list(msg, "&#255;")
                 if(c.len == 1)
