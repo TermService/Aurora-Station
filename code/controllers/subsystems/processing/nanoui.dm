@@ -1,7 +1,5 @@
 var/datum/controller/subsystem/processing/nanoui/SSnanoui
 
-#define NULL_OR_EQUAL(self,other) (!(self) || (self) == (other))
-
 /datum/controller/subsystem/processing/nanoui
 	// Subsystem stuff.
 	name = "NanoUI"
