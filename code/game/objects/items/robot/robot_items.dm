@@ -21,7 +21,7 @@
 
 	playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 
-	M.apply_effect(5, STUTTER)
+	M.apply_effect(5, STUTTER_ORGAN)
 	M.stun_effect_act(0, 70, check_zone(hit_zone), src)
 
 	if(ishuman(M))

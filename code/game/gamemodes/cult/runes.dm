@@ -149,18 +149,18 @@ var/list/sacrificed = list()
 					to_chat(target, "<span class='cult'>Your blood boils and your body burns as the corruption further forces itself into your body and mind.</span>")
 				if(45 to 75)
 					to_chat(target, "<span class='cult'>You begin to hallucinate images of a dark and incomprehensible being and your entire body feels like its engulfed in flame as your mental defenses crumble.</span>")
-					target.apply_effect(rand(1,10), STUTTER)
+					target.apply_effect(rand(1,10), STUTTER_ORGAN)
 				if(75 to 100)
 					to_chat(target, "<span class='cult'>Your mind turns to ash as the burning flames engulf your very soul and images of an unspeakable horror begin to bombard the last remnants of mental resistance.</span>")
 					//broken mind - 5000 may seem like a lot I wanted the effect to really stand out for maxiumum losing-your-mind-spooky
 					//hallucination is reduced when the step off as well, provided they haven't hit the last stage...
 					target.hallucination += 5000
-					target.apply_effect(10, STUTTER)
+					target.apply_effect(10, STUTTER_ORGAN)
 					target.adjustBrainLoss(1, 55)
 				if(100 to INFINITY)
 					to_chat(target, "<span class='cult'>Your entire broken soul and being is engulfed in corruption and flames as your mind shatters away into nothing.</span>")
 					target.hallucination += 5000
-					target.apply_effect(15, STUTTER)
+					target.apply_effect(15, STUTTER_ORGAN)
 					target.adjustBrainLoss(rand(1,5), 55)
 
 		initial_message = 1

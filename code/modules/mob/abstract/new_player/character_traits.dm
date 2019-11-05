@@ -19,7 +19,7 @@
 	desc = "You have a chronic case of stuttering, repeating sounds involuntarily."
 
 /datum/character_disabilities/stutter/apply_self(var/mob/living/carbon/human/H)
-	H.disabilities |= STUTTER
+	H.disabilities |= STUTTER_DNA
 
 /datum/character_disabilities/deuteranomaly
 	name = "Deuteranopia"
