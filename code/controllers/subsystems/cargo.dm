@@ -323,7 +323,7 @@ var/datum/controller/subsystem/cargo/SScargo
 		ci.container_type = container_type
 		ci.groupable = text2num(groupable)
 		ci.item_mul = text2num(item_mul)
-		ci.amount = length(ci.items)*ci.item_mul
+		ci.amount = length_char(ci.items)*ci.item_mul
 	catch(var/exception/e)
 		log_debug("SScargo: Error when loading item: [e]")
 		qdel(ci)

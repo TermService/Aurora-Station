@@ -12,10 +12,10 @@
 /datum/language/diona/get_random_name()
 	var/new_name = "[pick(list("To Sleep Beneath","Changing of", "Soaring Above", "Wind Over","Embrace of","Dreams of","Witnessing", "Lost in", "To Walk Beneath","Approaching the", "Distant Memories of", "Forgotten Glimpse of", "Roots of", "Tendrils of", "Leaves Rustling in", "Last Hope of", "Speaking to"))]"
 	new_name += " [pick(list("the Void","the Stillness of Death", "the Sky","Encroaching Night","Planetsong","Starsong","the Wandering Star","the Empty Day","Daybreak","Nightfall","the Rain", "a Distant Galaxy", "a Starless Night", "the Fruits of Dreams", "the Rising Dawn", "the Song of Life", "a Lonely Shadow", "Forlorn Hope", "a Bleak Wasteland"))]"
-	while(findtextEx(new_name,"the the",1,null))
+	while(findtextEx_char(new_name,"the the",1,null))
 		new_name = replacetext(new_name, "the the", "the")
 
-	while(findtextEx(new_name,"the a",1,null))
+	while(findtextEx_char(new_name,"the a",1,null))
 		new_name = replacetext(new_name, "the a", "a")
 
 	return new_name
@@ -287,4 +287,3 @@
 	flags = WHITELISTED | NONVERBAL
 	syllables = list("azs","zis","zau","azua","skiu","zuakz","izo","aei","ki","kut","zo")
 	partial_understanding = list(LANGUAGE_UNATHI = 50)
-

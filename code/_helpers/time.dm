@@ -37,9 +37,9 @@ var/real_round_start_time
 	var/duration = get_round_duration()
 	var/hour = "[ round(duration / ( 1 HOUR) ) ]"
 	var/minute = "[ round(duration / (1 MINUTE) ) % 60 ]"
-	if(length(hour) == 1)
+	if(length_char(hour) == 1)
 		hour = "0" + hour
-	if(length(minute) == 1)
+	if(length_char(minute) == 1)
 		minute = "0" + minute
 
 	return "[hour]:[minute]"

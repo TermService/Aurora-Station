@@ -16,7 +16,7 @@
 // Run all strings to be used in an SQL query through this proc first to properly escape out injection attempts.
 /proc/sanitizeSQL(var/t as text)
 	var/sqltext = dbcon.Quote(t);
-	return copytext_char(sqltext, 2, length(sqltext));//Quote() adds quotes around input, we already do that
+	return copytext_char(sqltext, 2, length_char(sqltext));//Quote() adds quotes around input, we already do that
 
 /*
  * Text sanitization
@@ -59,14 +59,14 @@
 
 //Filters out undesirable characters from names
 /proc/sanitizeName(var/input, var/max_length = MAX_NAME_LEN, var/allow_numbers = 1)
-	if(!input || length(input) > max_length)
+	if(!input || length_char(input) > max_length)
 		return //Rejects the input if it is null or if it is longer then the max length allowed
 
 	var/number_of_alphanumeric	= 0
 	var/last_char_group			= 0
 	var/output = ""
 
-	for(var/i=1, i<=length(input), i++)
+	for(var/i=1, i<=length_char(input), i++)
 		var/ascii_char = text2ascii(input,i)
 		switch(ascii_char)
 			// A  .. Z
@@ -114,7 +114,7 @@
 	if(number_of_alphanumeric < 2)	return		//protects against tiny names like "A" and also names like "' ' ' ' ' ' ' '"
 
 	if(last_char_group == 1)
-		output = copytext_char(output,1,length(output))	//removes the last character (in this case a space)
+		output = copytext_char(output,1,length_char(output))	//removes the last character (in this case a space)
 
 	for(var/bad_name in list("space","floor","wall","r-wall","monkey","unknown","inactive ai","plating"))	//prevents these common metagamey names
 		if(cmptext(output,bad_name))	return	//(not case sensitive)
@@ -123,9 +123,9 @@
 
 //Returns null if there is any bad text in the string
 /proc/reject_bad_text(var/text, var/max_length=512)
-	if(length(text) > max_length)	return			//message too long
+	if(length_char(text) > max_length)	return			//message too long
 	var/non_whitespace = 0
-	for(var/i=1, i<=length(text), i++)
+	for(var/i=1, i<=length_char(text), i++)
 		switch(text2ascii(text,i))
 			if(62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
 			if(127 to 255)	return			//rejects weird letters like �
@@ -140,12 +140,12 @@
 	return html_encode(replace_characters(t,repl_chars))
 
 // Truncates text to limit if necessary.
-/proc/dd_limittext(message, length)
-	var/size = length(message)
-	if (size <= length)
+/proc/dd_limittext(message, length_var)
+	var/size = length_char(message)
+	if (size <= length_var)
 		return message
 	else
-		return copytext_char(message, 1, length + 1)
+		return copytext_char(message, 1, length_var + 1)
 
 /*
  * Text searches
@@ -155,20 +155,20 @@
 //Returns the position of the substring or 0 if it was not found
 /proc/dd_hasprefix(text, prefix)
 	var/start = 1
-	var/end = length(prefix) + 1
+	var/end = length_char(prefix) + 1
 	return findtext_char(text, prefix, start, end)
 
 //Checks the beginning of a string for a specified sub-string. This proc is case sensitive
 //Returns the position of the substring or 0 if it was not found
 /proc/dd_hasprefix_case(text, prefix)
 	var/start = 1
-	var/end = length(prefix) + 1
-	return findtextEx(text, prefix, start, end)
+	var/end = length_char(prefix) + 1
+	return findtextEx_char(text, prefix, start, end)
 
 //Checks the end of a string for a specified substring.
 //Returns the position of the substring or 0 if it was not found
 /proc/dd_hassuffix(text, suffix)
-	var/start = length(text) - length(suffix)
+	var/start = length_char(text) - length_char(suffix)
 	if(start)
 		return findtext_char(text, suffix, start, null)
 	return
@@ -176,21 +176,21 @@
 //Checks the end of a string for a specified substring. This proc is case sensitive
 //Returns the position of the substring or 0 if it was not found
 /proc/dd_hassuffix_case(text, suffix)
-	var/start = length(text) - length(suffix)
+	var/start = length_char(text) - length_char(suffix)
 	if(start)
-		return findtextEx(text, suffix, start, null)
+		return findtextEx_char(text, suffix, start, null)
 
 
 //Parses a string into a list
 /proc/dd_text2List(text, separator)
-	var/textlength      = length(text)
-	var/separatorlength = length(separator)
+	var/textlength      = length_char(text)
+	var/separatorlength = length_char(separator)
 	var/list/textList   = new /list()
 	var/searchPosition  = 1
 	var/findPosition    = 1
 	var/buggyText
 	while (1)															// Loop forever.
-		findPosition = findtextEx(text, separator, searchPosition, 0)
+		findPosition = findtextEx_char(text, separator, searchPosition, 0)
 		buggyText = copytext_char(text, searchPosition, findPosition)		// Everything from searchPosition to findPosition goes into a list element.
 		textList += "[buggyText]"										// Working around weird problem where "text" != "text" after this copytext_char().
 
@@ -212,32 +212,32 @@
 
 //Adds 'u' number of zeros ahead of the text 't'
 /proc/add_zero(t, u)
-	while (length(t) < u)
+	while (length_char(t) < u)
 		t = "0[t]"
 	return t
 
 //Adds 'u' number of spaces ahead of the text 't'
 /proc/add_lspace(t, u)
-	while(length(t) < u)
+	while(length_char(t) < u)
 		t = " [t]"
 	return t
 
 //Adds 'u' number of spaces behind the text 't'
 /proc/add_tspace(t, u)
-	while(length(t) < u)
+	while(length_char(t) < u)
 		t = "[t] "
 	return t
 
 //Returns a string with reserved characters and spaces before the first letter removed
 /proc/trim_left(text)
-	for (var/i = 1 to length(text))
+	for (var/i = 1 to length_char(text))
 		if (text2ascii(text, i) > 32)
 			return copytext_char(text, i)
 	return ""
 
 //Returns a string with reserved characters and spaces after the last letter removed
 /proc/trim_right(text)
-	for (var/i = length(text), i > 0, i--)
+	for (var/i = length_char(text), i > 0, i--)
 		if (text2ascii(text, i) > 32)
 			return copytext_char(text, 1, i + 1)
 	return ""
@@ -280,9 +280,9 @@
 //This is used for fingerprints
 /proc/stringmerge(var/text,var/compare,replace = "*")
 	var/newtext = text
-	if(length(text) != length(compare))
+	if(length_char(text) != length_char(compare))
 		return 0
-	for(var/i = 1, i < length(text), i++)
+	for(var/i = 1, i < length_char(text), i++)
 		var/a = copytext_char(text,i,i+1)
 		var/b = copytext_char(compare,i,i+1)
 		//if it isn't both the same letter, or if they are both the replacement character
@@ -302,7 +302,7 @@
 	if(!text || !character)
 		return 0
 	var/count = 0
-	for(var/i = 1, i <= length(text), i++)
+	for(var/i = 1, i <= length_char(text), i++)
 		var/a = copytext_char(text,i,i+1)
 		if(a == character)
 			count++
@@ -310,15 +310,15 @@
 
 /proc/reverse_text(var/text = "")
 	var/new_text = ""
-	for(var/i = length(text); i > 0; i--)
+	for(var/i = length_char(text); i > 0; i--)
 		new_text += copytext_char(text, i, i+1)
 	return new_text
 
 //Used in preferences' SetFlavorText and human's set_flavor verb
 //Previews a string of len or less length
 proc/TextPreview(var/string,var/len=40)
-	if(length(string) <= len)
-		if(!length(string))
+	if(length_char(string) <= len)
+		if(!length_char(string))
 			return "\[...\]"
 		else
 			return string
@@ -374,7 +374,7 @@ proc/TextPreview(var/string,var/len=40)
 	return replacetextEx(text,"\n","<br>")
 
 /proc/contains_az09(var/input)
-	for(var/i=1, i<=length(input), i++)
+	for(var/i=1, i<=length_char(input), i++)
 		var/ascii_char = text2ascii(input,i)
 		switch(ascii_char)
 			// A  .. Z
@@ -389,19 +389,19 @@ proc/TextPreview(var/string,var/len=40)
 				return 1
 	return 0
 
-/proc/generateRandomString(var/length)
+/proc/generateRandomString(var/length_var)
 	. = list()
-	for(var/a in 1 to length)
+	for(var/a in 1 to length_var)
 		var/letter = rand(33,126)
 		. += ascii2text(letter)
 	. = jointext(.,null)
 
-/proc/random_string(length, list/characters)
+/proc/random_string(length_var, list/characters)
 	. = ""
-	for(var/i=1, i<=length, i++)
+	for(var/i=1, i<=length_var, i++)
 		. += pick(characters)
 
-#define starts_with(string, substring) (copytext_char(string,1,1+length(substring)) == substring)
+#define starts_with(string, substring) (copytext_char(string,1,1+length_char(substring)) == substring)
 
 #define gender2text(gender) capitalize(gender)
 
@@ -484,7 +484,7 @@ proc/TextPreview(var/string,var/len=40)
 	if(!next_backslash)
 		return string
 
-	var/leng = length(string)
+	var/leng = length_char(string)
 
 	var/next_space = findtext_char(string, " ", next_backslash + 1)
 	if(!next_space)

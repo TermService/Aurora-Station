@@ -16,7 +16,7 @@
 
 	var/num   = 0
 	var/power = 1
-	var/i     = length(hex)
+	var/i     = length_char(hex)
 
 	while (i)
 		var/char = text2ascii(hex, i)
@@ -46,7 +46,7 @@
 		num >>= 4 //go to the next half-byte
 
 	//pad with zeroes
-	var/left = padlength - length(.)
+	var/left = padlength - length_char(.)
 	while (left-- > 0)
 		. = "0[.]"
 
@@ -61,7 +61,7 @@ proc/tg_list2text(list/list, glue=",")
 
 // Converts a string into a list by splitting the string at each delimiter found. (discarding the seperator)
 /proc/text2list(text, delimiter="\n")
-	var/delim_len = length(delimiter)
+	var/delim_len = length_char(delimiter)
 	if (delim_len < 1)
 		return list(text)
 
@@ -77,7 +77,7 @@ proc/tg_list2text(list/list, glue=",")
 
 // Case sensitive version of /proc/text2list().
 /proc/text2listEx(text, delimiter="\n")
-	var/delim_len = length(delimiter)
+	var/delim_len = length_char(delimiter)
 	if (delim_len < 1)
 		return list(text)
 
@@ -86,7 +86,7 @@ proc/tg_list2text(list/list, glue=",")
 	var/found
 
 	do
-		found       = findtextEx(text, delimiter, last_found, 0)
+		found       = findtextEx_char(text, delimiter, last_found, 0)
 		.          += copytext_char(text, last_found, found)
 		last_found  = found + delim_len
 	while (found)
@@ -268,7 +268,7 @@ proc/tg_list2text(list/list, glue=",")
 		return
 	var/r
 	var/c
-	for(var/i = 1 to length(str))
+	for(var/i = 1 to length_char(str))
 		c= text2ascii(str,i)
 		r+= num2hex(c)
 	return r
@@ -280,7 +280,7 @@ proc/tg_list2text(list/list, glue=",")
 		return
 	var/r
 	var/c
-	for(var/i = 1 to length(str)/2)
+	for(var/i = 1 to length_char(str)/2)
 		c = hex2num(copytext_char(str,i*2-1,i*2+1), safe)
 		if(isnull(c))
 			return null

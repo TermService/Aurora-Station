@@ -438,10 +438,10 @@ datum/projectile_data
 	return rgb(r,g,b)
 
 /proc/mixOneColor(var/list/weight, var/list/color)
-	if (!weight || !color || length(weight)!=length(color))
+	if (!weight || !color || length_char(weight)!=length_char(color))
 		return 0
 
-	var/contents = length(weight)
+	var/contents = length_char(weight)
 	var/i
 
 	//normalize weights

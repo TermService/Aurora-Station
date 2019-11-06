@@ -66,12 +66,12 @@ proc/extract(var/data, var/type = PLAYERS)
 
 	if(type == PLAYERS)
 
-		nextpos = findtextEx(data, player_substr)
+		nextpos = findtextEx_char(data, player_substr)
 		nextpos += length(player_substr)
 
 	else
 
-		nextpos = findtextEx(data, admin_substr)
+		nextpos = findtextEx_char(data, admin_substr)
 		nextpos += length(admin_substr)
 
 	var/returnval = ""

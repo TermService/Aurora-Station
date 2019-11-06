@@ -237,7 +237,7 @@ var/list/world_api_rate_limit = list()
 // They don't provide any useful information, and as such, are being suppressed.
 #ifdef UNIT_TEST
 
-	if (findtextEx(e.name, "Invalid timer:") || findtextEx(e.desc, "Invalid timer:"))
+	if (findtextEx_char(e.name, "Invalid timer:") || findtextEx_char(e.desc, "Invalid timer:"))
 		inerror = 0
 		return
 

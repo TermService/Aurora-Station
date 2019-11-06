@@ -331,7 +331,7 @@ var/list/gamemode_cache = list()
 		if(!t)	continue
 
 		t = trim(t)
-		if (length(t) == 0)
+		if (length_char(t) == 0)
 			continue
 		else if (copytext_char(t, 1, 2) == "#")
 			continue

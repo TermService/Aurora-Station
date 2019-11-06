@@ -14,7 +14,7 @@
 		CRASH("Given non-text argument!")
 		return
 	else
-		if (length(HTMLstring) != 7)
+		if (length_char(HTMLstring) != 7)
 			CRASH("Given non-HTML argument!")
 			return
 	var/textr = copytext_char(HTMLstring, 2, 4)
@@ -26,11 +26,11 @@
 	textr = num2hex(255 - r)
 	textg = num2hex(255 - g)
 	textb = num2hex(255 - b)
-	if (length(textr) < 2)
+	if (length_char(textr) < 2)
 		textr = text("0[]", textr)
-	if (length(textg) < 2)
+	if (length_char(textg) < 2)
 		textr = text("0[]", textg)
-	if (length(textb) < 2)
+	if (length_char(textb) < 2)
 		textr = text("0[]", textb)
 	return text("#[][][]", textr, textg, textb)
 	return
@@ -256,10 +256,10 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 //Returns whether or not a player is a guest using their ckey as an input
 /proc/IsGuestKey(key)
-	if (findtext_char(key, "Guest-", 1, 7) != 1) //was findtextEx
+	if (findtext_char(key, "Guest-", 1, 7) != 1) //was findtextEx_char
 		return 0
 
-	var/i = 7, ch, len = length(key)
+	var/i = 7, ch, len = length_char(key)
 
 	if(copytext_char(key, 7, 8) == "W") //webclient
 		i++
@@ -591,7 +591,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 	return toReturn
 
 //Step-towards method of determining whether one atom can see another. Similar to viewers()
-/proc/can_see(var/atom/source, var/atom/target, var/length=5) // I couldn't be arsed to do actual raycasting :I This is horribly inaccurate.
+/proc/can_see(var/atom/source, var/atom/target, var/length_var=5) // I couldn't be arsed to do actual raycasting :I This is horribly inaccurate.
 	var/turf/current = get_turf(source)
 	var/turf/target_turf = get_turf(target)
 	var/steps = 0
@@ -600,7 +600,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		return 0
 
 	while(current != target_turf)
-		if(steps > length) return 0
+		if(steps > length_var) return 0
 		if(current.opacity) return 0
 		for(var/atom/A in current)
 			if(A.opacity) return 0
@@ -996,7 +996,7 @@ var/list/wall_items = typecacheof(list(
 	else
 		for(var/i=1;i<=3;i++)
 			var/temp_col = "[num2hex(rand(lower,upper))]"
-			if(length(temp_col )<2)
+			if(length_char(temp_col )<2)
 				temp_col  = "0[temp_col]"
 			colour += temp_col
 	return "#[colour]"
