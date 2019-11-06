@@ -7,15 +7,15 @@
 	help_verb = /datum/martial_art/sol_combat/proc/sol_combat_help
 
 /datum/martial_art/sol_combat/proc/check_streak(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
-	if(findtext(streak,NECK_CHOP))
+	if(findtext_char(streak,NECK_CHOP))
 		streak = ""
 		neck_chop(A,D)
 		return 1
-	if(findtext(streak,LEG_SWEEP))
+	if(findtext_char(streak,LEG_SWEEP))
 		streak = ""
 		leg_sweep(A,D)
 		return 1
-	if(findtext(streak,QUICK_CHOKE))
+	if(findtext_char(streak,QUICK_CHOKE))
 		streak = ""
 		quick_choke(A,D)
 		return 1

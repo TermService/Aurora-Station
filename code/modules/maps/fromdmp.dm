@@ -29,8 +29,8 @@ proc/dmp2swapmap(filename)
 	var/txt = d2sm_prepmap(filename)
 	var/mapname="[filename]"
 	var/i,j,k
-	i=findtext(mapname,".dmp")
-	while(i && i+4<length(mapname)) i=findtext(mapname,".dmp",i+1)
+	i=findtext_char(mapname,".dmp")
+	while(i && i+4<length(mapname)) i=findtext_char(mapname,".dmp",i+1)
 	mapname=copytext_char(mapname,1,i)
 	/* i=findText(txt,ascii2text(13))
 	while(i)
@@ -54,14 +54,14 @@ proc/dmp2swapmap(filename)
 				return
 			// standard line:
 			// "a" = (/obj, /obj, /turf, /area)
-			i=findtext(txt,"\"",2)
+			i=findtext_char(txt,"\"",2)
 			var/code=copytext_char(txt,2,i)
 			codelen=length(code)
-			i=findtext(txt,"(",i)
+			i=findtext_char(txt,"(",i)
 			if(!i)
 				to_world("Corrupt map file [filename]: No type list follows \"[code]\"")
 				return
-			k=findtext(txt,"\n",++i)
+			k=findtext_char(txt,"\n",++i)
 			j=(k || length(txt+1))
 			while(--j>=i && text2ascii(txt,j)!=41)
 			if(j<i)
@@ -96,13 +96,13 @@ proc/dmp2swapmap(filename)
 			// "}
 			i=d2sm_MatchBrace(txt,1,40)
 			if(!i)
-				to_world("Corrupt map file [filename]: No matching ) for coordinates: [copytext_char(txt,1,findtext(txt,"\n"))]")
+				to_world("Corrupt map file [filename]: No matching ) for coordinates: [copytext_char(txt,1,findtext_char(txt,"\n"))]")
 				return
 			var/list/coords=d2sm_ParseCommaList(copytext_char(txt,2,i))
 			if(istext(coords) || coords.len!=3)
 				to_world("Corrupt map file [filename]: [istext(coords)?(coords):"[copytext_char(txt,1,i+1)] is not a valid (x,y,z) coordinate"]")
 				return
-			j=findtext(txt,"{",i+1)
+			j=findtext_char(txt,"{",i+1)
 			if(!j)
 				to_world("Corrupt map file [filename]: No braces {} following [copytext_char(txt,1,i+1)]")
 				return
@@ -129,7 +129,7 @@ proc/dmp2swapmap(filename)
 			Z=max(Z,z)
 			txt=copytext_char(txt,k+1)
 		else
-			i=findtext(txt,"\n")
+			i=findtext_char(txt,"\n")
 			txt=i?copytext_char(txt,i+1):null
 	to_world("Map size: [X],[Y],[Z]")
 	fdel("map_[mapname].txt")
@@ -156,7 +156,7 @@ proc/dmp2swapmap(filename)
 			continue
 		i=d2sm_MatchBrace(txt,1,40)
 		var/list/coords=d2sm_ParseCommaList(copytext_char(txt,2,i))
-		j=findtext(txt,"{",i+1)
+		j=findtext_char(txt,"{",i+1)
 		k=d2sm_MatchBrace(txt,j,123)
 		var/mtxt=copytext_char(txt,j+2,k-1)
 		var/_x=0,_y=0

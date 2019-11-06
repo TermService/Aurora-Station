@@ -82,7 +82,7 @@ var/list/possible_cable_coil_colours = list(
 
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
 
-	var/dash = findtext(icon_state, "-")
+	var/dash = findtext_char(icon_state, "-")
 
 	d1 = text2num( copytext_char( icon_state, 1, dash ) )
 

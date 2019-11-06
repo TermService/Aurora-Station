@@ -336,7 +336,7 @@ var/list/gamemode_cache = list()
 		else if (copytext_char(t, 1, 2) == "#")
 			continue
 
-		var/pos = findtext(t, " ")
+		var/pos = findtext_char(t, " ")
 		var/name = null
 		var/value = null
 

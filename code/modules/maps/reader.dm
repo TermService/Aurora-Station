@@ -229,7 +229,7 @@ var/global/dmm_suite/preloader/_preloader = new
 			dpos = find_next_delimiter_position(model, old_position, ",", "{", "}") //find next delimiter (comma here) that's not within {...}
 
 			var/full_def = trim_text(copytext_char(model, old_position, dpos)) //full definition, e.g : /obj/foo/bar{variables=derp}
-			var/variables_start = findtext(full_def, "{")
+			var/variables_start = findtext_char(full_def, "{")
 
 			var/path_str = trim_text(copytext_char(full_def, 1, variables_start))
 			var/atom_def = text2path(path_str) //path definition, e.g /obj/foo/bar
@@ -369,20 +369,20 @@ var/global/dmm_suite/preloader/_preloader = new
 //returns 0 if reached the last delimiter
 /dmm_suite/proc/find_next_delimiter_position(text as text,initial_position as num, delimiter=",",opening_escape="\"",closing_escape="\"")
 	var/position = initial_position
-	var/next_delimiter = findtext(text,delimiter,position,0)
-	var/next_opening = findtext(text,opening_escape,position,0)
+	var/next_delimiter = findtext_char(text,delimiter,position,0)
+	var/next_opening = findtext_char(text,opening_escape,position,0)
 
 	while((next_opening != 0) && (next_opening < next_delimiter))
-		position = findtext(text,closing_escape,next_opening + 1,0)+1
-		next_delimiter = findtext(text,delimiter,position,0)
-		next_opening = findtext(text,opening_escape,position,0)
+		position = findtext_char(text,closing_escape,next_opening + 1,0)+1
+		next_delimiter = findtext_char(text,delimiter,position,0)
+		next_opening = findtext_char(text,opening_escape,position,0)
 
 	return next_delimiter
 
 /dmm_suite/proc/readlistitem(text as text, is_key = FALSE)
 	//Check for string
-	if(findtext(text,"\"",1,2))
-		. = copytext_char(text,2,findtext(text,"\"",3,0))
+	if(findtext_char(text,"\"",1,2))
+		. = copytext_char(text,2,findtext_char(text,"\"",3,0))
 
 	//Check for number
 	// Keys cannot safely be numbers. This implementation will return null if
@@ -426,7 +426,7 @@ var/global/dmm_suite/preloader/_preloader = new
 		position = find_next_delimiter_position(text,old_position,delimiter)
 
 		//check if this is a simple variable (as in list(var1, var2)) or an associative one (as in list(var1="foo",var2=7))
-		var/equal_position = findtext(text,"=",old_position, position)
+		var/equal_position = findtext_char(text,"=",old_position, position)
 
 		var/trim_left = trim_text(copytext_char(text,old_position,(equal_position ? equal_position : position)),1)//the name of the variable, must trim quotes to build a BYOND compliant associatives list
 		old_position = position + 1

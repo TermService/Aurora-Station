@@ -34,15 +34,15 @@
 		return
 
 	var/list/seperate = list()
-	if(findtext(msg,"(("))
+	if(findtext_char(msg,"(("))
 		return
-	else if(findtext(msg,"))"))
+	else if(findtext_char(msg,"))"))
 		return
-	else if(findtext(msg," ")==0)
+	else if(findtext_char(msg," ")==0)
 		return
 	else
 		/*var/l = length(msg)
-		if(findtext(msg," ",l,l+1)==0)
+		if(findtext_char(msg," ",l,l+1)==0)
 			msg+=" "*/
 		seperate = text2list(msg, " ")
 

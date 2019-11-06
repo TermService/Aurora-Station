@@ -1,11 +1,11 @@
 /mob/living/carbon/human/emote(var/act,var/m_type=1,var/message = null)
 	var/param = null
-	if (findtext(act, "-", 1, null))
-		var/t1 = findtext(act, "-", 1, null)
+	if (findtext_char(act, "-", 1, null))
+		var/t1 = findtext_char(act, "-", 1, null)
 		param = copytext_char(act, t1 + 1, length(act) + 1)
 		act = copytext_char(act, 1, t1)
 
-	if(findtext(act,"s",-1) && !findtext(act,"_",-2))//Removes ending s's unless they are prefixed with a '_'
+	if(findtext_char(act,"s",-1) && !findtext_char(act,"_",-2))//Removes ending s's unless they are prefixed with a '_'
 		act = copytext_char(act,1,length(act))
 
 	var/muzzled = istype(src.wear_mask, /obj/item/clothing/mask/muzzle)
@@ -66,7 +66,7 @@
 
 		if ("me")
 
-			//if(silent && silent > 0 && findtext(message,"\"",1, null) > 0)
+			//if(silent && silent > 0 && findtext_char(message,"\"",1, null) > 0)
 			//	return //This check does not work and I have no idea why, I'm leaving it in for reference.
 
 			if (src.client)

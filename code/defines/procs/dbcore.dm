@@ -303,11 +303,11 @@ Delayed insert mode was removed in mysql 7 and only works with MyISAM type table
 			return null
 
 	while (1)
-		search = findtext(query_to_parse, ":", pos)
+		search = findtext_char(query_to_parse, ":", pos)
 		parsed += copytext_char(query_to_parse, pos, search)
 		if (search)
 			pos = search
-			search = findtext(query_to_parse, ":", pos + 1)
+			search = findtext_char(query_to_parse, ":", pos + 1)
 			if (search)
 				curr_arg = copytext_char(query_to_parse, pos + 1, search)
 				if (cache[curr_arg])

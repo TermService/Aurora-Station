@@ -579,7 +579,7 @@
 		if (!length(job))
 			continue
 
-		var/pos = findtext(job, "=")
+		var/pos = findtext_char(job, "=")
 		var/name = null
 		var/value = null
 

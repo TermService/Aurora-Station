@@ -94,7 +94,7 @@
 				pick_list += i
 			for(var/i=1, i <= abs(temp_message.len/3), i++)
 				var/H = pick(pick_list)
-				if(findtext(temp_message[H], "*") || findtext(temp_message[H], ";") || findtext(temp_message[H], ":")) continue
+				if(findtext_char(temp_message[H], "*") || findtext_char(temp_message[H], ";") || findtext_char(temp_message[H], ":")) continue
 				temp_message[H] = ninjaspeak(temp_message[H])
 				pick_list -= H
 			message = jointext(temp_message, " ")

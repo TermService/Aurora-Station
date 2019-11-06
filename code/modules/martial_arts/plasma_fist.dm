@@ -8,15 +8,15 @@
 
 
 /datum/martial_art/plasma_fist/proc/check_streak(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
-	if(findtext(streak,TORNADO_COMBO))
+	if(findtext_char(streak,TORNADO_COMBO))
 		streak = ""
 		Tornado(A,D)
 		return 1
-	if(findtext(streak,THROWBACK_COMBO))
+	if(findtext_char(streak,THROWBACK_COMBO))
 		streak = ""
 		Throwback(A,D)
 		return 1
-	if(findtext(streak,PLASMA_COMBO))
+	if(findtext_char(streak,PLASMA_COMBO))
 		streak = ""
 		Plasma(A,D)
 		return 1

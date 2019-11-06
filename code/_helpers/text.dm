@@ -156,7 +156,7 @@
 /proc/dd_hasprefix(text, prefix)
 	var/start = 1
 	var/end = length(prefix) + 1
-	return findtext(text, prefix, start, end)
+	return findtext_char(text, prefix, start, end)
 
 //Checks the beginning of a string for a specified sub-string. This proc is case sensitive
 //Returns the position of the substring or 0 if it was not found
@@ -170,7 +170,7 @@
 /proc/dd_hassuffix(text, suffix)
 	var/start = length(text) - length(suffix)
 	if(start)
-		return findtext(text, suffix, start, null)
+		return findtext_char(text, suffix, start, null)
 	return
 
 //Checks the end of a string for a specified substring. This proc is case sensitive
@@ -258,8 +258,8 @@
 	var/opentag = 1 //These store the position of < and > respectively.
 	var/closetag = 1
 	while(1)
-		opentag = findtext(input, "<")
-		closetag = findtext(input, ">")
+		opentag = findtext_char(input, "<")
+		closetag = findtext_char(input, ">")
 		if(closetag && opentag)
 			if(closetag < opentag)
 				input = copytext_char(input, (closetag + 1))
@@ -480,13 +480,13 @@ proc/TextPreview(var/string,var/len=40)
 
 //Used for applying byonds text macros to strings that are loaded at runtime
 /proc/apply_text_macros(string)
-	var/next_backslash = findtext(string, "\\")
+	var/next_backslash = findtext_char(string, "\\")
 	if(!next_backslash)
 		return string
 
 	var/leng = length(string)
 
-	var/next_space = findtext(string, " ", next_backslash + 1)
+	var/next_space = findtext_char(string, " ", next_backslash + 1)
 	if(!next_space)
 		next_space = leng - next_backslash
 

@@ -26,7 +26,7 @@
 /datum/controller/subsystem/plants/Initialize(timeofday)
 	// Build the icon lists.
 	for(var/icostate in icon_states('icons/obj/hydroponics_growing.dmi'))
-		var/split = findtext(icostate,"-")
+		var/split = findtext_char(icostate,"-")
 		if(!split)
 			// invalid icon_state
 			continue
@@ -42,7 +42,7 @@
 			plant_sprites[base] = ikey
 
 	for(var/icostate in icon_states('icons/obj/hydroponics_products.dmi'))
-		var/split = findtext(icostate,"-")
+		var/split = findtext_char(icostate,"-")
 		if(split)
 			plant_product_sprites |= copytext_char(icostate,1,split)
 

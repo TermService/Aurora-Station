@@ -70,7 +70,7 @@ proc/tg_list2text(list/list, glue=",")
 	var/found
 
 	do
-		found       = findtext(text, delimiter, last_found, 0)
+		found       = findtext_char(text, delimiter, last_found, 0)
 		.          += copytext_char(text, last_found, found)
 		last_found  = found + delim_len
 	while (found)

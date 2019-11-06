@@ -249,14 +249,14 @@
 
 		for(var/datum/player_info/I in infos)
 			var/a_ckey = sanitizeSQL(I.author)
-			var/timeY = copytext_char(I.timestamp, findtext(I.timestamp, "of") + 3)
+			var/timeY = copytext_char(I.timestamp, findtext_char(I.timestamp, "of") + 3)
 			var/timeM
-			var/timeD = copytext_char(I.timestamp, findtext(I.timestamp, " ", 6) + 1, findtext(I.timestamp, " ", 6) + 3)
-			if(findtext(timeD, "s") || findtext(timeD, "n") || findtext(timeD, "r") || findtext(timeD, "t"))
+			var/timeD = copytext_char(I.timestamp, findtext_char(I.timestamp, " ", 6) + 1, findtext_char(I.timestamp, " ", 6) + 3)
+			if(findtext_char(timeD, "s") || findtext_char(timeD, "n") || findtext_char(timeD, "r") || findtext_char(timeD, "t"))
 				timeD = "0[copytext_char(timeD, 1, 2)]"
 
 //			msg_scopes("Timestamp: [I.timestamp].")
-			var/temp = copytext_char(I.timestamp, 6, findtext(I.timestamp, " ", 6))
+			var/temp = copytext_char(I.timestamp, 6, findtext_char(I.timestamp, " ", 6))
 //			msg_scopes("The day? [timeD].")
 //			msg_scopes("The month? [temp].")
 //			msg_scopes("The year? [timeY].")

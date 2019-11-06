@@ -13,23 +13,23 @@
 	no_guns_message = "Use of ranged weaponry would bring dishonor to the clan."
 
 /datum/martial_art/the_sleeping_carp/proc/check_streak(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
-	if(findtext(streak,WRIST_WRENCH_COMBO))
+	if(findtext_char(streak,WRIST_WRENCH_COMBO))
 		streak = ""
 		wristWrench(A,D)
 		return 1
-	if(findtext(streak,BACK_KICK_COMBO))
+	if(findtext_char(streak,BACK_KICK_COMBO))
 		streak = ""
 		backKick(A,D)
 		return 1
-	if(findtext(streak,STOMACH_KNEE_COMBO))
+	if(findtext_char(streak,STOMACH_KNEE_COMBO))
 		streak = ""
 		kneeStomach(A,D)
 		return 1
-	if(findtext(streak,HEAD_KICK_COMBO))
+	if(findtext_char(streak,HEAD_KICK_COMBO))
 		streak = ""
 		headKick(A,D)
 		return 1
-	if(findtext(streak,ELBOW_DROP_COMBO))
+	if(findtext_char(streak,ELBOW_DROP_COMBO))
 		streak = ""
 		elbowDrop(A,D)
 		return 1

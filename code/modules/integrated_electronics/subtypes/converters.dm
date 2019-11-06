@@ -186,7 +186,7 @@
 
 /obj/item/integrated_circuit/converter/findstring/do_work()
 
-	set_pin_data(IC_OUTPUT, 1, findtext(get_pin_data(IC_INPUT, 1),get_pin_data(IC_INPUT, 2)) )
+	set_pin_data(IC_OUTPUT, 1, findtext_char(get_pin_data(IC_INPUT, 1),get_pin_data(IC_INPUT, 2)) )
 	push_data()
 
 	activate_pin(2)

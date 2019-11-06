@@ -55,7 +55,7 @@
 	for(var/w in words)
 		var/nword = "[w] "
 		var/input_ending = copytext_char(w, length(w))
-		var/ends_sentence = findtext(".?!",input_ending)
+		var/ends_sentence = findtext_char(".?!",input_ending)
 		if(!prob(understand_chance))
 			nword = scramble_word(w)
 			if(new_sentence)

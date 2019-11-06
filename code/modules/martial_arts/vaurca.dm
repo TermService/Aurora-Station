@@ -7,15 +7,15 @@
 	help_verb = /datum/martial_art/vkutet/proc/vkutet_help
 
 /datum/martial_art/vkutet/proc/check_streak(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
-	if(findtext(streak,PIERCING_STRIKE))
+	if(findtext_char(streak,PIERCING_STRIKE))
 		streak = ""
 		piercing_strike(A,D)
 		return 1
-	if(findtext(streak,SWIFT_BITE))
+	if(findtext_char(streak,SWIFT_BITE))
 		streak = ""
 		swift_bite(A,D)
 		return 1
-	if(findtext(streak,CRUSHING_JAWS))
+	if(findtext_char(streak,CRUSHING_JAWS))
 		streak = ""
 		crushing_jaws(A,D)
 		return 1

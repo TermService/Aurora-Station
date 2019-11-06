@@ -1027,7 +1027,7 @@ proc/admin_notice(var/message, var/rights)
 	var/list/matches = new()
 
 	for(var/path in types)
-		if(findtext("[path]", object))
+		if(findtext_char("[path]", object))
 			matches += path
 
 	if(matches.len==0)

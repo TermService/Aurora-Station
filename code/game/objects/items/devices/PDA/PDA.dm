@@ -1391,14 +1391,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		// Scrub out the tags (replacing a few formatting ones along the way)
 
 		// Find the beginning and end of the first tag.
-		var/tag_start = findtext(raw_scan,"<")
-		var/tag_stop = findtext(raw_scan,">")
+		var/tag_start = findtext_char(raw_scan,"<")
+		var/tag_stop = findtext_char(raw_scan,">")
 
 		// Until we run out of complete tags...
 		while(tag_start&&tag_stop)
 			var/pre = copytext_char(raw_scan,1,tag_start) // Get the stuff that comes before the tag
 			var/tag = lowertext(copytext_char(raw_scan,tag_start+1,tag_stop)) // Get the tag so we can do intellegent replacement
-			var/tagend = findtext(tag," ") // Find the first space in the tag if there is one.
+			var/tagend = findtext_char(tag," ") // Find the first space in the tag if there is one.
 
 			// Anything that's before the tag can just be added as is.
 			formatted_scan = formatted_scan+pre
@@ -1413,8 +1413,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			raw_scan = copytext_char(raw_scan,tag_stop+1) // continue on with the stuff after the tag
 
 			// Look for the next tag in what's left
-			tag_start = findtext(raw_scan,"<")
-			tag_stop = findtext(raw_scan,">")
+			tag_start = findtext_char(raw_scan,"<")
+			tag_stop = findtext_char(raw_scan,">")
 
 		// Anything that is left in the page. just tack it on to the end as is
 		formatted_scan=formatted_scan+raw_scan
