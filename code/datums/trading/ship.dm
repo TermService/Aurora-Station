@@ -18,7 +18,7 @@
 	if(prob(-disposition))
 		return get_response("bribe_refusal", "How about.... no?")
 
-	var/length = round(amt/100)
-	duration_of_stay += length
+	var/time = round(amt/100)
+	duration_of_stay += time
 	. = get_response("bribe_accept", "Sure, I'll stay for TIME more minutes.")
-	. = replacetext(., "TIME", length)
+	. = replacetext(., "TIME", time)

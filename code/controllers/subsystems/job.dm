@@ -576,7 +576,7 @@
 			continue
 
 		job = trim(job)
-		if (!length(job))
+		if (!length_char(job))
 			continue
 
 		var/pos = findtext_char(job, "=")

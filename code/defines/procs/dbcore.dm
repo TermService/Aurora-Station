@@ -363,7 +363,7 @@ Delayed insert mode was removed in mysql 7 and only works with MyISAM type table
 	var/position //1-based index into item data
 	var/sql_type
 	var/flags
-	var/length
+	var/length_db
 	var/max_length
 
 /DBColumn/New(name_handler, table_handler, position_handler, type_handler, flag_handler, length_handler, max_length_handler)
@@ -372,7 +372,7 @@ Delayed insert mode was removed in mysql 7 and only works with MyISAM type table
 	position = position_handler
 	sql_type = type_handler
 	flags = flag_handler
-	length = length_handler
+	length_db = length_handler
 	max_length = max_length_handler
 	return ..()
 

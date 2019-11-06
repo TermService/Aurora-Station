@@ -133,7 +133,7 @@ var/datum/discord_bot/discord_bot = null
 	if (!message)
 		return
 
-	if (length(message) > 2000)
+	if (length_char(message) > 2000)
 		message = copytext_char(message, 1, 2001)
 
 	// Let's run it through the proper JSON encoder, just in case of special characters.

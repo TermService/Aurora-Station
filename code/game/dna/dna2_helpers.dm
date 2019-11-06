@@ -2,13 +2,13 @@
 // Helpers for DNA2
 /////////////////////////////
 
-// Pads 0s to t until length == u
+// Pads 0s to t until length_char == u
 /proc/add_zero2(t, u)
 	var/temp1
-	while (length(t) < u)
+	while (length_char(t) < u)
 		t = "0[t]"
 	temp1 = t
-	if (length(t) > u)
+	if (length_char(t) > u)
 		temp1 = copytext_char(t,2,u+1)
 	return temp1
 
