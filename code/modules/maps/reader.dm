@@ -151,7 +151,7 @@ var/global/dmm_suite/preloader/_preloader = new
 									world.maxx = xcrd
 
 							if(xcrd >= 1)
-								var/model_key = copytext(line, tpos, tpos + key_len)
+								var/model_key = copytext_char(line, tpos, tpos + key_len)
 								var/no_afterchange = no_changeturf || zexpansion
 								if(!no_afterchange || (model_key != space_key))
 									if(!grid_models[model_key])
@@ -228,10 +228,10 @@ var/global/dmm_suite/preloader/_preloader = new
 			//finding next member (e.g /turf/unsimulated/wall{icon_state = "rock"} or /area/mine/explored)
 			dpos = find_next_delimiter_position(model, old_position, ",", "{", "}") //find next delimiter (comma here) that's not within {...}
 
-			var/full_def = trim_text(copytext(model, old_position, dpos)) //full definition, e.g : /obj/foo/bar{variables=derp}
+			var/full_def = trim_text(copytext_char(model, old_position, dpos)) //full definition, e.g : /obj/foo/bar{variables=derp}
 			var/variables_start = findtext(full_def, "{")
 
-			var/path_str = trim_text(copytext(full_def, 1, variables_start))
+			var/path_str = trim_text(copytext_char(full_def, 1, variables_start))
 			var/atom_def = text2path(path_str) //path definition, e.g /obj/foo/bar
 			old_position = dpos + 1
 
@@ -245,7 +245,7 @@ var/global/dmm_suite/preloader/_preloader = new
 			var/list/fields
 
 			if(variables_start)//if there's any variable
-				full_def = copytext(full_def,variables_start+1,length(full_def))//removing the last '}'
+				full_def = copytext_char(full_def,variables_start+1,length(full_def))//removing the last '}'
 				fields = readlist(full_def, ";")
 				if(fields.len)
 					if(!trim(fields[fields.len]))
@@ -382,7 +382,7 @@ var/global/dmm_suite/preloader/_preloader = new
 /dmm_suite/proc/readlistitem(text as text, is_key = FALSE)
 	//Check for string
 	if(findtext(text,"\"",1,2))
-		. = copytext(text,2,findtext(text,"\"",3,0))
+		. = copytext_char(text,2,findtext(text,"\"",3,0))
 
 	//Check for number
 	// Keys cannot safely be numbers. This implementation will return null if
@@ -395,12 +395,12 @@ var/global/dmm_suite/preloader/_preloader = new
 		. = null
 
 	//Check for list
-	else if(copytext(text,1,6) == "list(")
-		. = readlist(copytext(text,6,length(text)))
+	else if(copytext_char(text,1,6) == "list(")
+		. = readlist(copytext_char(text,6,length(text)))
 
 	//Check for file
-	else if(copytext(text,1,2) == "'")
-		. = file(copytext(text,2,length(text)))
+	else if(copytext_char(text,1,2) == "'")
+		. = file(copytext_char(text,2,length(text)))
 
 	//Check for path
 	else if(ispath(text2path(text)))
@@ -428,11 +428,11 @@ var/global/dmm_suite/preloader/_preloader = new
 		//check if this is a simple variable (as in list(var1, var2)) or an associative one (as in list(var1="foo",var2=7))
 		var/equal_position = findtext(text,"=",old_position, position)
 
-		var/trim_left = trim_text(copytext(text,old_position,(equal_position ? equal_position : position)),1)//the name of the variable, must trim quotes to build a BYOND compliant associatives list
+		var/trim_left = trim_text(copytext_char(text,old_position,(equal_position ? equal_position : position)),1)//the name of the variable, must trim quotes to build a BYOND compliant associatives list
 		old_position = position + 1
 
 		if(equal_position) //associative var, so do the association
-			var/trim_right = trim_text(copytext(text,equal_position+1,position))//the content of the variable
+			var/trim_right = trim_text(copytext_char(text,equal_position+1,position))//the content of the variable
 			trim_left = readlistitem(trim_left, TRUE) // Assoc vars can be anything that isn't a num!
 			to_return[trim_left] = readlistitem(trim_right)
 			list_index++

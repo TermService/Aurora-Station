@@ -1,7 +1,7 @@
 /proc/sanitize_ru(var/input)
 	var/ind
 	while((ind  = findtext(input, "я")))
-		input = copytext(input, 1, ind) + "&#255;" + copytext(input, ind + 1)
+		input = copytext_char(input, 1, ind) + "&#255;" + copytext_char(input, ind + 1)
 		ind = findtext(input, "я")
 	return input
 
@@ -24,7 +24,7 @@
                 first = 0
                 out += html_encode(text)
         return out
- 
+
 /proc/rhtml_decode(var/msg, var/html = 0)
         var/rep
         if(html)

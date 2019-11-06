@@ -243,20 +243,20 @@
 			IP = query.item[1]
 			CID = query.item[2]
 
-		var/savefile/info = new("data/player_saves/[copytext(t, 1, 2)]/[t]/info.sav")
+		var/savefile/info = new("data/player_saves/[copytext_char(t, 1, 2)]/[t]/info.sav")
 		var/list/infos
 		info >> infos
 
 		for(var/datum/player_info/I in infos)
 			var/a_ckey = sanitizeSQL(I.author)
-			var/timeY = copytext(I.timestamp, findtext(I.timestamp, "of") + 3)
+			var/timeY = copytext_char(I.timestamp, findtext(I.timestamp, "of") + 3)
 			var/timeM
-			var/timeD = copytext(I.timestamp, findtext(I.timestamp, " ", 6) + 1, findtext(I.timestamp, " ", 6) + 3)
+			var/timeD = copytext_char(I.timestamp, findtext(I.timestamp, " ", 6) + 1, findtext(I.timestamp, " ", 6) + 3)
 			if(findtext(timeD, "s") || findtext(timeD, "n") || findtext(timeD, "r") || findtext(timeD, "t"))
-				timeD = "0[copytext(timeD, 1, 2)]"
+				timeD = "0[copytext_char(timeD, 1, 2)]"
 
 //			msg_scopes("Timestamp: [I.timestamp].")
-			var/temp = copytext(I.timestamp, 6, findtext(I.timestamp, " ", 6))
+			var/temp = copytext_char(I.timestamp, 6, findtext(I.timestamp, " ", 6))
 //			msg_scopes("The day? [timeD].")
 //			msg_scopes("The month? [temp].")
 //			msg_scopes("The year? [timeY].")

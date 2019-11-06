@@ -167,7 +167,7 @@
 			// Hopefully removes those goddamn \improper s which are screwing up the UI
 			var/N = A.area.name
 			if(findtext(N, "�"))
-				N = copytext(N, 3)
+				N = copytext_char(N, 3)
 			APC_entry["name"] = N
 			// Add data into main list of APC data.
 			APC_data += list(APC_entry)
@@ -185,8 +185,3 @@
 		data["load_percentage"] = 100
 	data["alarm"] = powernet.problem ? 1 : 0
 	return data
-
-
-
-
-

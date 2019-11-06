@@ -34,7 +34,7 @@ var/datum/discord_bot/discord_bot = null
 		var/client/cc = C
 		if (cc.holder && (cc.holder.rights & (R_MOD|R_ADMIN)))
 			admins_number++
-	
+
 	post_webhook_event(WEBHOOK_ROUNDSTART, list("playercount"=clients.len))
 	if (!admins_number)
 		post_webhook_event(WEBHOOK_ALERT_NO_ADMINS, list())
@@ -134,7 +134,7 @@ var/datum/discord_bot/discord_bot = null
 		return
 
 	if (length(message) > 2000)
-		message = copytext(message, 1, 2001)
+		message = copytext_char(message, 1, 2001)
 
 	// Let's run it through the proper JSON encoder, just in case of special characters.
 	message = json_encode(list("content" = message))

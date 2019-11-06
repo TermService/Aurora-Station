@@ -301,13 +301,13 @@ var/list/world_api_rate_limit = list()
 				if (!line)
 					continue
 
-				if (copytext(line, 1, 2) == ";")
+				if (copytext_char(line, 1, 2) == ";")
 					continue
 
 				var/title = "Moderator"
 				var/rights = admin_ranks[title]
 
-				var/ckey = copytext(line, 1, length(line)+1)
+				var/ckey = copytext_char(line, 1, length(line)+1)
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
 				D.associate(directory[ckey])
 
@@ -321,13 +321,13 @@ var/list/world_api_rate_limit = list()
 			for(var/line in lines)
 				if (!line)
 					continue
-				if (copytext(line, 1, 2) == ";")
+				if (copytext_char(line, 1, 2) == ";")
 					continue
 
 				var/title = "Mentor"
 				var/rights = admin_ranks[title]
 
-				var/ckey = copytext(line, 1, length(line)+1)
+				var/ckey = copytext_char(line, 1, length(line)+1)
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
 				D.associate(directory[ckey])
 
@@ -418,15 +418,15 @@ var/list/world_api_rate_limit = list()
 		t = trim(t)
 		if (length(t) == 0)
 			continue
-		else if (copytext(t, 1, 2) == "#")
+		else if (copytext_char(t, 1, 2) == "#")
 			continue
 
 		var/pos = findtext(t, " ")
 		var/name = null
 		var/value = null
 
-		name = lowertext(copytext(t, 1, pos))
-		value = copytext(t, pos + 1)
+		name = lowertext(copytext_char(t, 1, pos))
+		value = copytext_char(t, pos + 1)
 
 		if (!name)
 			continue

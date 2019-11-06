@@ -261,7 +261,7 @@ proc/admin_notice(var/message, var/rights)
 
 
 /datum/admins/proc/player_has_info(var/key as text)
-	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
+	var/savefile/info = new("data/player_saves/[copytext_char(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
 	info >> infos
 	if(!infos || !infos.len) return 0
@@ -288,7 +288,7 @@ proc/admin_notice(var/message, var/rights)
 				break
 		dat +="<span style='color:#000000; font-weight: bold'>Player age: [p_age]</span><br>"
 
-		var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
+		var/savefile/info = new("data/player_saves/[copytext_char(key, 1, 2)]/[key]/info.sav")
 		var/list/infos
 		info >> infos
 		if(!infos)

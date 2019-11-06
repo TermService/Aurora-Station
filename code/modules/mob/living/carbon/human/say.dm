@@ -16,19 +16,19 @@
 				temp = replacetext(temp, ";", "")	//general radio
 
 				if(findtext(trim_left(temp), ":", 6, 7))	//dept radio
-					temp = copytext(trim_left(temp), 8)
+					temp = copytext_char(trim_left(temp), 8)
 					virgin = 0
 
 				if(virgin)
-					temp = copytext(trim_left(temp), 6)	//normal speech
+					temp = copytext_char(trim_left(temp), 6)	//normal speech
 					virgin = 0
 
 				while(findtext(trim_left(temp), ":", 1, 2))	//dept radio again (necessary)
-					temp = copytext(trim_left(temp), 3)
+					temp = copytext_char(trim_left(temp), 3)
 
 				if(findtext(temp, "*", 1, 2))	//emotes
 					return
-				temp = copytext(trim_left(temp), 1, rand(5,8))
+				temp = copytext_char(trim_left(temp), 1, rand(5,8))
 
 				var/trimmed = trim_left(temp)
 				if(length(trimmed))
@@ -113,7 +113,7 @@
 
 /mob/living/carbon/human/say_quote(var/message, var/datum/language/speaking = null)
 	var/verb = "says"
-	var/ending = copytext(message, length(message))
+	var/ending = copytext_char(message, length(message))
 
 	if(speaking)
 		verb = speaking.get_spoken_verb(ending)
@@ -234,12 +234,12 @@
 /mob/living/carbon/human/proc/handle_speech_muts(var/message, var/verb)
 	if(message)
 		if(disabilities & TOURETTES)
-			var/prefix=copytext(message,1,2)
+			var/prefix=copytext_char(message,1,2)
 			if(prefix == ";")
-				message = copytext(message,2)
+				message = copytext_char(message,2)
 			else if(prefix in list(":","#"))
-				prefix += copytext(message,2,3)
-				message = copytext(message,3)
+				prefix += copytext_char(message,2,3)
+				message = copytext_char(message,3)
 			else
 				prefix=""
 
@@ -276,12 +276,12 @@
 			message = replacetext(message,"above"," [motional] ")
 			message = replacetext(message,"below"," [motional] ")
 		if(disabilities & UNINTELLIGIBLE)
-			var/prefix=copytext(message,1,2)
+			var/prefix=copytext_char(message,1,2)
 			if(prefix == ";")
-				message = copytext(message,2)
+				message = copytext_char(message,2)
 			else if(prefix in list(":","#"))
-				prefix += copytext(message,2,3)
-				message = copytext(message,3)
+				prefix += copytext_char(message,2,3)
+				message = copytext_char(message,3)
 			else
 				prefix=""
 
@@ -290,20 +290,20 @@
 			for(var/i=1;i<=words.len;i++)
 				var/cword = pick(words)
 				words.Remove(cword)
-				var/suffix = copytext(cword,length(cword)-1,length(cword))
+				var/suffix = copytext_char(cword,length(cword)-1,length(cword))
 				while(length(cword)>0 && suffix in list(".",",",";","!",":","?"))
-					cword  = copytext(cword,1              ,length(cword)-1)
-					suffix = copytext(cword,length(cword)-1,length(cword)  )
+					cword  = copytext_char(cword,1              ,length(cword)-1)
+					suffix = copytext_char(cword,length(cword)-1,length(cword)  )
 				if(length(cword))
 					rearranged += cword
 			message ="[prefix][jointext(rearranged," ")]"
 		if(losebreath>=5) //Gasping is a mutation, right?
-			var/prefix=copytext(message,1,2)
+			var/prefix=copytext_char(message,1,2)
 			if(prefix == ";")
-				message = copytext(message,2)
+				message = copytext_char(message,2)
 			else if(prefix in list(":","#"))
-				prefix += copytext(message,2,3)
-				message = copytext(message,3)
+				prefix += copytext_char(message,2,3)
+				message = copytext_char(message,3)
 			else
 				prefix=""
 

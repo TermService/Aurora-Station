@@ -333,7 +333,7 @@ var/list/gamemode_cache = list()
 		t = trim(t)
 		if (length(t) == 0)
 			continue
-		else if (copytext(t, 1, 2) == "#")
+		else if (copytext_char(t, 1, 2) == "#")
 			continue
 
 		var/pos = findtext(t, " ")
@@ -341,8 +341,8 @@ var/list/gamemode_cache = list()
 		var/value = null
 
 		if (pos)
-			name = lowertext(copytext(t, 1, pos))
-			value = copytext(t, pos + 1)
+			name = lowertext(copytext_char(t, 1, pos))
+			value = copytext_char(t, pos + 1)
 		else
 			name = lowertext(t)
 
