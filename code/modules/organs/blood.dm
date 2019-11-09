@@ -65,6 +65,9 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 							break
 
 				B.volume += 0.1 // regenerate blood VERY slowly
+				if(blood_volume <= BLOOD_VOLUME_SAFE) //We loose nutrition and hydration very slowly if our blood is too low
+					adjustNutritionLoss(2)
+					adjustHydrationLoss(1)
 				if(CE_BLOODRESTORE in chem_effects)
 					B.volume += chem_effects[CE_BLOODRESTORE]
 
@@ -126,11 +129,6 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 				toxloss += 300 // just to be safe!
 				death()
 
-		// Without enough blood you slowly go hungry and thirsty
-		if(blood_volume <= BLOOD_VOLUME_SAFE)
-			adjustNutritionLoss(7)
-			adjustHydrationLoss(3)
-
 		//Bleeding out
 		var/blood_max = 0
 		for(var/obj/item/organ/external/temp in organs)
@@ -173,13 +171,13 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 		B.data["virus2"] = list()
 	B.data["virus2"] |= virus_copylist(src.virus2)
 	B.data["antibodies"] = src.antibodies
-	B.data["blood_DNA"] = copytext_char(src.dna.unique_enzymes,1,0)
+	B.data["blood_DNA"] = copytext(src.dna.unique_enzymes,1,0)
 	if(src.resistances && src.resistances.len)
 		if(B.data["resistances"])
 			B.data["resistances"] |= src.resistances.Copy()
 		else
 			B.data["resistances"] = src.resistances.Copy()
-	B.data["blood_type"] = copytext_char(src.dna.b_type,1,0)
+	B.data["blood_type"] = copytext(src.dna.b_type,1,0)
 
 	// Putting this here due to return shenanigans.
 	if(istype(src,/mob/living/carbon/human))
@@ -260,10 +258,10 @@ proc/blood_incompatible(donor,receiver,donor_species,receiver_species)
 		if(donor_species != receiver_species)
 			return 1
 
-	var/donor_antigen = copytext_char(donor,1,length(donor))
-	var/receiver_antigen = copytext_char(receiver,1,length(receiver))
-	var/donor_rh = (findtext_char(donor,"+")>0)
-	var/receiver_rh = (findtext_char(receiver,"+")>0)
+	var/donor_antigen = copytext(donor,1,length(donor))
+	var/receiver_antigen = copytext(receiver,1,length(receiver))
+	var/donor_rh = (findtext(donor,"+")>0)
+	var/receiver_rh = (findtext(receiver,"+")>0)
 
 	if(donor_rh && !receiver_rh) return 1
 	switch(receiver_antigen)

@@ -387,8 +387,8 @@
 	if(paper_sheet)
 		stuff_to_print = paper_sheet.info + stuff_to_print
 		while(stuff_to_print)
-			paper_sheet.set_content(null, copytext_char(stuff_to_print, 1, MAX_PAPER_MESSAGE_LEN))
-			stuff_to_print = copytext_char(stuff_to_print, MAX_PAPER_MESSAGE_LEN)
+			paper_sheet.set_content(null, copytext(stuff_to_print, 1, MAX_PAPER_MESSAGE_LEN))
+			stuff_to_print = copytext(stuff_to_print, MAX_PAPER_MESSAGE_LEN)
 			if(stuff_to_print || eject)
 				paper_sheet = paper_source.get_item(TRUE)
 				audible_message("<span class='notice'>\The [src] buzzes and spits out a sheet of paper.</span>")

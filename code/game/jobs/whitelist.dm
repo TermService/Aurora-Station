@@ -94,9 +94,9 @@ var/list/whitelist = list()
 	else
 		if (M && species)
 			for (var/s in alien_whitelist)
-				if (findtext_char(s,"[M.ckey] - [species]"))
+				if (findtext(s,"[M.ckey] - [species]"))
 					return 1
-				if (findtext_char(s,"[M.ckey] - All"))
+				if (findtext(s,"[M.ckey] - All"))
 					return 1
 	return 0
 

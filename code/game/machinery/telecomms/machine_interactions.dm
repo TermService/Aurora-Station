@@ -107,16 +107,13 @@
 
 /obj/machinery/telecomms/attack_hand(var/mob/user as mob)
 
-	// You need a multitool to use this, or be silicon
-	if(!issilicon(user))
-		// istype returns false if the value is null
-		if(!istype(user.get_active_hand(), /obj/item/device/multitool))
-			return
-
 	if(stat & (BROKEN|NOPOWER))
 		return
 
-	var/obj/item/device/multitool/P = get_multitool(user)
+	var/obj/item/device/multitool/P = user.get_multitool()
+
+	if(!P)
+		return
 
 	user.set_machine(src)
 	var/dat
@@ -173,22 +170,6 @@
 	user << browse(dat, "window=tcommachine;size=520x500;can_resize=0")
 	onclose(user, "dormitory")
 
-// Returns a multitool from a user depending on their mobtype.
-
-/obj/machinery/telecomms/proc/get_multitool(mob/user as mob)
-
-	var/obj/item/device/multitool/P = null
-	// Let's double check
-	if(!issilicon(user) && istype(user.get_active_hand(), /obj/item/device/multitool))
-		P = user.get_active_hand()
-	else if(isAI(user))
-		var/mob/living/silicon/ai/U = user
-		P = U.aiMulti
-	else if(isrobot(user) && in_range(user, src))
-		if(istype(user.get_active_hand(), /obj/item/device/multitool))
-			P = user.get_active_hand()
-	return P
-
 // Additional Options for certain machines. Use this when you want to add an option to a specific machine.
 // Example of how to use below.
 
@@ -243,7 +224,7 @@
 		var/newfreq = input(usr, "Specify a new frequency for new signals to change to. Enter null to turn off frequency changing. Decimals assigned automatically.", src, network) as null|num
 		if(canAccess(usr))
 			if(newfreq)
-				if(findtext_char(num2text(newfreq), "."))
+				if(findtext(num2text(newfreq), "."))
 					newfreq *= 10 // shift the decimal one place
 				if(newfreq < 10000)
 					change_frequency = newfreq
@@ -255,14 +236,13 @@
 
 /obj/machinery/telecomms/Topic(href, href_list)
 
-	if(!issilicon(usr))
-		if(!istype(usr.get_active_hand(), /obj/item/device/multitool))
-			return
+	if(!isliving(usr))
+		return
 
 	if(stat & (BROKEN|NOPOWER))
 		return
 
-	var/obj/item/device/multitool/P = get_multitool(usr)
+	var/obj/item/device/multitool/P = usr.get_multitool()
 
 	if(href_list["input"])
 		switch(href_list["input"])
@@ -280,7 +260,7 @@
 			*/
 
 			if("id")
-				var/newid = copytext_char(reject_bad_text(input(usr, "Specify the new ID for this machine", src, id) as null|text),1,MAX_MESSAGE_LEN)
+				var/newid = copytext(reject_bad_text(input(usr, "Specify the new ID for this machine", src, id) as null|text),1,MAX_MESSAGE_LEN)
 				if(newid && canAccess(usr))
 					id = newid
 					temp = "<font color = #666633>-% New ID assigned: \"[id]\" %-</font>"
@@ -304,7 +284,7 @@
 			if("freq")
 				var/newfreq = input(usr, "Specify a new frequency to filter (GHz). Decimals assigned automatically.", src, network) as null|num
 				if(newfreq && canAccess(usr))
-					if(findtext_char(num2text(newfreq), "."))
+					if(findtext(num2text(newfreq), "."))
 						newfreq *= 10 // shift the decimal one place
 					if(!(newfreq in freq_listening) && newfreq < 10000)
 						freq_listening.Add(newfreq)

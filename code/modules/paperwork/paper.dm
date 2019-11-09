@@ -199,9 +199,9 @@
 	while(1) // I know this can cause infinite loops and fuck up the whole server, but the if(istart==0) should be safe as fuck
 		var/istart = 0
 		if(links)
-			istart = findtext_char(info_links, "<span class=\"paper_field\">", laststart)
+			istart = findtext(info_links, "<span class=\"paper_field\">", laststart)
 		else
-			istart = findtext_char(info, "<span class=\"paper_field\">", laststart)
+			istart = findtext(info, "<span class=\"paper_field\">", laststart)
 
 		if(istart==0)
 			return // No field found with matching id
@@ -211,20 +211,20 @@
 		if(locid == id)
 			var/iend = 1
 			if(links)
-				iend = findtext_char(info_links, "</span>", istart)
+				iend = findtext(info_links, "</span>", istart)
 			else
-				iend = findtext_char(info, "</span>", istart)
+				iend = findtext(info, "</span>", istart)
 
 			textindex = iend
 			break
 
 	if(links)
-		var/before = copytext_char(info_links, 1, textindex)
-		var/after = copytext_char(info_links, textindex)
+		var/before = copytext(info_links, 1, textindex)
+		var/after = copytext(info_links, textindex)
 		info_links = before + text + after
 	else
-		var/before = copytext_char(info, 1, textindex)
-		var/after = copytext_char(info, textindex)
+		var/before = copytext(info, 1, textindex)
+		var/after = copytext(info, textindex)
 		info = before + text + after
 		updateinfolinks()
 
@@ -245,7 +245,7 @@
 	update_icon()
 
 /obj/item/weapon/paper/proc/get_signature(var/obj/item/weapon/pen/P, mob/user as mob)
-	if(P && istype(P, /obj/item/weapon/pen))
+	if(P && P.ispen())
 		return P.get_signature(user)
 
 	if (user)
@@ -297,7 +297,7 @@
 	//Count the fields
 	var/laststart = 1
 	while(1)
-		var/i = findtext_char(t, "<span class=\"paper_field\">", laststart)	//</span>
+		var/i = findtext(t, "<span class=\"paper_field\">", laststart)	//</span>
 		if(i==0)
 			break
 		laststart = i+1
@@ -361,13 +361,20 @@
 			return
 
 		var/obj/item/i = usr.get_active_hand() // Check to see if he still got that darn pen, also check if he's using a crayon or pen.
+		var/obj/item/weapon/clipboard/c
 		var/iscrayon = 0
-		if(!istype(i, /obj/item/weapon/pen))
+		if(!i.ispen())
 			if(usr.back && istype(usr.back,/obj/item/weapon/rig))
 				var/obj/item/weapon/rig/r = usr.back
 				var/obj/item/rig_module/device/pen/m = locate(/obj/item/rig_module/device/pen) in r.installed_modules
 				if(!r.offline && m)
 					i = m.device
+				else
+					return
+			else if(istype(src.loc, /obj/item/weapon/clipboard))
+				c = src.loc
+				if(c.haspen)
+					i = c.haspen
 				else
 					return
 			else
@@ -403,6 +410,8 @@
 
 		playsound(src, pick('sound/bureaucracy/pen1.ogg','sound/bureaucracy/pen2.ogg'), 20)
 		update_icon()
+		if(c)
+			c.update_icon()
 
 
 /obj/item/weapon/paper/attackby(obj/item/weapon/P as obj, mob/user as mob)
@@ -465,7 +474,7 @@
 		B.amount = 2
 		B.update_icon()
 
-	else if(istype(P, /obj/item/weapon/pen))
+	else if(P.ispen())
 		if(icon_state == "scrap")
 			to_chat(user, span("warning", "The [src] is too crumpled to write on."))
 			return
@@ -519,6 +528,7 @@
 	else if(P.iswelder())
 		burnpaper(P, user)
 
+	update_icon()
 	add_fingerprint(user)
 	return
 

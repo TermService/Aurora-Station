@@ -146,7 +146,7 @@ Works together with spawning an observer, noted above.
 
 	if(client.images.len)
 		for(var/image/hud in client.images)
-			if(copytext_char(hud.icon_state,1,4) == "hud")
+			if(copytext(hud.icon_state,1,4) == "hud")
 				client.images.Remove(hud)
 
 	if(antagHUD)
@@ -167,11 +167,11 @@ Works together with spawning an observer, noted above.
 	//Check if they are a staff member
 	if(check_rights(R_MOD|R_ADMIN|R_DEV, show_msg=FALSE, user=src))
 		return FALSE
-
+	
 	//Check if the z level is in the restricted list
 	if (!(check in current_map.restricted_levels))
 		return FALSE
-
+	
 	return TRUE
 
 /mob/abstract/observer/proc/teleport_to_spawn(var/message)
@@ -280,7 +280,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(!(mind && mind.current && can_reenter_corpse))
 		to_chat(src, "<span class='warning'>You have no body.</span>")
 		return
-	if(mind.current.key && copytext_char(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
+	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
 		to_chat(usr, "<span class='warning'>Another consciousness is in your body... it is resisting you.</span>")
 		return
 	if(mind.current.ajourn && mind.current.stat != DEAD) //check if the corpse is astral-journeying (it's client ghosted using a cultist rune).
@@ -411,7 +411,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		moved_event.unregister(following, src)
 		destroyed_event.unregister(following, src)
 		following = null
-
+	
 
 /mob/abstract/observer/move_to_destination(var/atom/movable/am, var/old_loc, var/new_loc)
 	var/turf/T = get_turf(new_loc)
@@ -446,7 +446,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			forceMove(T)
 		else
 			to_chat(src, "This mob is not located in the game world.")
-
+		
 		teleport_if_needed()
 
 /mob/abstract/observer/memory()
@@ -925,7 +925,7 @@ mob/abstract/observer/MayRespawn(var/feedback = 0, var/respawn_type = null)
 /mob/abstract/observer/verb/ghost_spawner()
 	set category = "Ghost"
 	set name = "Ghost Spawner"
-
+	
 	if(!ROUND_IS_STARTED)
 		to_chat(usr, "<span class='danger'>The round hasn't started yet!</span>")
 		return

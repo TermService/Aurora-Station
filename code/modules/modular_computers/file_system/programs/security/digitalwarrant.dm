@@ -28,7 +28,7 @@
 		for(var/datum/record/warrant/W in SSrecords.warrants)
 			allwarrants.Add(list(list(
 			"warrantname" = W.name,
-			"charges" = "[copytext_char(W.notes,1,min(length(W.notes) + 1, 50))]...",
+			"charges" = "[copytext(W.notes,1,min(length(W.notes) + 1, 50))]...",
 			"auth" = W.authorization,
 			"id" = W.id,
 			"arrestsearch" = W.wtype

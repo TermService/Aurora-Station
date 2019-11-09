@@ -103,7 +103,7 @@ proc/get_radio_key_from_channel(var/channel)
 /mob/living/proc/handle_speech_problems(var/message, var/verb, var/message_mode)
 	var/list/returns[4]
 	var/speech_problem_flag = 0
-	if((HULK in mutations) && health >= 25 && length(message))
+	if((HULK in mutations) && health >= 25 && length_char(message))
 		message = "[uppertext(message)]!!!"
 		verb = pick("yells","roars","hollers")
 		speech_problem_flag = 1
@@ -179,15 +179,15 @@ proc/get_radio_key_from_channel(var/channel)
 	message = trim_left(message)
 
 	var/static/list/correct_punctuation = list("!" = TRUE, "." = TRUE, "?" = TRUE, "-" = TRUE, "~" = TRUE, "*" = TRUE, "/" = TRUE, ">" = TRUE, "\"" = TRUE, "'" = TRUE, "," = TRUE, ":" = TRUE, ";" = TRUE)
-	var/ending = copytext_char(message, length(message), (length(message) + 1))
-	if(ending && !correct_punctuation[ending])
+	var/ending = copytext_char(message, length_char(message), (length_char(message) + 1))
+	if(ending && !correct_punctuation[ending] && !(HULK in mutations))
 		message += "."
 
 	//parse the language code and consume it
 	if(!speaking)
 		speaking = parse_language(message)
 	if(speaking)
-		message = copytext_char(message,2+length(speaking.key))
+		message = copytext_char(message,2+length_char(speaking.key))
 	else
 		speaking = get_default_language()
 

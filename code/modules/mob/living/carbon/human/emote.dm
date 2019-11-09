@@ -1,12 +1,12 @@
 /mob/living/carbon/human/emote(var/act,var/m_type=1,var/message = null)
 	var/param = null
-	if (findtext_char(act, "-", 1, null))
-		var/t1 = findtext_char(act, "-", 1, null)
-		param = copytext_char(act, t1 + 1, length(act) + 1)
-		act = copytext_char(act, 1, t1)
+	if (findtext(act, "-", 1, null))
+		var/t1 = findtext(act, "-", 1, null)
+		param = copytext(act, t1 + 1, length(act) + 1)
+		act = copytext(act, 1, t1)
 
-	if(findtext_char(act,"s",-1) && !findtext_char(act,"_",-2))//Removes ending s's unless they are prefixed with a '_'
-		act = copytext_char(act,1,length(act))
+	if(findtext(act,"s",-1) && !findtext(act,"_",-2))//Removes ending s's unless they are prefixed with a '_'
+		act = copytext(act,1,length(act))
 
 	var/muzzled = istype(src.wear_mask, /obj/item/clothing/mask/muzzle)
 	//var/m_type = 1
@@ -66,7 +66,7 @@
 
 		if ("me")
 
-			//if(silent && silent > 0 && findtext_char(message,"\"",1, null) > 0)
+			//if(silent && silent > 0 && findtext(message,"\"",1, null) > 0)
 			//	return //This check does not work and I have no idea why, I'm leaving it in for reference.
 
 			if (src.client)
@@ -692,6 +692,14 @@
 				sleep(pick(list(5, 10, 15, 20)))
 			m_type = 2
 
+		if("chitter")
+			if(!isvaurca(src))
+				to_chat(src, "<span class='warning'>You don't have the means to do this!</span>")
+				return
+			message = "chitters."
+			playsound(src.loc, pick('sound/misc/zapsplat/chitter1.ogg', 'sound/misc/zapsplat/chitter2.ogg', 'sound/misc/zapsplat/chitter3.ogg'), 50, 0)
+			m_type = 2
+
 		if("vomit")
 			if (!check_has_mouth(src))
 				to_chat(src, "<span class='warning'>You are unable to vomit.</span>")
@@ -701,7 +709,7 @@
 
 
 		if ("help")
-			to_chat(src, "blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, golfclap, collapse, cough, cry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob, grin, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug, sigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, twitch_s, whimper, wink, yawn, swish, sway/wag, fastsway/qwag, stopsway/swag, beep, ping, buzz, slap, snap, vomit")
+			to_chat(src, "blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, golfclap, collapse, cough, cry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob, grin, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug, sigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, twitch_s, whimper, wink, yawn, swish, sway/wag, fastsway/qwag, stopsway/swag, beep, ping, buzz, slap, snap, chitter, vomit")
 
 		else
 			to_chat(src, span("notice", "Unusable emote '[act]'. Say *help for a list."))

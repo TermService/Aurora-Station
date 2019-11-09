@@ -14,41 +14,49 @@
 	name = "Red crayon dust"
 	id = "crayon_dust_red"
 	color = "#FE191A"
+	taste_description = "chalky strawberry wax"
 
 /datum/reagent/crayon_dust/orange
 	name = "Orange crayon dust"
 	id = "crayon_dust_orange"
 	color = "#FFBE4F"
+	taste_description = "chalky orange peels"
 
 /datum/reagent/crayon_dust/yellow
 	name = "Yellow crayon dust"
 	id = "crayon_dust_yellow"
 	color = "#FDFE7D"
+	taste_description = "chalky lemon rinds"
 
 /datum/reagent/crayon_dust/green
 	name = "Green crayon dust"
 	id = "crayon_dust_green"
 	color = "#18A31A"
+	taste_description = "chalky lime rinds"
 
 /datum/reagent/crayon_dust/blue
 	name = "Blue crayon dust"
 	id = "crayon_dust_blue"
 	color = "#247CFF"
+	taste_description = "chalky blueberry skins"
 
 /datum/reagent/crayon_dust/purple
 	name = "Purple crayon dust"
 	id = "crayon_dust_purple"
 	color = "#CC0099"
+	taste_description = "chalky grape skins"
 
 /datum/reagent/crayon_dust/grey //Mime
 	name = "Grey crayon dust"
 	id = "crayon_dust_grey"
 	color = "#808080"
+	taste_description = "chalky crushed dreams"
 
 /datum/reagent/crayon_dust/brown //Rainbow
 	name = "Brown crayon dust"
 	id = "crayon_dust_brown"
 	color = "#846F35"
+	taste_description = "raw, powerful creativity"
 
 /datum/reagent/paint
 	name = "Paint"
@@ -107,15 +115,15 @@
 		hex2 += "FF"
 	if(length(hex1) != 9 || length(hex2) != 9)
 		return
-	colors[1] += hex2num(copytext_char(hex1, 2, 4)) * volume
-	colors[2] += hex2num(copytext_char(hex1, 4, 6)) * volume
-	colors[3] += hex2num(copytext_char(hex1, 6, 8)) * volume
-	colors[4] += hex2num(copytext_char(hex1, 8, 10)) * volume
+	colors[1] += hex2num(copytext(hex1, 2, 4)) * volume
+	colors[2] += hex2num(copytext(hex1, 4, 6)) * volume
+	colors[3] += hex2num(copytext(hex1, 6, 8)) * volume
+	colors[4] += hex2num(copytext(hex1, 8, 10)) * volume
 	tot_w += volume
-	colors[1] += hex2num(copytext_char(hex2, 2, 4)) * newamount
-	colors[2] += hex2num(copytext_char(hex2, 4, 6)) * newamount
-	colors[3] += hex2num(copytext_char(hex2, 6, 8)) * newamount
-	colors[4] += hex2num(copytext_char(hex2, 8, 10)) * newamount
+	colors[1] += hex2num(copytext(hex2, 2, 4)) * newamount
+	colors[2] += hex2num(copytext(hex2, 4, 6)) * newamount
+	colors[3] += hex2num(copytext(hex2, 6, 8)) * newamount
+	colors[4] += hex2num(copytext(hex2, 8, 10)) * newamount
 	tot_w += newamount
 
 	color = rgb(colors[1] / tot_w, colors[2] / tot_w, colors[3] / tot_w, colors[4] / tot_w)
@@ -688,7 +696,7 @@
 	P.name = "wormhole"
 	var/list/pick_turfs = list()
 	for(var/turf/simulated/floor/exit in turfs)
-		if(exit.z in current_map.station_levels)
+		if(isStationLevel(exit.z))
 			pick_turfs += exit
 	P.target = pick(pick_turfs)
 	QDEL_IN(P, rand(150,300))
@@ -826,7 +834,3 @@
 /datum/reagent/bottle_lightning/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(prob(25))
 		tesla_zap(M, 6, 1500)
-
-/datum/reagent/bottle_lightning/touch_turf(var/turf/T)
-	if(volume >= 5)
-		tesla_zap(T, 6, 1500)

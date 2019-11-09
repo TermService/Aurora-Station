@@ -12,7 +12,7 @@
 /proc/is_on_same_plane_or_station(var/z1, var/z2)
 	if(z1 == z2)
 		return 1
-	if((z1 in current_map.station_levels) &&	(z2 in current_map.station_levels))
+	if(isStationLevel(z1) && isStationLevel(z2))
 		return 1
 	return 0
 
@@ -59,15 +59,6 @@
 	source.luminosity = lum
 
 	return heard
-
-/proc/isPlayerLevel(var/level)
-	return level in current_map.player_levels
-
-/proc/isAdminLevel(var/level)
-	return level in current_map.admin_levels
-
-/proc/isNotAdminLevel(var/level)
-	return !isAdminLevel(level)
 
 /proc/circlerange(center=usr,radius=3)
 
@@ -405,13 +396,13 @@ datum/projectile_data
 	return new /datum/projectile_data(src_x, src_y, time, distance, power_x, power_y, dest_x, dest_y)
 
 /proc/GetRedPart(const/hexa)
-	return hex2num(copytext_char(hexa,2,4))
+	return hex2num(copytext(hexa,2,4))
 
 /proc/GetGreenPart(const/hexa)
-	return hex2num(copytext_char(hexa,4,6))
+	return hex2num(copytext(hexa,4,6))
 
 /proc/GetBluePart(const/hexa)
-	return hex2num(copytext_char(hexa,6,8))
+	return hex2num(copytext(hexa,6,8))
 
 /proc/GetHexColors(const/hexa)
 	return list(
@@ -438,10 +429,10 @@ datum/projectile_data
 	return rgb(r,g,b)
 
 /proc/mixOneColor(var/list/weight, var/list/color)
-	if (!weight || !color || length_char(weight)!=length_char(color))
+	if (!weight || !color || length(weight)!=length(color))
 		return 0
 
-	var/contents = length_char(weight)
+	var/contents = length(weight)
 	var/i
 
 	//normalize weights

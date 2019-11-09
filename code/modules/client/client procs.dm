@@ -48,7 +48,7 @@
 		return
 
 	//search the href for script injection
-	if( findtext_char(href,"<script",1,0) )
+	if( findtext(href,"<script",1,0) )
 		world.log <<  "Attempted use of scripts within a topic call, by [src]"
 		message_admins("Attempted use of scripts within a topic call, by [src]")
 		//del(usr)
@@ -263,7 +263,9 @@
 			log_debug("SPAM_PROTECT: [src] tripped macro-trigger, now muted.")
 			return TRUE
 
-	spam_alert = max(0, spam_alert - 1)
+	else
+		spam_alert = max(0, spam_alert - 1)
+
 	return FALSE
 
 /client/proc/automute_by_duplicate(message, mute_type)

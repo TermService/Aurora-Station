@@ -31,7 +31,7 @@
 			log_debug("ghostroles","Spawner [G.type] got removed from selection because of missing spawnpoint")
 			continue
 		spawners[G.short_name] = G
-
+	
 	for (var/identifier in spawnpoints)
 		CHECK_TICK
 		update_spawnpoint_status_by_identifier(identifier)
@@ -45,7 +45,7 @@
 
 	if(!spawnpoints[P.identifier])
 		spawnpoints[P.identifier] = list()
-
+	
 	spawnpoints[P.identifier].Add(P)
 	//Only update the status if the round is started. During initialization that´s taken care of at the end of init.
 	if(ROUND_IS_STARTED)
@@ -69,9 +69,9 @@
 /datum/controller/subsystem/ghostroles/proc/update_spawnpoint_status_by_identifier(var/identifier)
 	if(!identifier) //If no identifier ist set, return false
 		return null
-	if(!length_char(spawnpoints[identifier])) //If we have no spawnpoints for that identifier, return false
+	if(!length(spawnpoints[identifier])) //If we have no spawnpoints for that identifier, return false
 		return null
-
+	
 	for (var/spawnpoint in spawnpoints[identifier])
 		CHECK_TICK
 		var/obj/effect/ghostspawpoint/P = spawnpoint
@@ -85,7 +85,7 @@
 /datum/controller/subsystem/ghostroles/proc/get_spawnpoint(var/identifier, var/use = TRUE)
 	if(!identifier) //If no identifier ist set, return false
 		return null
-	if(!length_char(spawnpoints[identifier])) //If we have no spawnpoints for that identifier, return false
+	if(!length(spawnpoints[identifier])) //If we have no spawnpoints for that identifier, return false
 		return null
 
 	for (var/spawnpoint in spawnpoints[identifier])

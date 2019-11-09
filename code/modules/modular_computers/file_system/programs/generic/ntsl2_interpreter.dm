@@ -48,8 +48,8 @@
 	if(href_list["PRG_topic"])
 		if(istype(running))
 			var/topc = href_list["PRG_topic"]
-			if(copytext_char(topc, 1, 2) == "?")
-				topc = copytext_char(topc, 2) + "?" + input("","Enter Data")
+			if(copytext(topc, 1, 2) == "?")
+				topc = copytext(topc, 2) + "?" + input("","Enter Data")
 			running.topic(topc)
 			running.cycle(300)
 		. = 1
@@ -98,3 +98,4 @@
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
+

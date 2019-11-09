@@ -23,7 +23,7 @@
 
 	for (var/thing in subtypesof(/datum/unit_test) - typecacheof(current_map.excluded_test_types))
 		var/datum/unit_test/D = new thing
-		if(findtext_char(D.name, "template"))
+		if(findtext(D.name, "template"))
 			qdel(D)
 			continue
 

@@ -17,7 +17,7 @@
 	var/inactive_on_main_station = 0
 	for(var/zone/zone in SSair.zones)
 		var/turf/simulated/turf = locate() in zone.contents
-		if(turf && turf.z in current_map.station_levels)
+		if(turf && isStationLevel(turf.z))
 			if(zone.needs_update)
 				active_on_main_station++
 			else
@@ -183,5 +183,5 @@
 
 	to_chat(usr, "<b>Jobbans active in this round.</b>")
 	for(var/t in jobban_keylist)
-		if(findtext_char(t, filter))
+		if(findtext(t, filter))
 			to_chat(usr, "[t]")

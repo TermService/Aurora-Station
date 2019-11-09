@@ -24,6 +24,8 @@
 	max_storage_space = 28
 	var/species_restricted = list("exclude","Vaurca Breeder","Vaurca Warform")
 	drop_sound = 'sound/items/drop/backpack.ogg'
+	allow_quick_empty = TRUE
+	empty_delay = 0.5 SECOND
 
 /obj/item/weapon/storage/backpack/mob_can_equip(M as mob, slot)
 
@@ -80,6 +82,7 @@
 		slot_l_hand_str = "holdingpack",
 		slot_r_hand_str = "holdingpack"
 		)
+	empty_delay = 0.8 SECOND
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/weapon/storage/backpack/holding))
@@ -100,14 +103,18 @@
 	icon_state = "giftbag0"
 	item_state = "giftbag"
 	w_class = 4.0
-	max_w_class = 3
 	max_storage_space = 400 // can store a ton of shit!
 	item_state_slots = null
+	empty_delay = 1 SECOND
 
 /obj/item/weapon/storage/backpack/cultpack
 	name = "trophy rack"
 	desc = "It's useful for both carrying extra gear and proudly declaring your insanity."
 	icon_state = "cultpack"
+
+/obj/item/weapon/storage/backpack/cultpack/adorned
+	name = "adorned backpack"
+	desc = "A backpack adorned with various decorations."
 
 /obj/item/weapon/storage/backpack/clown
 	name = "Giggles von Honkerton"
@@ -132,12 +139,14 @@
 	desc = "It's a special backpack made exclusively for officers."
 	icon_state = "captainpack"
 	item_state_slots = null
+	empty_delay = 0.8 SECOND
 
 /obj/item/weapon/storage/backpack/industrial
 	name = "industrial backpack"
 	desc = "It's a tough backpack for the daily grind of station life."
 	icon_state = "engiepack"
 	item_state_slots = null
+	empty_delay = 0.8 SECOND
 
 /obj/item/weapon/storage/backpack/toxins
 	name = "laboratory backpack"
@@ -175,11 +184,13 @@
 	name = "syndicate rucksack"
 	desc = "The latest in carbon fiber and red satin combat rucksack technology. Comfortable and tough!"
 	icon_state = "syndiepack"
+	empty_delay = 0.8 SECOND
 
 /obj/item/weapon/storage/backpack/wizard
 	name = "wizard federation sack"
 	desc = "Perfect for keeping your shining crystal balls inside of."
 	icon_state = "wizardpack"
+	empty_delay = 0.8 SECOND
 
 /*
  * Satchel Types
@@ -212,6 +223,7 @@
 		slot_l_hand_str = "engiepack",
 		slot_r_hand_str = "engiepack"
 		)
+	empty_delay = 0.8 SECOND
 
 /obj/item/weapon/storage/backpack/satchel_med
 	name = "medical satchel"
@@ -264,16 +276,19 @@
 		slot_l_hand_str = "satchel-cap",
 		slot_r_hand_str = "satchel-cap"
 		)
+	empty_delay = 0.8 SECOND
 
 /obj/item/weapon/storage/backpack/satchel_syndie
 	name = "syndicate satchel"
 	desc = "A satchel in the new age style of a multi-corperate terrorist organisation."
 	icon_state = "satchel-syndie"
+	empty_delay = 0.8 SECOND
 
 /obj/item/weapon/storage/backpack/satchel_wizard
 	name = "wizard federation satchel"
 	desc = "This stylish satchel will put a spell on anyone with some fashion sense to spare."
 	icon_state = "satchel-wizard"
+	empty_delay = 0.8 SECOND
 
 //ERT backpacks.
 /obj/item/weapon/storage/backpack/ert
@@ -284,6 +299,7 @@
 		slot_l_hand_str = "securitypack",
 		slot_r_hand_str = "securitypack"
 		)
+	empty_delay = 0.8 SECOND
 
 //Commander
 /obj/item/weapon/storage/backpack/ert/commander
@@ -329,6 +345,7 @@
 		slot_l_hand_str = "duffle_captain",
 		slot_r_hand_str = "duffle_captain"
 	)
+	empty_delay = 0.8 SECOND
 
 /obj/item/weapon/storage/backpack/duffel/hyd
 	name = "botanist's duffel bag"
@@ -361,6 +378,7 @@
 		slot_l_hand_str = "duffle_eng",
 		slot_r_hand_str = "duffle_eng"
 	)
+	empty_delay = 0.8 SECOND
 
 /obj/item/weapon/storage/backpack/duffel/tox
 	name = "scientist's duffel bag"
@@ -395,12 +413,14 @@
 		slot_r_hand_str = "duffle_syndie"
 	)
 	slowdown = 0
+	empty_delay = 0.8 SECOND
 
 /obj/item/weapon/storage/backpack/duffel/wizard
 	name = "wizardly duffel bag"
 	desc = "A fancy blue wizard bag, duffel edition."
 	icon_state = "duffel-wizard"
 	slowdown = 0
+	empty_delay = 0.8 SECOND
 
 /*
  * Messenger Bags
@@ -440,11 +460,13 @@
 	name = "captain's messenger bag"
 	desc = "A special backpack worn over one shoulder.  This one is made specifically for command officers."
 	icon_state = "courierbagcom"
+	empty_delay = 0.8 SECOND
 
 /obj/item/weapon/storage/backpack/messenger/engi
 	name = "engineering messenger bag"
 	desc = "A strong backpack worn over one shoulder. This one is designed for industrial work."
 	icon_state = "courierbagengi"
+	empty_delay = 0.8 SECOND
 
 /obj/item/weapon/storage/backpack/messenger/hyd
 	name = "hydroponics messenger bag"
@@ -470,6 +492,7 @@
 	name = "military rucksack"
 	desc = "A sturdy backpack with the emblems and markings of the Tau Ceti Foreign Legion."
 	icon_state = "legion_bag"
+	empty_delay = 0.8 SECOND
 
 /obj/item/weapon/storage/backpack/typec
 	icon = 'icons/mob/species/breeder/inventory.dmi'
@@ -479,7 +502,6 @@
 	item_state = "wings"
 	w_class = 5.0
 	slot_flags = SLOT_BACK
-	max_w_class = 3
 	max_storage_space = 12
 	canremove = 0
 	species_restricted = list("Vaurca Breeder")

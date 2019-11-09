@@ -303,13 +303,13 @@ Delayed insert mode was removed in mysql 7 and only works with MyISAM type table
 			return null
 
 	while (1)
-		search = findtext_char(query_to_parse, ":", pos)
-		parsed += copytext_char(query_to_parse, pos, search)
+		search = findtext(query_to_parse, ":", pos)
+		parsed += copytext(query_to_parse, pos, search)
 		if (search)
 			pos = search
-			search = findtext_char(query_to_parse, ":", pos + 1)
+			search = findtext(query_to_parse, ":", pos + 1)
 			if (search)
-				curr_arg = copytext_char(query_to_parse, pos + 1, search)
+				curr_arg = copytext(query_to_parse, pos + 1, search)
 				if (cache[curr_arg])
 					parsed += cache[curr_arg]
 				else
@@ -326,7 +326,7 @@ Delayed insert mode was removed in mysql 7 and only works with MyISAM type table
 				curr_arg = ""
 				continue
 			else
-				parsed += copytext_char(query_to_parse, pos, search)
+				parsed += copytext(query_to_parse, pos, search)
 
 		break
 
@@ -363,7 +363,7 @@ Delayed insert mode was removed in mysql 7 and only works with MyISAM type table
 	var/position //1-based index into item data
 	var/sql_type
 	var/flags
-	var/length_db
+	var/length
 	var/max_length
 
 /DBColumn/New(name_handler, table_handler, position_handler, type_handler, flag_handler, length_handler, max_length_handler)
@@ -372,7 +372,7 @@ Delayed insert mode was removed in mysql 7 and only works with MyISAM type table
 	position = position_handler
 	sql_type = type_handler
 	flags = flag_handler
-	length_db = length_handler
+	length = length_handler
 	max_length = max_length_handler
 	return ..()
 

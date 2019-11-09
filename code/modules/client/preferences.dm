@@ -55,9 +55,9 @@ datum/preferences
 	var/b_facial = 0					//Face hair color
 	var/s_tone = 0						//Skin tone
 	var/skin_colour = "#000000"			//Skin colour hex value, for SQL loading
-	var/r_skin = 0						//Skin color
-	var/g_skin = 0						//Skin color
-	var/b_skin = 0						//Skin color
+	var/r_skin = 37						//Skin color
+	var/g_skin = 3						//Skin color
+	var/b_skin = 2						//Skin color
 	var/eyes_colour = "#000000"			//Eye colour hex value, for SQL loading
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
@@ -301,7 +301,7 @@ datum/preferences
 	player_setup.sanitize_setup()
 
 	if(config.humans_need_surnames)
-		var/firstspace = findtext_char(real_name, " ")
+		var/firstspace = findtext(real_name, " ")
 		var/name_length = length(real_name)
 		if(!firstspace)	//we need a surname
 			real_name += " [pick(last_names)]"

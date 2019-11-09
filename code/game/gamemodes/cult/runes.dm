@@ -21,7 +21,7 @@ var/list/sacrificed = list()
 	for(var/obj/effect/rune/R in rune_list)
 		if(R == src)
 			continue
-		if(R.word1 == cultwords["travel"] && R.word2 == cultwords["self"] && R.word3 == key && isPlayerLevel(R.z))
+		if(R.word1 == cultwords["travel"] && R.word2 == cultwords["self"] && R.word3 == key && isStationLevel(R.z))
 			index++
 			allrunesloc.len = index
 			allrunesloc[index] = R.loc
@@ -32,7 +32,7 @@ var/list/sacrificed = list()
 		qdel(src)
 
 	var/turf/T = get_turf(user)
-	if(!(T.z in current_map.station_levels))
+	if(isNotStationLevel(T.z))
 		to_chat(user, "<span class='warning'>You are too far from the station, Nar'sie is unable to reach you here.</span>")
 		return fizzle(user)
 
@@ -149,18 +149,18 @@ var/list/sacrificed = list()
 					to_chat(target, "<span class='cult'>Your blood boils and your body burns as the corruption further forces itself into your body and mind.</span>")
 				if(45 to 75)
 					to_chat(target, "<span class='cult'>You begin to hallucinate images of a dark and incomprehensible being and your entire body feels like its engulfed in flame as your mental defenses crumble.</span>")
-					target.apply_effect(rand(1,10), STUTTER_ORGAN)
+					target.apply_effect(rand(1,10), STUTTER)
 				if(75 to 100)
 					to_chat(target, "<span class='cult'>Your mind turns to ash as the burning flames engulf your very soul and images of an unspeakable horror begin to bombard the last remnants of mental resistance.</span>")
 					//broken mind - 5000 may seem like a lot I wanted the effect to really stand out for maxiumum losing-your-mind-spooky
 					//hallucination is reduced when the step off as well, provided they haven't hit the last stage...
 					target.hallucination += 5000
-					target.apply_effect(10, STUTTER_ORGAN)
+					target.apply_effect(10, STUTTER)
 					target.adjustBrainLoss(1, 55)
 				if(100 to INFINITY)
 					to_chat(target, "<span class='cult'>Your entire broken soul and being is engulfed in corruption and flames as your mind shatters away into nothing.</span>")
 					target.hallucination += 5000
-					target.apply_effect(15, STUTTER_ORGAN)
+					target.apply_effect(15, STUTTER)
 					target.adjustBrainLoss(rand(1,5), 55)
 
 		initial_message = 1
@@ -195,7 +195,7 @@ var/list/sacrificed = list()
 		return fizzle(user)
 
 	var/turf/T = get_turf(src)
-	if(!(T.z in current_map.station_levels))
+	if(isNotStationLevel(T.z))
 		to_chat(user, "<span class='warning'>You are too far from the station, Nar'sie can not be summoned here.</span>")
 		return fizzle(user)
 
@@ -458,7 +458,7 @@ var/list/sacrificed = list()
 	var/chose_name = 0
 	for(var/obj/item/weapon/paper/P in this_rune.loc)
 		if(P.info)
-			D.real_name = copytext_char(P.info, findtext_char(P.info,">")+1, findtext_char(P.info,"<",2) )
+			D.real_name = copytext(P.info, findtext(P.info,">")+1, findtext(P.info,"<",2) )
 			chose_name = 1
 			break
 	D.universal_speak = 1
@@ -523,7 +523,7 @@ var/list/sacrificed = list()
 			T.imbue = "emp"
 			imbued_from = R
 			break
-		if(R.word1==cultwords["blood"] && R.word2==cultwords["see"] && R.word3==cultwords["destroy"]) //conceal
+		if(R.word1==cultwords["hide"] && R.word2==cultwords["see"] && R.word3==cultwords["blood"]) //conceal
 			T = new(src.loc)
 			T.imbue = "conceal"
 			imbued_from = R

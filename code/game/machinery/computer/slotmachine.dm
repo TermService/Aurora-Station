@@ -253,7 +253,7 @@
 			var/j = 3 //The lowest value we have to check for.
 			var/symboltext = symbol + symbol + symbol
 			while(j <= 5)
-				if(findtext_char(inputtext, symboltext))
+				if(findtext(inputtext, symboltext))
 					amountthesame = max(j, amountthesame)
 				j++
 				symboltext += symbol

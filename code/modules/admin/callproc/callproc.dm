@@ -98,7 +98,7 @@
 				var/list/matches = new()
 
 				for(var/path in types)
-					if(findtext_char("[path]", object))
+					if(findtext("[path]", object))
 						matches += path
 
 				if(matches.len==0)

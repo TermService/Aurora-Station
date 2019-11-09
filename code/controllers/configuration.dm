@@ -4,18 +4,18 @@ var/list/gamemode_cache = list()
 	var/server_name = null				// server name (for world name / status)
 	var/server_suffix = 0				// generate numeric suffix based on server port
 
-	var/log_ooc = 0						// log OOC channel
+	var/log_ooc = 1						// log OOC channel
 	var/log_access = 0					// log login/logout
-	var/log_say = 0						// log client say
+	var/log_say = 1						// log client say
 	var/log_admin = 0					// log admin actions
 	var/log_debug = 1					// log debug output
 	var/log_game = 0					// log game events
 	var/log_vote = 0					// log voting
-	var/log_whisper = 0					// log client whisper
-	var/log_emote = 0					// log emotes
-	var/log_attack = 0					// log attack messages
+	var/log_whisper = 1					// log client whisper
+	var/log_emote = 1					// log emotes
+	var/log_attack = 1					// log attack messages
 	var/log_adminchat = 0				// log admin chat messages
-	var/log_pda = 0						// log pda messages
+	var/log_pda = 1						// log pda messages
 	var/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
 	var/log_runtime = 0					// logs world.log to a file
 	var/log_world_output = 0			// log world.log <<  messages
@@ -280,6 +280,7 @@ var/list/gamemode_cache = list()
 
 	var/iterative_explosives_z_threshold = 10
 	var/iterative_explosives_z_multiplier = 0.75
+	var/iterative_explosives_z_subtraction = 2
 
 	var/ticket_reminder_period = 0
 
@@ -288,16 +289,6 @@ var/list/gamemode_cache = list()
 	var/docs_load_docs_from
 	var/load_customsynths_from
 	var/docs_image_host
-
-	var/ert_base_chance = 10
-	var/ert_green_inc = 1
-	var/ert_yellow_inc = 1
-	var/ert_blue_inc = 2
-	var/ert_red_inc = 3
-	var/ert_delta_inc = 10
-	var/ert_scaling_factor = 1
-	var/ert_scaling_factor_antag = 1
-	var/ert_scaling_factor_dead = 2
 
 	// Configurable hostname / port for the NTSL Daemon.
 	var/ntsl_hostname = "localhost"
@@ -331,18 +322,18 @@ var/list/gamemode_cache = list()
 		if(!t)	continue
 
 		t = trim(t)
-		if (length_char(t) == 0)
+		if (length(t) == 0)
 			continue
-		else if (copytext_char(t, 1, 2) == "#")
+		else if (copytext(t, 1, 2) == "#")
 			continue
 
-		var/pos = findtext_char(t, " ")
+		var/pos = findtext(t, " ")
 		var/name = null
 		var/value = null
 
 		if (pos)
-			name = lowertext(copytext_char(t, 1, pos))
-			value = copytext_char(t, pos + 1)
+			name = lowertext(copytext(t, 1, pos))
+			value = copytext(t, pos + 1)
 		else
 			name = lowertext(t)
 
@@ -886,6 +877,9 @@ var/list/gamemode_cache = list()
 				if ("explosion_z_mult")
 					iterative_explosives_z_multiplier = text2num(value)
 
+				if ("explosion_z_sub")
+					iterative_explosives_z_subtraction = text2num(value)
+
 				if("show_game_type_odd")
 					config.show_game_type_odd = 1
 
@@ -903,25 +897,6 @@ var/list/gamemode_cache = list()
 					load_customsynths_from = value
 				if ("docs_image_host")
 					docs_image_host = value
-
-				if ("ert_base_chance")
-					ert_base_chance = text2num(value)
-				if ("ert_green_inc")
-					ert_green_inc = text2num(value)
-				if ("ert_yellow_inc")
-					ert_yellow_inc = text2num(value)
-				if ("ert_blue_inc")
-					ert_blue_inc = text2num(value)
-				if ("ert_red_inc")
-					ert_red_inc = text2num(value)
-				if ("ert_delta_inc")
-					ert_delta_inc = text2num(value)
-				if ("ert_scaling_factor")
-					ert_scaling_factor = text2num(value)
-				if ("ert_scaling_factor_antag")
-					ert_scaling_factor_antag = text2num(value)
-				if ("ert_scaling_factor_dead")
-					ert_scaling_factor_dead = text2num(value)
 
 				if ("ntsl_hostname")
 					ntsl_hostname = value

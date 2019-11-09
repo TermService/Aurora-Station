@@ -23,7 +23,7 @@
 	//parse the language code and consume it
 	var/datum/language/speaking = parse_language(message)
 	if (speaking)
-		message = copytext_char(message,2+length(speaking.key))
+		message = copytext(message,2+length(speaking.key))
 
 	whisper_say(message, speaking, alt_name)
 
@@ -87,14 +87,14 @@
 				voice_sub = changer.voice
 
 	if(voice_sub == "Unknown")
-		if(copytext_char(message, 1, 2) != "*")
+		if(copytext(message, 1, 2) != "*")
 			var/list/temp_message = text2list(message, " ")
 			var/list/pick_list = list()
 			for(var/i = 1, i <= temp_message.len, i++)
 				pick_list += i
 			for(var/i=1, i <= abs(temp_message.len/3), i++)
 				var/H = pick(pick_list)
-				if(findtext_char(temp_message[H], "*") || findtext_char(temp_message[H], ";") || findtext_char(temp_message[H], ":")) continue
+				if(findtext(temp_message[H], "*") || findtext(temp_message[H], ";") || findtext(temp_message[H], ":")) continue
 				temp_message[H] = ninjaspeak(temp_message[H])
 				pick_list -= H
 			message = jointext(temp_message, " ")

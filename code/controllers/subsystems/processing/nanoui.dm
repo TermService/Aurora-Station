@@ -232,7 +232,7 @@ var/datum/controller/subsystem/processing/nanoui/SSnanoui
 	for (var/path in nano_asset_dirs)
 		filenames = flist(path)
 		for(var/filename in filenames)
-			if(copytext_char(filename, length_char(filename)) != "/") // filenames which end in "/" are actually directories, which we want to ignore
+			if(copytext(filename, length(filename)) != "/") // filenames which end in "/" are actually directories, which we want to ignore
 				var/fullpath = path + filename
 				if(fexists(fullpath))
 					register_asset(filename, fcopy_rsc(fullpath))

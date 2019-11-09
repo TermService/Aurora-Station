@@ -576,16 +576,16 @@
 			continue
 
 		job = trim(job)
-		if (!length_char(job))
+		if (!length(job))
 			continue
 
-		var/pos = findtext_char(job, "=")
+		var/pos = findtext(job, "=")
 		var/name = null
 		var/value = null
 
 		if(pos)
-			name = copytext_char(job, 1, pos)
-			value = copytext_char(job, pos + 1)
+			name = copytext(job, 1, pos)
+			value = copytext(job, pos + 1)
 		else
 			continue
 

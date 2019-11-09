@@ -7,15 +7,15 @@
 	help_verb = /datum/martial_art/baghrar/proc/baghrar_help
 
 /datum/martial_art/baghrar/proc/check_streak(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
-	if(findtext_char(streak,EYE_RAKE))
+	if(findtext(streak,EYE_RAKE))
 		streak = ""
 		eye_rake(A,D)
 		return 1
-	if(findtext_char(streak,CLAW_PUNCH))
+	if(findtext(streak,CLAW_PUNCH))
 		streak = ""
 		claw_punch(A,D)
 		return 1
-	if(findtext_char(streak,RRAKNARR_STAB))
+	if(findtext(streak,RRAKNARR_STAB))
 		streak = ""
 		rraknar_stab(A,D)
 		return 1
@@ -107,3 +107,4 @@
 	matches or stabbing forward with the claws in typical matches. Modern Baghrariri, or people who fight in the Baghrar style for sport, usually fight with implements that cover and \
 	support their claws to avoid serious bodily damage. Modern Baghrar matches are decided upon with a point scoring system over three 10 minute rounds of fighting, but historical \
 	victories were secured by knocking opponents onto the ground."
+

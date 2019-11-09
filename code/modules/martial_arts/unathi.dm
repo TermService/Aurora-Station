@@ -9,15 +9,15 @@
 	no_guns_message = "Use of ranged weaponry would be dishonorable."
 
 /datum/martial_art/kis_khan/proc/check_streak(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
-	if(findtext_char(streak,TAIL_SWEEP))
+	if(findtext(streak,TAIL_SWEEP))
 		streak = ""
 		tail_sweep(A,D)
 		return 1
-	if(findtext_char(streak,SWIFT_DISARM))
+	if(findtext(streak,SWIFT_DISARM))
 		streak = ""
 		swift_disarm(A,D)
 		return 1
-	if(findtext_char(streak,HAMMERING_STRIKE))
+	if(findtext(streak,HAMMERING_STRIKE))
 		streak = ""
 		hammering_strike(A,D)
 		return 1

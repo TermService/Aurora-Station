@@ -47,7 +47,7 @@
 
 	if(!check_rights(R_ADMIN|R_DEV)) return
 
-	msg = copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	if(!msg)	return
 
 	log_admin("DEV: [key_name(src)] : [msg]",admin_key=key_name(src))
@@ -66,7 +66,7 @@
 
 	if(!check_rights(R_ADMIN|R_CCIAA)) return
 
-	msg = copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	if(!msg)	return
 
 	log_admin("CCIASAY: [key_name(src)] : [msg]",admin_key=key_name(src))

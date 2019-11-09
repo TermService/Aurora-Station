@@ -421,9 +421,9 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 						var/list/temp_overlays = C.overlays
 						var/image/img
 						for (var/j = 1, j <= temp_overlays.len, j++)
-							if (findtext_char(C.ico[j], "cap") || findtext_char(C.ico[j], "cent"))
+							if (findtext(C.ico[j], "cap") || findtext(C.ico[j], "cent"))
 								img = image('icons/obj/bureaucracy.dmi', "paper_stamp-circle")
-							else if (findtext_char(C.ico[j], "deny"))
+							else if (findtext(C.ico[j], "deny"))
 								img = image('icons/obj/bureaucracy.dmi', "paper_stamp-x")
 							else
 								img = image('icons/obj/bureaucracy.dmi', "paper_stamp-dots")

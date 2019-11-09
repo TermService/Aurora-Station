@@ -92,18 +92,18 @@
 	var/DX = (32*target.x+target.pixel_x)-(32*origin.x+origin.pixel_x)
 	var/DY = (32*target.y+target.pixel_y)-(32*origin.y+origin.pixel_y)
 	var/N = 0
-	var/length_beam = round(sqrt((DX)**2+(DY)**2)) //hypotenuse of the triangle formed by target and origin's displacement
+	var/length = round(sqrt((DX)**2+(DY)**2)) //hypotenuse of the triangle formed by target and origin's displacement
 
-	for(N in 0 to length_beam-1 step 32)//-1 as we want < not <=, but we want the speed of X in Y to Z and step X
+	for(N in 0 to length-1 step 32)//-1 as we want < not <=, but we want the speed of X in Y to Z and step X
 		var/obj/effect/ebeam/X = new beam_type(origin_oldloc)
 		X.owner = src
 		elements += X
 
 		//Assign icon, for main segments it's base_icon, for the end, it's icon+icon_state
 		//cropped by a transparent box of length-N pixel size
-		if(N+32>length_beam)
+		if(N+32>length)
 			var/icon/II = new(icon, icon_state)
-			II.DrawBox(null,1,(length_beam-N),32,32)
+			II.DrawBox(null,1,(length-N),32,32)
 			X.icon = II
 		else
 			X.icon = base_icon
@@ -143,6 +143,9 @@
 	layer = LIGHTING_LAYER + 0.1
 	blend_mode = BLEND_ADD
 	var/datum/beam/owner
+
+/obj/effect/ebeam/tesla_act()
+	return
 
 /obj/effect/ebeam/Destroy()
 	owner = null

@@ -127,12 +127,12 @@
 		return
 	M.druggy = max(M.druggy, 30)
 	if(dose < 1)
-		M.apply_effect(3, STUTTER_ORGAN)
+		M.apply_effect(3, STUTTER)
 		M.make_dizzy(5)
 		if(prob(5))
 			M.emote(pick("twitch", "giggle"))
 	else if(dose < 2)
-		M.apply_effect(3, STUTTER_ORGAN)
+		M.apply_effect(3, STUTTER)
 		M.make_jittery(5)
 		M.dizziness = max(150, M.dizziness)
 		M.make_dizzy(5)
@@ -140,7 +140,7 @@
 		if(prob(10))
 			M.emote(pick("twitch", "giggle"))
 	else
-		M.apply_effect(3, STUTTER_ORGAN)
+		M.apply_effect(3, STUTTER)
 		M.make_jittery(10)
 		M.dizziness = max(150, M.dizziness)
 		M.make_dizzy(10)
@@ -199,7 +199,7 @@
 	M.drowsyness = max(0,M.drowsyness - (1 + special_counter*0.1))
 	if(special_counter > 5)
 		M.add_chemical_effect(CE_SPEEDBOOST, 1)
-		M.apply_effect(1 + special_counter*0.25, STUTTER_ORGAN)
+		M.apply_effect(1 + special_counter*0.25, STUTTER)
 		M.druggy = max(M.druggy, special_counter*0.25)
 		M.hallucination = max(M.hallucination, special_counter*5 - 100)
 		M.make_jittery(special_counter)
@@ -327,5 +327,5 @@
 	fallback_specific_heat = 1
 
 /datum/reagent/wulumunusha/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.druggy = max(M.druggy, 50)
-	M.silent += 15
+	M.druggy = max(M.druggy, 100)
+	M.silent = max(M.silent, 5)

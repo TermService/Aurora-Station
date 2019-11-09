@@ -112,6 +112,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	icon_state = "pda-tox"
 	ttone = "boom"
 
+/obj/item/device/pda/xenobio
+	default_cartridge = /obj/item/weapon/cartridge/signal/science
+	icon_state = "pda-xenobio"
+
 /obj/item/device/pda/clown
 	default_cartridge = /obj/item/weapon/cartridge/clown
 	icon_state = "pda-clown"
@@ -223,9 +227,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	default_cartridge = /obj/item/weapon/cartridge/chemistry
 	icon_state = "pda-chem"
 
-/obj/item/device/pda/geneticist
+/obj/item/device/pda/psych
 	default_cartridge = /obj/item/weapon/cartridge/medical
-	icon_state = "pda-gene"
+	icon_state = "pda-psych"
+
+/obj/item/device/pda/paramedic
+	default_cartridge = /obj/item/weapon/cartridge/medical
+	icon_state = "pda-paramedic"
 
 /obj/item/device/pda/merchant
 	icon_state = "pda-chef"
@@ -963,6 +971,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			var/mob/M = loc
 			M.put_in_hands(id)
 			to_chat(usr, "<span class='notice'>You remove the ID from the [name].</span>")
+			playsound(loc, 'sound/machines/id_swipe.ogg', 100, 1)
 		else
 			id.forceMove(get_turf(src))
 		id = null
@@ -1227,7 +1236,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if (cartridge.radio)
 					cartridge.radio.hostpda = null
 				to_chat(usr, "<span class='notice'>You remove \the [cartridge] from the [name].</span>")
-				playsound(loc, 'sound/machines/id_swipe.ogg', 100, 1)
+				playsound(loc, 'sound/machines/click.ogg', 100, 1)
 				cartridge = null
 
 /obj/item/device/pda/proc/id_check(mob/user as mob, choice as num)//To check for IDs; 1 for in-pda use, 2 for out of pda use.
@@ -1258,6 +1267,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		cartridge = C
 		user.drop_from_inventory(cartridge,src)
 		to_chat(user, "<span class='notice'>You insert [cartridge] into [src].</span>")
+		playsound(loc, 'sound/machines/click.ogg', 100, 1)
 		SSnanoui.update_uis(src) // update all UIs attached to src
 		if(cartridge.radio)
 			cartridge.radio.hostpda = src
@@ -1274,6 +1284,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			if(((src in user.contents) && (C in user.contents)) || (istype(loc, /turf) && in_range(src, user) && (C in user.contents)) )
 				if(id_check(user, 2))
 					to_chat(user, "<span class='notice'>You put the ID into \the [src]'s slot.</span>")
+					playsound(loc, 'sound/machines/id_swipe.ogg', 100, 1)
 					updateSelfDialog()//Update self dialog on success.
 			return	//Return in case of failed check or when successful.
 		updateSelfDialog()//For the non-input related code.
@@ -1283,7 +1294,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		pai.update_location()//This notifies the pAI that they've been slotted into a PDA
 		to_chat(user, "<span class='notice'>You slot \the [C] into [src].</span>")
 		SSnanoui.update_uis(src) // update all UIs attached to src
-	else if(istype(C, /obj/item/weapon/pen))
+	else if(C.ispen())
 		if(pen)
 			to_chat(user, "<span class='notice'>There is already a pen in \the [src].</span>")
 		else
@@ -1391,30 +1402,30 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		// Scrub out the tags (replacing a few formatting ones along the way)
 
 		// Find the beginning and end of the first tag.
-		var/tag_start = findtext_char(raw_scan,"<")
-		var/tag_stop = findtext_char(raw_scan,">")
+		var/tag_start = findtext(raw_scan,"<")
+		var/tag_stop = findtext(raw_scan,">")
 
 		// Until we run out of complete tags...
 		while(tag_start&&tag_stop)
-			var/pre = copytext_char(raw_scan,1,tag_start) // Get the stuff that comes before the tag
-			var/tag = lowertext(copytext_char(raw_scan,tag_start+1,tag_stop)) // Get the tag so we can do intellegent replacement
-			var/tagend = findtext_char(tag," ") // Find the first space in the tag if there is one.
+			var/pre = copytext(raw_scan,1,tag_start) // Get the stuff that comes before the tag
+			var/tag = lowertext(copytext(raw_scan,tag_start+1,tag_stop)) // Get the tag so we can do intellegent replacement
+			var/tagend = findtext(tag," ") // Find the first space in the tag if there is one.
 
 			// Anything that's before the tag can just be added as is.
 			formatted_scan = formatted_scan+pre
 
 			// If we have a space after the tag (and presumably attributes) just crop that off.
 			if (tagend)
-				tag=copytext_char(tag,1,tagend)
+				tag=copytext(tag,1,tagend)
 
 			if (tag=="p"||tag=="/p"||tag=="br") // Check if it's I vertical space tag.
 				formatted_scan=formatted_scan+"<br>" // If so, add some padding in.
 
-			raw_scan = copytext_char(raw_scan,tag_stop+1) // continue on with the stuff after the tag
+			raw_scan = copytext(raw_scan,tag_stop+1) // continue on with the stuff after the tag
 
 			// Look for the next tag in what's left
-			tag_start = findtext_char(raw_scan,"<")
-			tag_stop = findtext_char(raw_scan,">")
+			tag_start = findtext(raw_scan,"<")
+			tag_stop = findtext(raw_scan,">")
 
 		// Anything that is left in the page. just tack it on to the end as is
 		formatted_scan=formatted_scan+raw_scan
@@ -1495,7 +1506,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/weapon/storage/box/PDAs
 	name = "box of spare PDAs"
 	desc = "A box of spare PDA microcomputers."
-	icon = 'icons/obj/pda.dmi'
 	icon_state = "pdabox"
 
 /obj/item/weapon/storage/box/PDAs/fill()

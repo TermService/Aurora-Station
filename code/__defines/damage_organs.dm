@@ -17,7 +17,7 @@
 #define IRRADIATE "irradiate"
 #define AGONY     "agony"     // Added in PAIN!
 #define SLUR      "slur"
-#define STUTTER_ORGAN   "stutter"
+#define STUTTER   "stutter"
 #define EYE_BLUR  "eye_blur"
 #define DROWSY    "drowsy"
 #define INCINERATE "incinerate"

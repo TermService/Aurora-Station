@@ -176,36 +176,36 @@
 	var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = ""," " = "")
 	msg = sanitize_old(msg, replacechars)
 	/* Firing Modes*/
-	if(findtext_char(msg,"single"))
+	if(findtext(msg,"single"))
 		sel_mode = 1
 		to_chat(usr, "<span class='warning'>[src.name] is now set to single shot mode.</span>")
-	else if(findtext_char(msg,"rapidfire"))
+	else if(findtext(msg,"rapidfire"))
 		sel_mode = 2
 		to_chat(usr, "<span class='warning'>[src.name] is now set to rapid fire mode.</span>")
-	else if(findtext_char(msg,"highex") || findtext_char(msg,"grenade"))
+	else if(findtext(msg,"highex") || findtext(msg,"grenade"))
 		sel_mode = 3
 		to_chat(usr, "<span class='warning'>[src.name] is now set to high explosive mode.</span>")
-	else if(findtext_char(msg,"stun"))
+	else if(findtext(msg,"stun"))
 		sel_mode = 4
 		to_chat(usr, "<span class='warning'>[src.name] is now set to stun mode.</span>")
-	else if(findtext_char(msg,"hotshot") || findtext_char(msg,"incendiary"))
+	else if(findtext(msg,"hotshot") || findtext(msg,"incendiary"))
 		sel_mode = 5
 		to_chat(usr, "<span class='warning'>[src.name] is now set to incendiary mode.</span>")
-	else if(findtext_char(msg,"armorpiercing") || findtext_char(msg,"execution"))
+	else if(findtext(msg,"armorpiercing") || findtext(msg,"execution"))
 		sel_mode = 6
 		to_chat(usr, "<span class='warning'>[src.name] is now set to armorpiercing mode.</span>")
-	else if(findtext_char(msg,"pellets"))
+	else if(findtext(msg,"pellets"))
 		sel_mode = 7
 		to_chat(usr, "<span class='warning'>[src.name] is now set to pellet mode.</span>")
 	/* Other Stuff */
-	else if(findtext_char(msg,"reset") && (findtext_char(msg,"user") || findtext_char(msg,"dna")))
+	else if(findtext(msg,"reset") && (findtext(msg,"user") || findtext(msg,"dna")))
 		dna = null
 		desc = default_desc
 		to_chat(usr, "<span class='warning'>[src.name]´s owner has been reset. Do not attempt to fire [src.name] without rebinding a new owner.</span>")
-	else if((findtext_char(msg,"disable") || findtext_char(msg,"deactivate")) && findtext_char(msg,"crowdcontrol"))
+	else if((findtext(msg,"disable") || findtext(msg,"deactivate")) && findtext(msg,"crowdcontrol"))
 		message_disable = 1
 		to_chat(usr, "<span class='warning'>[src.name]´s crowdcontrol deactivation sequence started.</span>")
-	else if((findtext_char(msg,"enable") || findtext_char(msg,"activate")) && findtext_char(msg,"crowdcontrol"))
+	else if((findtext(msg,"enable") || findtext(msg,"activate")) && findtext(msg,"crowdcontrol"))
 		if(message_enabled) //Check if a message is already broadcasting -> abort
 			to_chat(usr, "<span class='warning'>[src.name] is already broadcasting a message.</span>")
 			return

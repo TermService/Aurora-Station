@@ -227,7 +227,7 @@
 				pixel_x = old_x
 				pixel_y = old_y
 				return
-	if (disabilities & STUTTER_DNA)
+	if (disabilities & STUTTER)
 		speech_problem_flag = 1
 		if (prob(10))
 			stuttering = max(10, stuttering)
@@ -393,7 +393,7 @@
 		return
 
 	//exposure to extreme pressures can rupture lungs
-	if(breath && (breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5))
+	if(breath && (breath.total_moles/(species?.breath_vol_mul || 1) < BREATH_MOLES / 5 || breath.total_moles/(species?.breath_vol_mul || 1) > BREATH_MOLES * 5))
 		if(!is_lung_ruptured() && prob(5))
 			rupture_lung()
 
@@ -431,7 +431,7 @@
 	var/SA_sleep_min = 5
 	var/inhaled_gas_used = 0
 
-	var/breath_pressure = (breath.total_moles*R_IDEAL_GAS_EQUATION*breath.temperature)/BREATH_VOLUME
+	var/breath_pressure = (breath.total_moles*R_IDEAL_GAS_EQUATION*breath.temperature)/(BREATH_VOLUME * species.breath_vol_mul)
 
 	var/inhaling
 	var/poison
@@ -482,7 +482,7 @@
 		// We're in safe limits
 		oxygen_alert = 0
 
-	inhaled_gas_used = inhaling/6
+	inhaled_gas_used = inhaling/6 * (species?.breath_eff_mul || 1)
 
 	breath.adjust_gas(breath_type, -inhaled_gas_used, update = 0) //update afterwards
 

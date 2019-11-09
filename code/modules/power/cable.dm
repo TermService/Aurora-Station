@@ -82,11 +82,11 @@ var/list/possible_cable_coil_colours = list(
 
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
 
-	var/dash = findtext_char(icon_state, "-")
+	var/dash = findtext(icon_state, "-")
 
-	d1 = text2num( copytext_char( icon_state, 1, dash ) )
+	d1 = text2num( copytext( icon_state, 1, dash ) )
 
-	d2 = text2num( copytext_char( icon_state, dash+1 ) )
+	d2 = text2num( copytext( icon_state, dash+1 ) )
 
 	var/turf/T = src.loc			// hide if turf is not intact
 	if(level == 1 && !T.is_hole)
@@ -496,7 +496,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	if(amount <= 10)
 		to_chat(user, "<span class='notice'>You don't have enough coils for this!</span>")
 		return
-
+	
 	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 

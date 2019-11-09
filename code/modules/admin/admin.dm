@@ -261,7 +261,7 @@ proc/admin_notice(var/message, var/rights)
 
 
 /datum/admins/proc/player_has_info(var/key as text)
-	var/savefile/info = new("data/player_saves/[copytext_char(key, 1, 2)]/[key]/info.sav")
+	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
 	info >> infos
 	if(!infos || !infos.len) return 0
@@ -288,7 +288,7 @@ proc/admin_notice(var/message, var/rights)
 				break
 		dat +="<span style='color:#000000; font-weight: bold'>Player age: [p_age]</span><br>"
 
-		var/savefile/info = new("data/player_saves/[copytext_char(key, 1, 2)]/[key]/info.sav")
+		var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
 		var/list/infos
 		info >> infos
 		if(!infos)
@@ -369,7 +369,7 @@ proc/admin_notice(var/message, var/rights)
 					if(FC.is_admin_channel)
 						dat+="<B><FONT style='BACKGROUND-COLOR: LightGreen'><A href='?src=\ref[src];ac_show_channel=\ref[FC]'>[FC.channel_name]</A></FONT></B><BR>"
 					else
-						dat+="<B><A href='?src=\ref[src];ac_show_channel=\ref[FC]'>[FC.channel_name]</A> [(FC.censored) ? ("<FONT COLOR='red'>***</FONT>") : null]<BR></B>"
+						dat+="<B><A href='?src=\ref[src];ac_show_channel=\ref[FC]'>[FC.channel_name]</A> [(FC.censored) ? ("<FONT COLOR='red'>***</FONT>") : ()]<BR></B>"
 			dat+={"<BR><HR><A href='?src=\ref[src];ac_refresh=1'>Refresh</A>
 				<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Back</A>
 			"}
@@ -456,7 +456,7 @@ proc/admin_notice(var/message, var/rights)
 			else
 				for(var/channel in SSnews.network_channels)
 					var/datum/feed_channel/FC = SSnews.GetFeedChannel(channel)
-					dat+="<A href='?src=\ref[src];ac_pick_censor_channel=\ref[FC]'>[FC.channel_name]</A> [(FC.censored) ? ("<FONT COLOR='red'>***</FONT>") : null]<BR>"
+					dat+="<A href='?src=\ref[src];ac_pick_censor_channel=\ref[FC]'>[FC.channel_name]</A> [(FC.censored) ? ("<FONT COLOR='red'>***</FONT>") : ()]<BR>"
 			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Cancel</A>"
 		if(11)
 			dat+={"
@@ -470,7 +470,7 @@ proc/admin_notice(var/message, var/rights)
 			else
 				for(var/channel in SSnews.network_channels)
 					var/datum/feed_channel/FC = SSnews.GetFeedChannel(channel)
-					dat+="<A href='?src=\ref[src];ac_pick_d_notice=\ref[FC]'>[FC.channel_name]</A> [(FC.censored) ? ("<FONT COLOR='red'>***</FONT>") : null]<BR>"
+					dat+="<A href='?src=\ref[src];ac_pick_d_notice=\ref[FC]'>[FC.channel_name]</A> [(FC.censored) ? ("<FONT COLOR='red'>***</FONT>") : ()]<BR>"
 
 			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Back</A>"
 		if(12)
@@ -1027,7 +1027,7 @@ proc/admin_notice(var/message, var/rights)
 	var/list/matches = new()
 
 	for(var/path in types)
-		if(findtext_char("[path]", object))
+		if(findtext("[path]", object))
 			matches += path
 
 	if(matches.len==0)
@@ -1374,8 +1374,8 @@ proc/admin_notice(var/message, var/rights)
 		return
 	if(!check_rights(R_SERVER,0))
 		message = sanitize(message, 500, extra = 0)
-
-
+	
+			
 	var/list/sounds = file2list("sound/serversound_list.txt");
 	sounds += "--CANCEL--"
 	sounds += "--LOCAL--"
@@ -1389,7 +1389,7 @@ proc/admin_notice(var/message, var/rights)
 		melody = input("Select a sound to play", "Sound select") as sound
 		if(!melody)
 			return
-
+	
 	command_announcement.Announce(message, title, new_sound = melody)
 	log_and_message_admins("made custom announcement with custom sound", usr)
 	feedback_add_details("admin_verb","ACS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

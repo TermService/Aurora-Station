@@ -31,7 +31,7 @@
 		streak = ""
 	streak = streak+element
 	if(length(streak) > max_streak_length)
-		streak = copytext_char(streak,2)
+		streak = copytext(streak,2)
 	return
 
 /datum/martial_art/proc/basic_hit(var/mob/living/carbon/human/A,var/mob/living/carbon/human/D)	//copy pasta of the regular unarmed attack, but can be replaced by something else

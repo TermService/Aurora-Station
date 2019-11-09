@@ -2,14 +2,14 @@
 // Helpers for DNA2
 /////////////////////////////
 
-// Pads 0s to t until length_char == u
+// Pads 0s to t until length == u
 /proc/add_zero2(t, u)
 	var/temp1
-	while (length_char(t) < u)
+	while (length(t) < u)
 		t = "0[t]"
 	temp1 = t
-	if (length_char(t) > u)
-		temp1 = copytext_char(t,2,u+1)
+	if (length(t) > u)
+		temp1 = copytext(t,2,u+1)
 	return temp1
 
 // DNA Gene activation boundaries, see dna2.dm.

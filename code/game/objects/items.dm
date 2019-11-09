@@ -159,7 +159,7 @@
 	return ..(user, distance, "", "It is a [size] item.")
 
 /obj/item/attack_hand(mob/user as mob)
-	if (!user || anchored) return
+	if (!user) return
 	if (hasorgans(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
@@ -373,7 +373,7 @@ var/list/global/slot_flags_enumeration = list(
 				if(!disable_warning)
 					to_chat(usr, "<span class='warning'>You somehow have a suit with no defined allowed items for suit storage, stop that.</span>")
 				return 0
-			if( !(istype(src, /obj/item/device/pda) || istype(src, /obj/item/weapon/pen) || is_type_in_list(src, H.wear_suit.allowed)) )
+			if( !(istype(src, /obj/item/device/pda) || src.ispen() || is_type_in_list(src, H.wear_suit.allowed)) )
 				return 0
 		if(slot_handcuffed)
 			if(!istype(src, /obj/item/weapon/handcuffs))

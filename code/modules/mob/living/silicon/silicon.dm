@@ -129,7 +129,7 @@
 			paralysis = max(paralysis,(effect/(blocked+1)))
 		if(IRRADIATE)
 			radiation += min((effect - (effect*getarmor(null, "rad"))), 0)//Rads auto check armor
-		if(STUTTER_ORGAN)
+		if(STUTTER)
 			stuttering = max(stuttering,(effect/(blocked+1)))
 		if(EYE_BLUR)
 			eye_blurry = max(eye_blurry,(effect/(blocked+1)))

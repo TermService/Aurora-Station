@@ -48,7 +48,7 @@ var/list/modules = list(			// global associative list
 	var/pos = 1
 
 	while(1)
-		pos = findtext_char(modtext, ",", pos, 0)
+		pos = findtext(modtext, ",", pos, 0)
 		if(!pos)
 			break
 		else
@@ -59,3 +59,5 @@ var/list/modules = list(			// global associative list
 	modcount["[type]"] = num
 
 	return 2**num-1
+
+
