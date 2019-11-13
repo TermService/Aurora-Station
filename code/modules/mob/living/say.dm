@@ -36,20 +36,18 @@ var/list/department_radio_keys = list(
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":к" = "right ear",	".к" = "right ear",
-	  ":л" = "left ear",	".л" = "left ear",
-	  ":ш" = "intercom",	".ш" = "intercom",
-	  ":р" = "department",	".р" = "department",
-	  ":с" = "Command",		".с" = "Command",
-	  ":т" = "Science",		".т" = "Science",
-	  ":ь" = "Medical",		".ь" = "Medical",
-	  ":у" = "Engineering",	".у" = "Engineering",
-	  ":ы" = "Security",	".ы" = "Security",
-	  ":ц" = "whisper",		".ц" = "whisper",
-	  ":е" = "Mercenary",	".е" = "Mercenary",
-	  ":г" = "Supply",		".г" = "Supply",
-	  ":з" = "AI Private",	".з" = "AI Private",
-	  ":ч" = "Raider",		".ч" = "Raider"
+	  ":ê" = "right ear",	".ê" = "right ear",
+	  ":ä" = "left ear",	".ä" = "left ear",
+	  ":ø" = "intercom",	".ø" = "intercom",
+	  ":ð" = "department",	".ð" = "department",
+	  ":ñ" = "Command",		".ñ" = "Command",
+	  ":ò" = "Science",		".ò" = "Science",
+	  ":ü" = "Medical",		".ü" = "Medical",
+	  ":ó" = "Engineering",	".ó" = "Engineering",
+	  ":û" = "Security",	".û" = "Security",
+	  ":ö" = "whisper",		".ö" = "whisper",
+	  ":å" = "Mercenary",	".å" = "Mercenary",
+	  ":é" = "Supply",		".é" = "Supply"
 )
 
 
@@ -86,13 +84,7 @@ proc/get_radio_key_from_channel(var/channel)
 		if(dongle.translate_binary) return 1
 
 /mob/living/proc/get_stuttered_message(message)
-	return stutter(message)
-
-/mob/living/carbon/get_stuttered_message(message)
-	if (shock_stage >= 30)
-		return stutter(message)
-	else
-		return NewStutter(message)
+	return stutter(message, stuttering)
 
 /mob/living/proc/get_default_language()
 	return default_language
@@ -103,7 +95,7 @@ proc/get_radio_key_from_channel(var/channel)
 /mob/living/proc/handle_speech_problems(var/message, var/verb, var/message_mode)
 	var/list/returns[4]
 	var/speech_problem_flag = 0
-	if((HULK in mutations) && health >= 25 && length_char(message))
+	if((HULK in mutations) && health >= 25 && length(message))
 		message = "[uppertext(message)]!!!"
 		verb = pick("yells","roars","hollers")
 		speech_problem_flag = 1
@@ -163,23 +155,23 @@ proc/get_radio_key_from_channel(var/channel)
 
 	var/message_mode = parse_message_mode(message, "headset")
 
-	message = process_chat_markup(message, list("~", "_"))
+	var/regex/emote = regex("^(\[\\*^\])\[^*\]+$")
 
-	switch(copytext_char(message,1,2))
-		if("*") return emote(copytext_char(message,2))
-		if("^") return custom_emote(1, copytext_char(message,2))
+	if(emote.Find(message))
+		if(emote.group[1] == "*") return emote(copytext(message, 2))
+		if(emote.group[1] == "^") return custom_emote(1, copytext(message,2))
 
 	//parse the radio code and consume it
 	if (message_mode)
 		if (message_mode == "headset")
-			message = copytext_char(message,2)	//it would be really nice if the parse procs could do this for us.
+			message = copytext(message,2)	//it would be really nice if the parse procs could do this for us.
 		else
-			message = copytext_char(message,3)
+			message = copytext(message,3)
 
 	message = trim_left(message)
 
 	var/static/list/correct_punctuation = list("!" = TRUE, "." = TRUE, "?" = TRUE, "-" = TRUE, "~" = TRUE, "*" = TRUE, "/" = TRUE, ">" = TRUE, "\"" = TRUE, "'" = TRUE, "," = TRUE, ":" = TRUE, ";" = TRUE)
-	var/ending = copytext_char(message, length_char(message), (length_char(message) + 1))
+	var/ending = copytext(message, length(message), (length(message) + 1))
 	if(ending && !correct_punctuation[ending] && !(HULK in mutations))
 		message += "."
 
@@ -187,7 +179,7 @@ proc/get_radio_key_from_channel(var/channel)
 	if(!speaking)
 		speaking = parse_language(message)
 	if(speaking)
-		message = copytext_char(message,2+length_char(speaking.key))
+		message = copytext(message,2+length(speaking.key))
 	else
 		speaking = get_default_language()
 
@@ -215,6 +207,8 @@ proc/get_radio_key_from_channel(var/channel)
 
 	if(!message || message == "")
 		return 0
+
+	message = process_chat_markup(message, list("~", "_"))
 
 	//handle nonverbal and sign languages here
 	if (speaking)
@@ -270,7 +264,7 @@ proc/get_radio_key_from_channel(var/channel)
 
 
 	var/list/hear_clients = list()
-	for(var/m in listening)
+	for(var/m in listening)		
 		var/mob/M = m
 		M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
 		if (M.client)
