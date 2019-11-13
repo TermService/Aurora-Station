@@ -31,8 +31,8 @@
 	note_wrapper = new_wrapper
 	note_text = new_text
 
-	note_text = replacetextEx(note_text, ":src_ref", SOFTREF(src))
-	note_wrapper[1] = replacetextEx(note_wrapper[1], ":src_ref", SOFTREF(src))
+	note_text = replacetextEx_char(note_text, ":src_ref", SOFTREF(src))
+	note_wrapper[1] = replacetextEx_char(note_wrapper[1], ":src_ref", SOFTREF(src))
 
 	if (new_persistence)
 		persistent = new_persistence
@@ -153,7 +153,7 @@
 		var/cciaa_actions = count_ccia_actions(user)
 		if (cciaa_actions)
 			new_notification("info", cciaa_actions)
-		
+
 		add_active_notifications(user)
 
 /datum/preferences/proc/add_active_notifications(var/client/user)

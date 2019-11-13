@@ -403,10 +403,10 @@ var/datum/controller/subsystem/battle_monsters/SSbattlemonsters
 	)
 
 	for(var/word in replacements)
-		text = replacetext(text,word,replacements[word])
+		text = replacetext_char(text,word,replacements[word])
 
 	for(var/word in replacements)//2 passes for good measure.
-		text = replacetext(text,word,replacements[word])
+		text = replacetext_char(text,word,replacements[word])
 
 	return text
 
@@ -428,10 +428,10 @@ var/datum/controller/subsystem/battle_monsters/SSbattlemonsters
 	)
 
 	for(var/word in replacements)
-		text = replacetext(text,word,replacements[word])
+		text = replacetext_char(text,word,replacements[word])
 
 	for(var/word in replacements)//2 passes for good measure.
-		text = replacetext(text,word,replacements[word])
+		text = replacetext_char(text,word,replacements[word])
 
 	return text
 

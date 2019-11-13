@@ -160,7 +160,7 @@
 				if(i != 1) step_away(M, src)
 				M.Friends = Friends.Copy()
 				babies += M
-				feedback_add_details("slime_babies_born","slimebirth_[replacetext(M.colour," ","_")]")
+				feedback_add_details("slime_babies_born","slimebirth_[replacetext_char(M.colour," ","_")]")
 
 			var/mob/living/carbon/slime/new_slime = pick(babies)
 			new_slime.universal_speak = universal_speak

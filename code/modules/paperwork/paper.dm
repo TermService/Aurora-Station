@@ -199,9 +199,9 @@
 	while(1) // I know this can cause infinite loops and fuck up the whole server, but the if(istart==0) should be safe as fuck
 		var/istart = 0
 		if(links)
-			istart = findtext(info_links, "<span class=\"paper_field\">", laststart)
+			istart = findtext_char(info_links, "<span class=\"paper_field\">", laststart)
 		else
-			istart = findtext(info, "<span class=\"paper_field\">", laststart)
+			istart = findtext_char(info, "<span class=\"paper_field\">", laststart)
 
 		if(istart==0)
 			return // No field found with matching id
@@ -211,20 +211,20 @@
 		if(locid == id)
 			var/iend = 1
 			if(links)
-				iend = findtext(info_links, "</span>", istart)
+				iend = findtext_char(info_links, "</span>", istart)
 			else
-				iend = findtext(info, "</span>", istart)
+				iend = findtext_char(info, "</span>", istart)
 
 			textindex = iend
 			break
 
 	if(links)
-		var/before = copytext(info_links, 1, textindex)
-		var/after = copytext(info_links, textindex)
+		var/before = copytext_char(info_links, 1, textindex)
+		var/after = copytext_char(info_links, textindex)
 		info_links = before + text + after
 	else
-		var/before = copytext(info, 1, textindex)
-		var/after = copytext(info, textindex)
+		var/before = copytext_char(info, 1, textindex)
+		var/after = copytext_char(info, textindex)
 		info = before + text + after
 		updateinfolinks()
 
@@ -265,27 +265,27 @@
 
 /obj/item/weapon/paper/proc/parsepencode(t, obj/item/weapon/pen/P, mob/user, iscrayon)
 
-	t = replacetext(t, "\[sign\]", "<font face=\"[get_signfont(P, user)]\">[get_signature(P, user)]</font>")
+	t = replacetext_char(t, "\[sign\]", "<font face=\"[get_signfont(P, user)]\">[get_signature(P, user)]</font>")
 
 	if(iscrayon) // If it is a crayon, and he still tries to use these, make them empty!
-		t = replacetext(t, "\[*\]", "")
-		t = replacetext(t, "\[hr\]", "")
-		t = replacetext(t, "\[small\]", "")
-		t = replacetext(t, "\[/small\]", "")
-		t = replacetext(t, "\[list\]", "")
-		t = replacetext(t, "\[/list\]", "")
-		t = replacetext(t, "\[table\]", "")
-		t = replacetext(t, "\[/table\]", "")
-		t = replacetext(t, "\[row\]", "")
-		t = replacetext(t, "\[cell\]", "")
-		t = replacetext(t, "\[logo_nt\]", "")
-		t = replacetext(t, "\[logo_nt_small\]", "")
-		t = replacetext(t, "\[logo_zh\]", "")
-		t = replacetext(t, "\[logo_idris\]", "")
-		t = replacetext(t, "\[logo_eridani\]", "")
-		t = replacetext(t, "\[logo_necro\]", "")
-		t = replacetext(t, "\[logo_hp\]", "")
-		t = replacetext(t, "\[logo_be\]", "")
+		t = replacetext_char(t, "\[*\]", "")
+		t = replacetext_char(t, "\[hr\]", "")
+		t = replacetext_char(t, "\[small\]", "")
+		t = replacetext_char(t, "\[/small\]", "")
+		t = replacetext_char(t, "\[list\]", "")
+		t = replacetext_char(t, "\[/list\]", "")
+		t = replacetext_char(t, "\[table\]", "")
+		t = replacetext_char(t, "\[/table\]", "")
+		t = replacetext_char(t, "\[row\]", "")
+		t = replacetext_char(t, "\[cell\]", "")
+		t = replacetext_char(t, "\[logo_nt\]", "")
+		t = replacetext_char(t, "\[logo_nt_small\]", "")
+		t = replacetext_char(t, "\[logo_zh\]", "")
+		t = replacetext_char(t, "\[logo_idris\]", "")
+		t = replacetext_char(t, "\[logo_eridani\]", "")
+		t = replacetext_char(t, "\[logo_necro\]", "")
+		t = replacetext_char(t, "\[logo_hp\]", "")
+		t = replacetext_char(t, "\[logo_be\]", "")
 
 	if(iscrayon)
 		t = "<font face=\"[crayonfont]\" color=[P ? P.colour : "black"]><b>[t]</b></font>"
@@ -297,7 +297,7 @@
 	//Count the fields
 	var/laststart = 1
 	while(1)
-		var/i = findtext(t, "<span class=\"paper_field\">", laststart)	//</span>
+		var/i = findtext_char(t, "<span class=\"paper_field\">", laststart)	//</span>
 		if(i==0)
 			break
 		laststart = i+1

@@ -274,12 +274,12 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			if(prob(50))//Auto-mute? Fuck that noise
 				user.say(invocation)
 			else
-				user.say(replacetext(invocation," ","`"))
+				user.say(replacetext_char(invocation," ","`"))
 		if(SpI_WHISPER)
 			if(prob(50))
 				user.whisper(invocation)
 			else
-				user.whisper(replacetext(invocation," ","`"))
+				user.whisper(replacetext_char(invocation," ","`"))
 		if(SpI_EMOTE)
 			user.emote("me", 1, invocation) //the 1 means it's for everyone in view, the me makes it an emote, and the invocation is written accordingly.
 

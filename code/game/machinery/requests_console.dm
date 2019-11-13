@@ -406,8 +406,8 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 						var/obj/item/weapon/paper/P = new /obj/item/weapon/paper()
 						var/info = "<font color = #101010>"
 						var/copied = html_decode(C.info)
-						copied = replacetext(copied, "<font face=\"[P.deffont]\" color=", "<font face=\"[P.deffont]\" nocolor=")	//state of the art techniques in action
-						copied = replacetext(copied, "<font face=\"[P.crayonfont]\" color=", "<font face=\"[P.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
+						copied = replacetext_char(copied, "<font face=\"[P.deffont]\" color=", "<font face=\"[P.deffont]\" nocolor=")	//state of the art techniques in action
+						copied = replacetext_char(copied, "<font face=\"[P.crayonfont]\" color=", "<font face=\"[P.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
 						info += copied
 						info += "</font>"
 						var/pname = C.name
@@ -421,9 +421,9 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 						var/list/temp_overlays = C.overlays
 						var/image/img
 						for (var/j = 1, j <= temp_overlays.len, j++)
-							if (findtext(C.ico[j], "cap") || findtext(C.ico[j], "cent"))
+							if (findtext_char(C.ico[j], "cap") || findtext_char(C.ico[j], "cent"))
 								img = image('icons/obj/bureaucracy.dmi', "paper_stamp-circle")
-							else if (findtext(C.ico[j], "deny"))
+							else if (findtext_char(C.ico[j], "deny"))
 								img = image('icons/obj/bureaucracy.dmi', "paper_stamp-x")
 							else
 								img = image('icons/obj/bureaucracy.dmi', "paper_stamp-dots")

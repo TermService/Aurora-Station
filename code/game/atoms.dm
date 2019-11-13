@@ -438,7 +438,7 @@
 	change_area_name(oldarea.name, newarea.name)
 
 /atom/proc/change_area_name(var/oldname, var/newname)
-	name = replacetext(name,oldname,newname)
+	name = replacetext_char(name,oldname,newname)
 
 /atom/movable/proc/dropInto(var/atom/destination)
 	while(istype(destination))

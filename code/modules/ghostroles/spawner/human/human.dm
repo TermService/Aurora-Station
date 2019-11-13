@@ -39,10 +39,10 @@
 		mname = sanitizeSafe(input(user, pick_message, "Name for a [species] (without prefix/suffix)"))
 
 	if(mob_name_prefix)
-		mname = replacetext(mname,mob_name_prefix,"") //Remove the prefix if it exists in the string
+		mname = replacetext_char(mname,mob_name_prefix,"") //Remove the prefix if it exists in the string
 		mname = "[mob_name_prefix][mname]"
 	if(mob_name_suffix)
-		mname = replacetext(mname,mob_name_suffix,"") //Remove the suffix if it exists in the string
+		mname = replacetext_char(mname,mob_name_suffix,"") //Remove the suffix if it exists in the string
 		mname = "[mname][mob_name_suffix]"
 	return mname
 

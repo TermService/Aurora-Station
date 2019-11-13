@@ -193,13 +193,13 @@
 /datum/brain_trauma/severe/split_personality/brainwashing/on_hear(message, speaker, message_language, raw_message, radio_freq)
 	if(owner.disabilities & DEAF || owner == speaker)
 		return message
-	if(findtext(message, codeword))
-		message = replacetext(message, codeword, "<span class='warning'>[codeword]</span>")
+	if(findtext_char(message, codeword))
+		message = replacetext_char(message, codeword, "<span class='warning'>[codeword]</span>")
 		addtimer(CALLBACK(src, /datum/brain_trauma/severe/split_personality.proc/switch_personalities), 10)
 	return message
 
 /datum/brain_trauma/severe/split_personality/brainwashing/on_say(message)
-	if(findtext(message, codeword))
+	if(findtext_char(message, codeword))
 		return "" //oh hey did you want to tell people about the secret word to bring you back?
 	return message
 

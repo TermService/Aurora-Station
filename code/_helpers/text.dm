@@ -16,7 +16,7 @@
 // Run all strings to be used in an SQL query through this proc first to properly escape out injection attempts.
 /proc/sanitizeSQL(var/t as text)
 	var/sqltext = dbcon.Quote(t);
-	return copytext(sqltext, 2, lentext(sqltext));//Quote() adds quotes around input, we already do that
+	return copytext_char(sqltext, 2, length_char(sqltext));//Quote() adds quotes around input, we already do that
 
 /*
  * Text sanitization
@@ -28,7 +28,7 @@
 		return
 
 	if(max_length)
-		input = copytext(input,1,max_length)
+		input = copytext_char(input,1,max_length)
 
 	if(extra)
 		input = replace_characters(input, list("\n"=" ","\t"=" "))
@@ -45,7 +45,7 @@
 		input = replace_characters(input, list("<"=" ", ">"=" "))
 
 	if(trim)
-		//Maybe, we need trim text twice? Here and before copytext?
+		//Maybe, we need trim text twice? Here and before copytext_char?
 		input = trim(input)
 
 	return input
@@ -114,7 +114,7 @@
 	if(number_of_alphanumeric < 2)	return		//protects against tiny names like "A" and also names like "' ' ' ' ' ' ' '"
 
 	if(last_char_group == 1)
-		output = copytext(output,1,length(output))	//removes the last character (in this case a space)
+		output = copytext_char(output,1,length(output))	//removes the last character (in this case a space)
 
 	for(var/bad_name in list("space","floor","wall","r-wall","monkey","unknown","inactive ai","plating"))	//prevents these common metagamey names
 		if(cmptext(output,bad_name))	return	//(not case sensitive)
@@ -145,7 +145,7 @@
 	if (size <= length)
 		return message
 	else
-		return copytext(message, 1, length + 1)
+		return copytext_char(message, 1, length + 1)
 
 /*
  * Text searches
@@ -156,21 +156,21 @@
 /proc/dd_hasprefix(text, prefix)
 	var/start = 1
 	var/end = length(prefix) + 1
-	return findtext(text, prefix, start, end)
+	return findtext_char(text, prefix, start, end)
 
 //Checks the beginning of a string for a specified sub-string. This proc is case sensitive
 //Returns the position of the substring or 0 if it was not found
 /proc/dd_hasprefix_case(text, prefix)
 	var/start = 1
 	var/end = length(prefix) + 1
-	return findtextEx(text, prefix, start, end)
+	return findtextEx_char(text, prefix, start, end)
 
 //Checks the end of a string for a specified substring.
 //Returns the position of the substring or 0 if it was not found
 /proc/dd_hassuffix(text, suffix)
 	var/start = length(text) - length(suffix)
 	if(start)
-		return findtext(text, suffix, start, null)
+		return findtext_char(text, suffix, start, null)
 	return
 
 //Checks the end of a string for a specified substring. This proc is case sensitive
@@ -178,21 +178,21 @@
 /proc/dd_hassuffix_case(text, suffix)
 	var/start = length(text) - length(suffix)
 	if(start)
-		return findtextEx(text, suffix, start, null)
+		return findtextEx_char(text, suffix, start, null)
 
 
 //Parses a string into a list
 /proc/dd_text2List(text, separator)
-	var/textlength      = lentext(text)
-	var/separatorlength = lentext(separator)
+	var/textlength      = length_char(text)
+	var/separatorlength = length_char(separator)
 	var/list/textList   = new /list()
 	var/searchPosition  = 1
 	var/findPosition    = 1
 	var/buggyText
 	while (1)															// Loop forever.
-		findPosition = findtextEx(text, separator, searchPosition, 0)
-		buggyText = copytext(text, searchPosition, findPosition)		// Everything from searchPosition to findPosition goes into a list element.
-		textList += "[buggyText]"										// Working around weird problem where "text" != "text" after this copytext().
+		findPosition = findtextEx_char(text, separator, searchPosition, 0)
+		buggyText = copytext_char(text, searchPosition, findPosition)		// Everything from searchPosition to findPosition goes into a list element.
+		textList += "[buggyText]"										// Working around weird problem where "text" != "text" after this copytext_char().
 
 		searchPosition = findPosition + separatorlength					// Skip over separator.
 		if (findPosition == 0)											// Didn't find anything at end of string so stop here.
@@ -207,7 +207,7 @@
  */
 /proc/replace_characters(var/t,var/list/repl_chars)
 	for(var/char in repl_chars)
-		t = replacetext(t, char, repl_chars[char])
+		t = replacetext_char(t, char, repl_chars[char])
 	return t
 
 //Adds 'u' number of zeros ahead of the text 't'
@@ -232,14 +232,14 @@
 /proc/trim_left(text)
 	for (var/i = 1 to length(text))
 		if (text2ascii(text, i) > 32)
-			return copytext(text, i)
+			return copytext_char(text, i)
 	return ""
 
 //Returns a string with reserved characters and spaces after the last letter removed
 /proc/trim_right(text)
 	for (var/i = length(text), i > 0, i--)
 		if (text2ascii(text, i) > 32)
-			return copytext(text, 1, i + 1)
+			return copytext_char(text, 1, i + 1)
 	return ""
 
 //Returns a string with reserved characters and spaces before the first word and after the last word removed.
@@ -248,7 +248,7 @@
 
 //Returns a string with the first element of the string capitalized.
 /proc/capitalize(var/t as text)
-	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
+	return uppertext(copytext_char(t, 1, 2)) + copytext_char(t, 2)
 
 //This proc strips html properly, remove < > and all text between
 //for complete text sanitizing should be used sanitize()
@@ -258,18 +258,18 @@
 	var/opentag = 1 //These store the position of < and > respectively.
 	var/closetag = 1
 	while(1)
-		opentag = findtext(input, "<")
-		closetag = findtext(input, ">")
+		opentag = findtext_char(input, "<")
+		closetag = findtext_char(input, ">")
 		if(closetag && opentag)
 			if(closetag < opentag)
-				input = copytext(input, (closetag + 1))
+				input = copytext_char(input, (closetag + 1))
 			else
-				input = copytext(input, 1, opentag) + copytext(input, (closetag + 1))
+				input = copytext_char(input, 1, opentag) + copytext_char(input, (closetag + 1))
 		else if(closetag || opentag)
 			if(opentag)
-				input = copytext(input, 1, opentag)
+				input = copytext_char(input, 1, opentag)
 			else
-				input = copytext(input, (closetag + 1))
+				input = copytext_char(input, (closetag + 1))
 		else
 			break
 
@@ -280,18 +280,18 @@
 //This is used for fingerprints
 /proc/stringmerge(var/text,var/compare,replace = "*")
 	var/newtext = text
-	if(lentext(text) != lentext(compare))
+	if(length_char(text) != length_char(compare))
 		return 0
-	for(var/i = 1, i < lentext(text), i++)
-		var/a = copytext(text,i,i+1)
-		var/b = copytext(compare,i,i+1)
+	for(var/i = 1, i < length_char(text), i++)
+		var/a = copytext_char(text,i,i+1)
+		var/b = copytext_char(compare,i,i+1)
 		//if it isn't both the same letter, or if they are both the replacement character
 		//(no way to know what it was supposed to be)
 		if(a != b)
 			if(a == replace) //if A is the replacement char
-				newtext = copytext(newtext,1,i) + b + copytext(newtext, i+1)
+				newtext = copytext_char(newtext,1,i) + b + copytext_char(newtext, i+1)
 			else if(b == replace) //if B is the replacement char
-				newtext = copytext(newtext,1,i) + a + copytext(newtext, i+1)
+				newtext = copytext_char(newtext,1,i) + a + copytext_char(newtext, i+1)
 			else //The lists disagree, Uh-oh!
 				return 0
 	return newtext
@@ -302,8 +302,8 @@
 	if(!text || !character)
 		return 0
 	var/count = 0
-	for(var/i = 1, i <= lentext(text), i++)
-		var/a = copytext(text,i,i+1)
+	for(var/i = 1, i <= length_char(text), i++)
+		var/a = copytext_char(text,i,i+1)
 		if(a == character)
 			count++
 	return count
@@ -311,23 +311,23 @@
 /proc/reverse_text(var/text = "")
 	var/new_text = ""
 	for(var/i = length(text); i > 0; i--)
-		new_text += copytext(text, i, i+1)
+		new_text += copytext_char(text, i, i+1)
 	return new_text
 
 //Used in preferences' SetFlavorText and human's set_flavor verb
 //Previews a string of len or less length
 proc/TextPreview(var/string,var/len=40)
-	if(lentext(string) <= len)
-		if(!lentext(string))
+	if(length_char(string) <= len)
+		if(!length_char(string))
 			return "\[...\]"
 		else
 			return string
 	else
 		return "[copytext_preserve_html(string, 1, 37)]..."
 
-//alternative copytext() for encoded text, doesn't break html entities (&#34; and other)
+//alternative copytext_char() for encoded text, doesn't break html entities (&#34; and other)
 /proc/copytext_preserve_html(var/text, var/first, var/last)
-	return html_encode(copytext(html_decode(text), first, last))
+	return html_encode(copytext_char(html_decode(text), first, last))
 
 //For generating neat chat tag-images
 //The icon var could be local in the proc, but it's a waste of resources
@@ -355,7 +355,7 @@ proc/TextPreview(var/string,var/len=40)
 		i++
 
 	for (var/ref in urls)
-		message = replacetextEx(message, urls[ref], ref)
+		message = replacetextEx_char(message, urls[ref], ref)
 	// ---End URL caching
 
 	var/regex/tag_markup
@@ -365,13 +365,13 @@ proc/TextPreview(var/string,var/len=40)
 
 	// ---Unload URL cache
 	for (var/ref in urls)
-		message = replacetextEx(message, ref, urls[ref])
+		message = replacetextEx_char(message, ref, urls[ref])
 
 	return message
 
 //Converts New Lines to html <br>
 /proc/nl2br(var/text)
-	return replacetextEx(text,"\n","<br>")
+	return replacetextEx_char(text,"\n","<br>")
 
 /proc/contains_az09(var/input)
 	for(var/i=1, i<=length(input), i++)
@@ -401,7 +401,7 @@ proc/TextPreview(var/string,var/len=40)
 	for(var/i=1, i<=length, i++)
 		. += pick(characters)
 
-#define starts_with(string, substring) (copytext(string,1,1+length(substring)) == substring)
+#define starts_with(string, substring) (copytext_char(string,1,1+length(substring)) == substring)
 
 #define gender2text(gender) capitalize(gender)
 
@@ -409,93 +409,93 @@ proc/TextPreview(var/string,var/len=40)
  * Strip out the special beyond characters for \proper and \improper
  * from text that will be sent to the browser.
  */
-#define strip_improper(input_text) replacetext(replacetext(input_text, "\proper", ""), "\improper", "")
+#define strip_improper(input_text) replacetext_char(replacetext_char(input_text, "\proper", ""), "\improper", "")
 
 
 /proc/pencode2html(t, limited = 0)
-	t = replacetext(t, "\[b\]", "<B>")
-	t = replacetext(t, "\[/b\]", "</B>")
-	t = replacetext(t, "\[i\]", "<I>")
-	t = replacetext(t, "\[/i\]", "</I>")
-	t = replacetext(t, "\[u\]", "<U>")
-	t = replacetext(t, "\[/u\]", "</U>")
-	t = replacetext(t, "\[large\]", "<font size=\"4\">")
-	t = replacetext(t, "\[/large\]", "</font>")
-	t = replacetext(t, "\[small\]", "<font size = \"1\">")
-	t = replacetext(t, "\[/small\]", "</font>")
+	t = replacetext_char(t, "\[b\]", "<B>")
+	t = replacetext_char(t, "\[/b\]", "</B>")
+	t = replacetext_char(t, "\[i\]", "<I>")
+	t = replacetext_char(t, "\[/i\]", "</I>")
+	t = replacetext_char(t, "\[u\]", "<U>")
+	t = replacetext_char(t, "\[/u\]", "</U>")
+	t = replacetext_char(t, "\[large\]", "<font size=\"4\">")
+	t = replacetext_char(t, "\[/large\]", "</font>")
+	t = replacetext_char(t, "\[small\]", "<font size = \"1\">")
+	t = replacetext_char(t, "\[/small\]", "</font>")
 
 	// A break for signature customization code to use this proc as well.
 	if (limited)
 		return t
 
-	t = replacetext(t, "\n", "<BR>")
-	t = replacetext(t, "\[center\]", "<center>")
-	t = replacetext(t, "\[/center\]", "</center>")
-	t = replacetext(t, "\[br\]", "<BR>")
-	t = replacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
-	t = replacetext(t, "\[h1\]", "<H1>")
-	t = replacetext(t, "\[/h1\]", "</H1>")
-	t = replacetext(t, "\[h2\]", "<H2>")
-	t = replacetext(t, "\[/h2\]", "</H2>")
-	t = replacetext(t, "\[h3\]", "<H3>")
-	t = replacetext(t, "\[/h3\]", "</H3>")
-	t = replacetext(t, "\[*\]", "<li>")
-	t = replacetext(t, "\[hr\]", "<HR>")
-	t = replacetext(t, "\[list\]", "<ul>")
-	t = replacetext(t, "\[/list\]", "</ul>")
-	t = replacetext(t, "\[table\]", "<table border=1 cellspacing=0 cellpadding=3 style='border: 1px solid black;'>")
-	t = replacetext(t, "\[/table\]", "</td></tr></table>")
-	t = replacetext(t, "\[grid\]", "<table>")
-	t = replacetext(t, "\[/grid\]", "</td></tr></table>")
-	t = replacetext(t, "\[row\]", "</td><tr>")
-	t = replacetext(t, "\[cell\]", "<td>")
-	t = replacetext(t, "\[logo_nt\]", "<img src = ntlogo.png>")
-	t = replacetext(t, "\[logo_nt_small\]", "<img src = ntlogo_small.png>")
-	t = replacetext(t, "\[logo_zh\]", "<img src = zhlogo.png>")
-	t = replacetext(t, "\[logo_idris\]", "<img src = idrislogo.png>")
-	t = replacetext(t, "\[logo_eridani\]", "<img src = eridanilogo.png>")
-	t = replacetext(t, "\[logo_necro\]", "<img src = necrologo.png>")
-	t = replacetext(t, "\[logo_hp\]", "<img src = hplogo.png>")
-	t = replacetext(t, "\[logo_be\]", "<img src = belogo.png>")
-	t = replacetext(t, "\[barcode\]", "<img src = barcode[rand(0, 3)].png>")
-	t = replacetext(t, "\[time\]", "[worldtime2text()]")
-	t = replacetext(t, "\[date\]", "[worlddate2text()]")
-	t = replacetext(t, "\[editorbr\]", "<BR>")
-	t = replacetext(t, @"[image id=([\w]*?\.[\w]*?)]", "<img style=\"display:block;width:90%;\" src = [config.docs_image_host]$1></img>")
+	t = replacetext_char(t, "\n", "<BR>")
+	t = replacetext_char(t, "\[center\]", "<center>")
+	t = replacetext_char(t, "\[/center\]", "</center>")
+	t = replacetext_char(t, "\[br\]", "<BR>")
+	t = replacetext_char(t, "\[field\]", "<span class=\"paper_field\"></span>")
+	t = replacetext_char(t, "\[h1\]", "<H1>")
+	t = replacetext_char(t, "\[/h1\]", "</H1>")
+	t = replacetext_char(t, "\[h2\]", "<H2>")
+	t = replacetext_char(t, "\[/h2\]", "</H2>")
+	t = replacetext_char(t, "\[h3\]", "<H3>")
+	t = replacetext_char(t, "\[/h3\]", "</H3>")
+	t = replacetext_char(t, "\[*\]", "<li>")
+	t = replacetext_char(t, "\[hr\]", "<HR>")
+	t = replacetext_char(t, "\[list\]", "<ul>")
+	t = replacetext_char(t, "\[/list\]", "</ul>")
+	t = replacetext_char(t, "\[table\]", "<table border=1 cellspacing=0 cellpadding=3 style='border: 1px solid black;'>")
+	t = replacetext_char(t, "\[/table\]", "</td></tr></table>")
+	t = replacetext_char(t, "\[grid\]", "<table>")
+	t = replacetext_char(t, "\[/grid\]", "</td></tr></table>")
+	t = replacetext_char(t, "\[row\]", "</td><tr>")
+	t = replacetext_char(t, "\[cell\]", "<td>")
+	t = replacetext_char(t, "\[logo_nt\]", "<img src = ntlogo.png>")
+	t = replacetext_char(t, "\[logo_nt_small\]", "<img src = ntlogo_small.png>")
+	t = replacetext_char(t, "\[logo_zh\]", "<img src = zhlogo.png>")
+	t = replacetext_char(t, "\[logo_idris\]", "<img src = idrislogo.png>")
+	t = replacetext_char(t, "\[logo_eridani\]", "<img src = eridanilogo.png>")
+	t = replacetext_char(t, "\[logo_necro\]", "<img src = necrologo.png>")
+	t = replacetext_char(t, "\[logo_hp\]", "<img src = hplogo.png>")
+	t = replacetext_char(t, "\[logo_be\]", "<img src = belogo.png>")
+	t = replacetext_char(t, "\[barcode\]", "<img src = barcode[rand(0, 3)].png>")
+	t = replacetext_char(t, "\[time\]", "[worldtime2text()]")
+	t = replacetext_char(t, "\[date\]", "[worlddate2text()]")
+	t = replacetext_char(t, "\[editorbr\]", "<BR>")
+	t = replacetext_char(t, @"[image id=([\w]*?\.[\w]*?)]", "<img style=\"display:block;width:90%;\" src = [config.docs_image_host]$1></img>")
 	return t
 
 /proc/html2pencode(t)
-	t = replacetext(t, "<B>", "\[b\]")
-	t = replacetext(t, "</B>", "\[/b\]")
-	t = replacetext(t, "<I>", "\[i\]")
-	t = replacetext(t, "</I>", "\[/i\]")
-	t = replacetext(t, "<U>", "\[u\]")
-	t = replacetext(t, "</U>", "\[/u\]")
-	t = replacetext(t, "<font size=\"4\">", "\[large\]")
-	t = replacetext(t, "</font>", "\[/large\]")
-	t = replacetext(t, "<font size = \"1\">", "\[small\]")
-	t = replacetext(t, "</font>", "\[/small\]")
+	t = replacetext_char(t, "<B>", "\[b\]")
+	t = replacetext_char(t, "</B>", "\[/b\]")
+	t = replacetext_char(t, "<I>", "\[i\]")
+	t = replacetext_char(t, "</I>", "\[/i\]")
+	t = replacetext_char(t, "<U>", "\[u\]")
+	t = replacetext_char(t, "</U>", "\[/u\]")
+	t = replacetext_char(t, "<font size=\"4\">", "\[large\]")
+	t = replacetext_char(t, "</font>", "\[/large\]")
+	t = replacetext_char(t, "<font size = \"1\">", "\[small\]")
+	t = replacetext_char(t, "</font>", "\[/small\]")
 
 	return t
 
 //Used for applying byonds text macros to strings that are loaded at runtime
 /proc/apply_text_macros(string)
-	var/next_backslash = findtext(string, "\\")
+	var/next_backslash = findtext_char(string, "\\")
 	if(!next_backslash)
 		return string
 
 	var/leng = length(string)
 
-	var/next_space = findtext(string, " ", next_backslash + 1)
+	var/next_space = findtext_char(string, " ", next_backslash + 1)
 	if(!next_space)
 		next_space = leng - next_backslash
 
 	if(!next_space)	//trailing bs
 		return string
 
-	var/base = next_backslash == 1 ? "" : copytext(string, 1, next_backslash)
-	var/macro = lowertext(copytext(string, next_backslash + 1, next_space))
-	var/rest = next_backslash > leng ? "" : copytext(string, next_space + 1)
+	var/base = next_backslash == 1 ? "" : copytext_char(string, 1, next_backslash)
+	var/macro = lowertext(copytext_char(string, next_backslash + 1, next_space))
+	var/rest = next_backslash > leng ? "" : copytext_char(string, next_space + 1)
 
 	//See http://www.byond.com/docs/ref/info.html#/DM/text/macros
 	switch(macro)
@@ -541,4 +541,4 @@ proc/TextPreview(var/string,var/len=40)
 	. = text
 
 	for (var/replacement in replacements)
-		. = replacetext(., replacement, replacements[replacement])
+		. = replacetext_char(., replacement, replacements[replacement])

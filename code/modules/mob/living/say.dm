@@ -158,20 +158,20 @@ proc/get_radio_key_from_channel(var/channel)
 	var/regex/emote = regex("^(\[\\*^\])\[^*\]+$")
 
 	if(emote.Find(message))
-		if(emote.group[1] == "*") return emote(copytext(message, 2))
-		if(emote.group[1] == "^") return custom_emote(1, copytext(message,2))
+		if(emote.group[1] == "*") return emote(copytext_char(message, 2))
+		if(emote.group[1] == "^") return custom_emote(1, copytext_char(message,2))
 
 	//parse the radio code and consume it
 	if (message_mode)
 		if (message_mode == "headset")
-			message = copytext(message,2)	//it would be really nice if the parse procs could do this for us.
+			message = copytext_char(message,2)	//it would be really nice if the parse procs could do this for us.
 		else
-			message = copytext(message,3)
+			message = copytext_char(message,3)
 
 	message = trim_left(message)
 
 	var/static/list/correct_punctuation = list("!" = TRUE, "." = TRUE, "?" = TRUE, "-" = TRUE, "~" = TRUE, "*" = TRUE, "/" = TRUE, ">" = TRUE, "\"" = TRUE, "'" = TRUE, "," = TRUE, ":" = TRUE, ";" = TRUE)
-	var/ending = copytext(message, length(message), (length(message) + 1))
+	var/ending = copytext_char(message, length(message), (length(message) + 1))
 	if(ending && !correct_punctuation[ending] && !(HULK in mutations))
 		message += "."
 
@@ -179,7 +179,7 @@ proc/get_radio_key_from_channel(var/channel)
 	if(!speaking)
 		speaking = parse_language(message)
 	if(speaking)
-		message = copytext(message,2+length(speaking.key))
+		message = copytext_char(message,2+length(speaking.key))
 	else
 		speaking = get_default_language()
 
@@ -264,7 +264,7 @@ proc/get_radio_key_from_channel(var/channel)
 
 
 	var/list/hear_clients = list()
-	for(var/m in listening)		
+	for(var/m in listening)
 		var/mob/M = m
 		M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
 		if (M.client)

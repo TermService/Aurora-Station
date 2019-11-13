@@ -169,7 +169,7 @@
 	if(citizenship)
 
 		var/list/dat = list("<center><b>[citizenship.name]</center></b>")
-		dat += "<br><br><center><a href='?src=\ref[user.client];JSlink=wiki;wiki_page=[replacetext(citizenship.name, " ", "_")]'>Read the Wiki</a></center>"
+		dat += "<br><br><center><a href='?src=\ref[user.client];JSlink=wiki;wiki_page=[replacetext_char(citizenship.name, " ", "_")]'>Read the Wiki</a></center>"
 		dat += "<br>[citizenship.description]"
 		dat += "<br><center>\[<a href='?src=\ref[src];set_citizenship=[html_encode(citizenship.name)]'>Select</a>\]</center>"
 		show_browser(user, dat.Join(), "window=citizenshippreview;size=400x500")

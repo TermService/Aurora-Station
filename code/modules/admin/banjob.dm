@@ -331,10 +331,10 @@ var/list/jobban_keylist = list() // Global jobban list.
 			continue
 
 		if (jobban_isbanned(ckey, job.title))
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext(job.title, " ", "&nbsp")]</font></a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext_char(job.title, " ", "&nbsp")]</font></a></td>"
 			counter++
 		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext_char(job.title, " ", "&nbsp")]</a></td>"
 			counter++
 
 		if (counter >= 6) //So things dont get squiiiiished!
@@ -354,10 +354,10 @@ var/list/jobban_keylist = list() // Global jobban list.
 			continue
 
 		if (jobban_isbanned(ckey, job.title))
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext(job.title, " ", "&nbsp")]</font></a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext_char(job.title, " ", "&nbsp")]</font></a></td>"
 			counter++
 		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext_char(job.title, " ", "&nbsp")]</a></td>"
 			counter++
 
 		if (counter >= 5) //So things dont get squiiiiished!
@@ -377,10 +377,10 @@ var/list/jobban_keylist = list() // Global jobban list.
 			continue
 
 		if (jobban_isbanned(ckey, job.title))
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext(job.title, " ", "&nbsp")]</font></a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext_char(job.title, " ", "&nbsp")]</font></a></td>"
 			counter++
 		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext_char(job.title, " ", "&nbsp")]</a></td>"
 			counter++
 
 		if (counter >= 5) //So things dont get squiiiiished!
@@ -400,10 +400,10 @@ var/list/jobban_keylist = list() // Global jobban list.
 			continue
 
 		if (jobban_isbanned(ckey, job.title))
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext(job.title, " ", "&nbsp")]</font></a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext_char(job.title, " ", "&nbsp")]</font></a></td>"
 			counter++
 		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext_char(job.title, " ", "&nbsp")]</a></td>"
 			counter++
 
 		if (counter >= 5) //So things dont get squiiiiished!
@@ -423,10 +423,10 @@ var/list/jobban_keylist = list() // Global jobban list.
 			continue
 
 		if (jobban_isbanned(ckey, job.title))
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext(job.title, " ", "&nbsp")]</font></a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext_char(job.title, " ", "&nbsp")]</font></a></td>"
 			counter++
 		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext_char(job.title, " ", "&nbsp")]</a></td>"
 			counter++
 
 		if (counter >= 5) //So things dont get squiiiiished!
@@ -446,10 +446,10 @@ var/list/jobban_keylist = list() // Global jobban list.
 			continue
 
 		if (jobban_isbanned(ckey, job.title))
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext(job.title, " ", "&nbsp")]</font></a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext_char(job.title, " ", "&nbsp")]</font></a></td>"
 			counter++
 		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext_char(job.title, " ", "&nbsp")]</a></td>"
 			counter++
 
 		if (counter >= 5)
@@ -468,10 +468,10 @@ var/list/jobban_keylist = list() // Global jobban list.
 			continue
 
 		if (jobban_isbanned(ckey, job.title))
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext(job.title, " ", "&nbsp")]</font></a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext_char(job.title, " ", "&nbsp")]</font></a></td>"
 			counter++
 		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext_char(job.title, " ", "&nbsp")]</a></td>"
 			counter++
 
 		if (counter >= 5) //So things dont get squiiiiished!
@@ -497,10 +497,10 @@ var/list/jobban_keylist = list() // Global jobban list.
 			continue
 
 		if (jobban_isbanned(ckey, job.title))
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext(job.title, " ", "&nbsp")]</font></a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'><font color=red>[replacetext_char(job.title, " ", "&nbsp")]</font></a></td>"
 			counter++
 		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[job.title];jobban_tgt=[ckey]'>[replacetext_char(job.title, " ", "&nbsp")]</a></td>"
 			counter++
 
 		if (counter >= 5) //So things dont get squiiiiished!
@@ -531,9 +531,9 @@ var/list/jobban_keylist = list() // Global jobban list.
 		if (!antag || !antag.bantype)
 			continue
 		if (isbanned_dept || jobban_isbanned(ckey, antag.bantype))
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[antag.bantype];jobban_tgt=[ckey]'><font color=red>[replacetext("[antag.role_text]", " ", "&nbsp")]</font></a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[antag.bantype];jobban_tgt=[ckey]'><font color=red>[replacetext_char("[antag.role_text]", " ", "&nbsp")]</font></a></td>"
 		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[antag.bantype];jobban_tgt=[ckey]'>[replacetext("[antag.role_text]", " ", "&nbsp")]</a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban_job=[antag.bantype];jobban_tgt=[ckey]'>[replacetext_char("[antag.role_text]", " ", "&nbsp")]</a></td>"
 
 		counter++
 

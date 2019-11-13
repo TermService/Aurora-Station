@@ -60,10 +60,10 @@
 		var/filtered_name = lowertext(html_decode(name))
 		var/filtered_short = lowertext(html_decode(short_name))
 		if(dd_hasprefix(text,filtered_name))
-			var/substring = copytext(text,length(filtered_name)+1) //get rid of the name.
+			var/substring = copytext_char(text,length(filtered_name)+1) //get rid of the name.
 			listen(speaker,substring)
 		else if(dd_hasprefix(text,filtered_short))
-			var/substring = copytext(text,length(filtered_short)+1) //get rid of the name.
+			var/substring = copytext_char(text,length(filtered_short)+1) //get rid of the name.
 			listen(speaker,substring)
 		command_buffer.Remove(command_buffer[1],command_buffer[2])
 	..()
@@ -88,7 +88,7 @@
 
 /mob/living/bot/secbot/ed209/proc/listen(var/mob/speaker, var/text)
 	for(var/command in known_commands)
-		if(findtext(text,command))
+		if(findtext_char(text,command))
 			switch(command)
 				if("stay")
 					if(stay_command(speaker,text)) //find a valid command? Stop. Dont try and find more.
@@ -115,14 +115,14 @@
 /mob/living/bot/secbot/ed209/proc/get_target_by_name(var/text)
 	var/list/possible_targets = hearers(src,10)
 	for(var/mob/M in possible_targets)
-		if(findtext(text, "[M]"))
+		if(findtext_char(text, "[M]"))
 			return M
 		else
 			var/list/parsed_name = splittext(replace_characters(lowertext(html_decode("[M]")),list("-"=" ", "."=" ", "," = " ", "'" = " ")), " ") //this big MESS is basically 'turn this into words, no punctuation, lowercase so we can check first name/last name/etc'
 			for(var/a in parsed_name)
 				if(a == "the" || length(a) < 2) //get rid of shit words.
 					continue
-				if(findtext(text,"[a]"))
+				if(findtext_char(text,"[a]"))
 					return M
 	return null
 
@@ -134,7 +134,7 @@
 	if(!(target in view(7, src)))
 		return 0
 
-	if(findtext(text,"detain"))
+	if(findtext_char(text,"detain"))
 		arrest_type = 1
 	else
 		arrest_type = 0
@@ -188,7 +188,7 @@
 
 /mob/living/bot/secbot/ed209/proc/follow_command(var/mob/speaker,var/text)
 	//we can assume 'stop following' is handled by stop_command
-	if(findtext(text,"me"))
+	if(findtext_char(text,"me"))
 		mode = SECBOT_FOLLOW
 		target = speaker
 		custom_emote(2, "[emote_hear], \"Roger that, following you\"")

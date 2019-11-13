@@ -170,9 +170,9 @@
 
 // Sanitize inputs to avoid SQL injection attacks
 /proc/sql_sanitize_text(var/text)
-	text = replacetext(text, "'", "''")
-	text = replacetext(text, ";", "")
-	text = replacetext(text, "&", "")
+	text = replacetext_char(text, "'", "''")
+	text = replacetext_char(text, ";", "")
+	text = replacetext_char(text, "&", "")
 	return text
 
 /proc/feedback_set(var/variable,var/value)

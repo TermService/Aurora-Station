@@ -159,8 +159,8 @@
 						ears.forceMove(src.loc)
 						ears = null
 						for(var/possible_phrase in speak)
-							if(copytext(possible_phrase,1,3) in department_radio_keys)
-								possible_phrase = copytext(possible_phrase,3,length(possible_phrase))
+							if(copytext_char(possible_phrase,1,3) in department_radio_keys)
+								possible_phrase = copytext_char(possible_phrase,3,length(possible_phrase))
 					else
 						to_chat(usr, "<span class='warning'>There is nothing to remove from its [remove_from].</span>")
 						return
@@ -328,8 +328,8 @@
 						if(prob(50))
 							useradio = 1
 
-						if(copytext(possible_phrase,1,3) in department_radio_keys)
-							possible_phrase = "[useradio?pick(available_channels):""] [copytext(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
+						if(copytext_char(possible_phrase,1,3) in department_radio_keys)
+							possible_phrase = "[useradio?pick(available_channels):""] [copytext_char(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
 						else
 							possible_phrase = "[useradio?pick(available_channels):""] [possible_phrase]"
 
@@ -337,8 +337,8 @@
 
 				else //If we have no headset or channels to use, dont try to use any!
 					for(var/possible_phrase in speak)
-						if(copytext(possible_phrase,1,3) in department_radio_keys)
-							possible_phrase = "[copytext(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
+						if(copytext_char(possible_phrase,1,3) in department_radio_keys)
+							possible_phrase = "[copytext_char(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
 						newspeak.Add(possible_phrase)
 				speak = newspeak
 
@@ -700,17 +700,17 @@
 
 
 	var/message_mode=""
-	if(copytext(message,1,2) == ";")
+	if(copytext_char(message,1,2) == ";")
 		message_mode = "headset"
-		message = copytext(message,2)
+		message = copytext_char(message,2)
 
 	if(length(message) >= 2)
-		var/channel_prefix = copytext(message, 1 ,3)
+		var/channel_prefix = copytext_char(message, 1 ,3)
 		message_mode = department_radio_keys[channel_prefix]
 
-	if(copytext(message,1,2) == ":")
+	if(copytext_char(message,1,2) == ":")
 		var/positioncut = 3
-		message = trim(copytext(message,positioncut))
+		message = trim(copytext_char(message,positioncut))
 
 	message = capitalize(trim_left(message))
 
@@ -758,4 +758,3 @@
 	parrot_state = PARROT_SWOOP | PARROT_ATTACK //Attack other animals regardless
 	icon_state = "parrot_fly"
 	return success
-

@@ -154,7 +154,7 @@ move an amendment</a> to the drawing.</p>
 
 
 /obj/item/blueprints/proc/set_area_machinery_title(var/area/A,var/title,var/oldtitle)
-	if (!oldtitle) // or replacetext goes to infinite loop
+	if (!oldtitle) // or replacetext_char goes to infinite loop
 		return
 
 	var/static/list/types_to_rename = list(
@@ -167,7 +167,7 @@ move an amendment</a> to the drawing.</p>
 
 	for(var/obj/machinery/M in A)
 		if (is_type_in_list(M, types_to_rename))
-			M.name = replacetext(M.name, oldtitle, title)
+			M.name = replacetext_char(M.name, oldtitle, title)
 
 		CHECK_TICK
 

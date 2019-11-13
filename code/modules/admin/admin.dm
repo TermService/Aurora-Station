@@ -261,7 +261,7 @@ proc/admin_notice(var/message, var/rights)
 
 
 /datum/admins/proc/player_has_info(var/key as text)
-	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
+	var/savefile/info = new("data/player_saves/[copytext_char(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
 	info >> infos
 	if(!infos || !infos.len) return 0
@@ -288,7 +288,7 @@ proc/admin_notice(var/message, var/rights)
 				break
 		dat +="<span style='color:#000000; font-weight: bold'>Player age: [p_age]</span><br>"
 
-		var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
+		var/savefile/info = new("data/player_saves/[copytext_char(key, 1, 2)]/[key]/info.sav")
 		var/list/infos
 		info >> infos
 		if(!infos)
@@ -675,7 +675,7 @@ proc/admin_notice(var/message, var/rights)
 	if(message)
 		if(!check_rights(R_SERVER, 0))
 			message = sanitize(message, 500, extra = 0)
-		message = replacetext(message, "\n", "<br>") // required since we're putting it in a <p> tag
+		message = replacetext_char(message, "\n", "<br>") // required since we're putting it in a <p> tag
 		to_world("<span class=notice><b>[usr.client.holder.fakekey ? "Administrator" : usr.key] Announces:</b><p style='text-indent: 50px'>[message]</p></span>")
 		log_admin("Announce: [key_name(usr)] : [message]")
 	feedback_add_details("admin_verb","A") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -1027,7 +1027,7 @@ proc/admin_notice(var/message, var/rights)
 	var/list/matches = new()
 
 	for(var/path in types)
-		if(findtext("[path]", object))
+		if(findtext_char("[path]", object))
 			matches += path
 
 	if(matches.len==0)
@@ -1374,8 +1374,8 @@ proc/admin_notice(var/message, var/rights)
 		return
 	if(!check_rights(R_SERVER,0))
 		message = sanitize(message, 500, extra = 0)
-	
-			
+
+
 	var/list/sounds = file2list("sound/serversound_list.txt");
 	sounds += "--CANCEL--"
 	sounds += "--LOCAL--"
@@ -1389,7 +1389,7 @@ proc/admin_notice(var/message, var/rights)
 		melody = input("Select a sound to play", "Sound select") as sound
 		if(!melody)
 			return
-	
+
 	command_announcement.Announce(message, title, new_sound = melody)
 	log_and_message_admins("made custom announcement with custom sound", usr)
 	feedback_add_details("admin_verb","ACS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

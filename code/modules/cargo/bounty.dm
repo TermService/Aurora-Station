@@ -6,12 +6,12 @@
 	var/high_priority = FALSE
 
 /datum/bounty/New()
-	description = replacetext(description, "%DOCKNAME",current_map.dock_name)
-	description = replacetext(description, "%DOCKSHORT",current_map.dock_short)
-	description = replacetext(description, "%BOSSNAME",current_map.boss_name)
-	description = replacetext(description, "%BOSSSHORT",current_map.boss_short)
-	description = replacetext(description, "%COMPNAME",current_map.company_name)
-	description = replacetext(description, "%COMPSHORT",current_map.company_short)
+	description = replacetext_char(description, "%DOCKNAME",current_map.dock_name)
+	description = replacetext_char(description, "%DOCKSHORT",current_map.dock_short)
+	description = replacetext_char(description, "%BOSSNAME",current_map.boss_name)
+	description = replacetext_char(description, "%BOSSSHORT",current_map.boss_short)
+	description = replacetext_char(description, "%COMPNAME",current_map.company_name)
+	description = replacetext_char(description, "%COMPSHORT",current_map.company_short)
 
 
 // Displayed on bounty UI screen.
@@ -177,7 +177,7 @@
 		CHECK_TICK
 		var/list/subtype = pick(subtypesof(/datum/bounty/item/security))
 		try_add_bounty(new subtype)
-	
+
 	for(var/i = 0; i < 5; ++i)
 		CHECK_TICK
 		var/list/subtype = pick(subtypesof(/datum/bounty/weapon_prototype, /datum/bounty/item/science, /datum/bounty/item/slime))
@@ -207,4 +207,3 @@
 		if(B.claimed)
 			++count
 	return count
-

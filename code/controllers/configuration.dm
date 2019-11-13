@@ -324,16 +324,16 @@ var/list/gamemode_cache = list()
 		t = trim(t)
 		if (length(t) == 0)
 			continue
-		else if (copytext(t, 1, 2) == "#")
+		else if (copytext_char(t, 1, 2) == "#")
 			continue
 
-		var/pos = findtext(t, " ")
+		var/pos = findtext_char(t, " ")
 		var/name = null
 		var/value = null
 
 		if (pos)
-			name = lowertext(copytext(t, 1, pos))
-			value = copytext(t, pos + 1)
+			name = lowertext(copytext_char(t, 1, pos))
+			value = copytext_char(t, pos + 1)
 		else
 			name = lowertext(t)
 
@@ -982,7 +982,7 @@ var/list/gamemode_cache = list()
 					log_misc("Unknown setting in configuration: '[name]'")
 
 		else if (type == "age_restrictions")
-			name = replacetext(name, "_", " ")
+			name = replacetext_char(name, "_", " ")
 			age_restrictions[name] = text2num(value)
 
 		else if (type == "discord")

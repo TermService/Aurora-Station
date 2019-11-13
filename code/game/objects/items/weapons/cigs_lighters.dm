@@ -206,9 +206,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			text = weldermes
 		else if(istype(W, /obj/item/device/assembly/igniter))
 			text = ignitermes
-		text = replacetext(text, "USER", "[user]")
-		text = replacetext(text, "NAME", "[name]")
-		text = replacetext(text, "FLAME", "[W.name]")
+		text = replacetext_char(text, "USER", "[user]")
+		text = replacetext_char(text, "NAME", "[name]")
+		text = replacetext_char(text, "FLAME", "[W.name]")
 		light(text)
 
 /obj/item/clothing/mask/smokable/cigarette

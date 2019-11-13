@@ -302,7 +302,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			out += "<br><b>Body Color</b><br>"
 			out += "<a href='?src=\ref[src];skin_color=1'>Change Color</a> [HTML_RECT(rgb(pref.r_skin, pref.g_skin, pref.b_skin))] <br>"
 
-	
+
 
 	out += "<br><a href='?src=\ref[src];marking_style=1'>Body Markings +</a><br>"
 	for(var/M in pref.body_markings)
@@ -389,9 +389,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				pref.f_style = facial_hair_styles_list["Shaved"]
 
 			//reset hair colour and skin colour
-			pref.r_hair = 0//hex2num(copytext(new_hair, 2, 4))
-			pref.g_hair = 0//hex2num(copytext(new_hair, 4, 6))
-			pref.b_hair = 0//hex2num(copytext(new_hair, 6, 8))
+			pref.r_hair = 0//hex2num(copytext_char(new_hair, 2, 4))
+			pref.g_hair = 0//hex2num(copytext_char(new_hair, 4, 6))
+			pref.b_hair = 0//hex2num(copytext_char(new_hair, 6, 8))
 			pref.s_tone = 0
 
 			pref.organ_data.Cut()

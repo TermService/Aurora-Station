@@ -409,7 +409,7 @@
 	if (faction.is_default)
 		dat += "<br><center><small>This faction is the default faction aboard this installation.</small></center>"
 
-	dat += "<br><br><center><a href='?src=\ref[user.client];JSlink=wiki;wiki_page=[replacetext(faction.name, " ", "_")]'>Read the Wiki</a></center>"
+	dat += "<br><br><center><a href='?src=\ref[user.client];JSlink=wiki;wiki_page=[replacetext_char(faction.name, " ", "_")]'>Read the Wiki</a></center>"
 	dat += "<br>[faction.description]"
 
 	show_browser(user, dat.Join(), "window=factionpreview;size=400x600")

@@ -82,7 +82,7 @@
 		var/obj/item/weapon/paper/a = faxes[fax_id]
 		output["title"] = a.name ? a.name : "Untitled Fax"
 
-		var/content = replacetext(a.info, "<br>", "\n")
+		var/content = replacetext_char(a.info, "<br>", "\n")
 		content = strip_html_properly(content, 0)
 		output["content"] = content
 
@@ -108,7 +108,7 @@
 		var/i = 0
 		for (var/obj/item/weapon/paper/c in b.pages)
 			i++
-			var/content = replacetext(c.info, "<br>", "\n")
+			var/content = replacetext_char(c.info, "<br>", "\n")
 			content = strip_html_properly(content, 0)
 			output["content"] += "Page [i]:\n[content]\n\n"
 

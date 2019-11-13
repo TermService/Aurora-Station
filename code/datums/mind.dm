@@ -118,7 +118,7 @@
 	. = length(memory + new_text)
 
 	if (. > MAX_PAPER_MESSAGE_LEN)
-		memory = copytext(memory, . - MAX_PAPER_MESSAGE_LEN, .)
+		memory = copytext_char(memory, . - MAX_PAPER_MESSAGE_LEN, .)
 	else
 		memory += "[new_text]<BR>"
 
@@ -230,7 +230,7 @@
 
 			//Text strings are easy to manipulate. Revised for simplicity.
 			var/temp_obj_type = "[objective.type]"//Convert path into a text string.
-			def_value = copytext(temp_obj_type, 19)//Convert last part of path into an objective keyword.
+			def_value = copytext_char(temp_obj_type, 19)//Convert last part of path into an objective keyword.
 			if(!def_value)//If it's a custom objective, it will be an empty string.
 				def_value = "custom"
 
@@ -242,8 +242,8 @@
 		switch (new_obj_type)
 			if ("assassinate","protect","debrain", "harm", "brig")
 				//To determine what to name the objective in explanation text.
-				var/objective_type_capital = uppertext(copytext(new_obj_type, 1,2))//Capitalize first letter.
-				var/objective_type_text = copytext(new_obj_type, 2)//Leave the rest of the text.
+				var/objective_type_capital = uppertext(copytext_char(new_obj_type, 1,2))//Capitalize first letter.
+				var/objective_type_text = copytext_char(new_obj_type, 2)//Leave the rest of the text.
 				var/objective_type = "[objective_type_capital][objective_type_text]"//Add them together into a text string.
 
 				var/list/possible_targets = list("Free objective")

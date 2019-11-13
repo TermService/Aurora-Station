@@ -34,7 +34,7 @@
 		var/datum/computer_file/data/F = HDD.find_file_by_name(href_list["PRG_execfile"])
 		if(istype(F))
 			var/oldtext = html_decode(F.stored_data)
-			oldtext = replacetext(oldtext, "\[editorbr\]", "\n")
+			oldtext = replacetext_char(oldtext, "\[editorbr\]", "\n")
 			running = ntsl2.new_program(oldtext, src, usr)
 			if(istype(running))
 				running.name = href_list["PRG_execfile"]
@@ -48,8 +48,8 @@
 	if(href_list["PRG_topic"])
 		if(istype(running))
 			var/topc = href_list["PRG_topic"]
-			if(copytext(topc, 1, 2) == "?")
-				topc = copytext(topc, 2) + "?" + input("","Enter Data")
+			if(copytext_char(topc, 1, 2) == "?")
+				topc = copytext_char(topc, 2) + "?" + input("","Enter Data")
 			running.topic(topc)
 			running.cycle(300)
 		. = 1
@@ -98,4 +98,3 @@
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
-

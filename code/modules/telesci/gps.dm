@@ -71,7 +71,7 @@ var/global/list/gps_by_type = list()
 	..()
 	if(href_list["tag"] )
 		var/a = input("Please enter desired tag.", name, gpstag) as text
-		a = uppertext(copytext(sanitize(a), 1, 5))
+		a = uppertext(copytext_char(sanitize(a), 1, 5))
 		if(src.loc == usr)
 			gpstag = a
 			name = "global positioning system ([gpstag])"

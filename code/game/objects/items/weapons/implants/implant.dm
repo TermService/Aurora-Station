@@ -165,7 +165,7 @@ Implant Specifics:<BR>"}
 /obj/item/weapon/implant/explosive/hear(var/msg)
 	var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
 	msg = replace_characters(msg, replacechars)
-	if(findtext(msg,phrase))
+	if(findtext_char(msg,phrase))
 		activate()
 		qdel(src)
 

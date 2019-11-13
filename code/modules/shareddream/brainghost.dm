@@ -55,7 +55,7 @@
 	if(!istype(body) || body.stat!=UNCONSCIOUS)
 		return
 	if(prob(20)) // 1/5 chance to mumble out anything you say in the dream.
-		var/list/words = text2list(replacetext(message, "\[^a-zA-Z]*$", ""), " ")
+		var/list/words = text2list(replacetext_char(message, "\[^a-zA-Z]*$", ""), " ")
 		var/word_count = rand(1, words.len) // How many words to mumble out from within the sentance
 		var/words_start = rand(1, words.len - (word_count - 1)) // Where the chunk of said words should start.
 

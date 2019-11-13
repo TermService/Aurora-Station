@@ -68,7 +68,7 @@
 					for (var/ID in virus)
 						var/datum/disease2/disease/V = virus[ID]
 						var/datum/record/virus/R = SSrecords.find_record("id", "[ID]", RECORD_VIRUS)
-		
+
 						var/datum/weakref/A = B.data["donor"]
 						var/mob/living/carbon/human/D = A.resolve()
 						pathogen_pool.Add(list(list(\
@@ -95,7 +95,7 @@
 				var/desc = entry.description
 				data["entry"] = list(\
 					"name" = entry.name, \
-					"description" = replacetext(desc, "\n", ""))
+					"description" = replacetext_char(desc, "\n", ""))
 
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

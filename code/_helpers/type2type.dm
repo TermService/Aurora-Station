@@ -70,8 +70,8 @@ proc/tg_list2text(list/list, glue=",")
 	var/found
 
 	do
-		found       = findtext(text, delimiter, last_found, 0)
-		.          += copytext(text, last_found, found)
+		found       = findtext_char(text, delimiter, last_found, 0)
+		.          += copytext_char(text, last_found, found)
 		last_found  = found + delim_len
 	while (found)
 
@@ -86,8 +86,8 @@ proc/tg_list2text(list/list, glue=",")
 	var/found
 
 	do
-		found       = findtextEx(text, delimiter, last_found, 0)
-		.          += copytext(text, last_found, found)
+		found       = findtextEx_char(text, delimiter, last_found, 0)
+		.          += copytext_char(text, last_found, found)
 		last_found  = found + delim_len
 	while (found)
 
@@ -281,16 +281,16 @@ proc/tg_list2text(list/list, glue=",")
 	var/r
 	var/c
 	for(var/i = 1 to length(str)/2)
-		c = hex2num(copytext(str,i*2-1,i*2+1), safe)
+		c = hex2num(copytext_char(str,i*2-1,i*2+1), safe)
 		if(isnull(c))
 			return null
 		r += ascii2text(c)
 	return r
 
 /proc/hex2cssrgba(var/hex, var/alpha)
-	var/textr = copytext(hex, 2, 4)
-	var/textg = copytext(hex, 4, 6)
-	var/textb = copytext(hex, 6, 8)
+	var/textr = copytext_char(hex, 2, 4)
+	var/textg = copytext_char(hex, 4, 6)
+	var/textb = copytext_char(hex, 6, 8)
 	var/r = hex2num(textr)
 	var/g = hex2num(textg)
 	var/b = hex2num(textb)

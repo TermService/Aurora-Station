@@ -89,24 +89,24 @@ var j1251_to_utf_table = list(
 	if(!t)
 		return
 
-	t = replacetext(t, "&#255;", "\\u044f")
-	t = replacetext(t, "&#1103;", "\\u044f")
+	t = replacetext_char(t, "&#255;", "\\u044f")
+	t = replacetext_char(t, "&#1103;", "\\u044f")
 
 	if(DM_VERSION < 511)
 		for(var/s in j1251_to_utf_table)
-			t = replacetext(t, "\\x[s]", "\\u[j1251_to_utf_table[s]]")
+			t = replacetext_char(t, "\\x[s]", "\\u[j1251_to_utf_table[s]]")
 	else
 		for(var/s in j1251_to_utf_table)
-			t = replacetext(t, "\\u00[s]", "\\u[j1251_to_utf_table[s]]")
+			t = replacetext_char(t, "\\u00[s]", "\\u[j1251_to_utf_table[s]]")
 	return t
 
 /proc/convert1251_to_utf(t)
 	if(!t)
 		return
 
-	t = replacetext(t, "&#255;", "&#x044f")
-	t = replacetext(t, "&#1103;", "&#x044f")
+	t = replacetext_char(t, "&#255;", "&#x044f")
+	t = replacetext_char(t, "&#1103;", "&#x044f")
 
 	for(var/s in c1251_to_utf_table)
-		t = replacetext(t, s, "&#x[c1251_to_utf_table[s]];")
+		t = replacetext_char(t, s, "&#x[c1251_to_utf_table[s]];")
 	return t

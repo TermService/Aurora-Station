@@ -165,8 +165,8 @@
 				dat += "<tr[even ? " class='alt'" : ""]><td>[item["name"]]</td><td>[item["rank"]]</td><td>[isactive[item["name"]] ? isactive[item["name"]] : item["active"]]</td></tr>"
 				even = !even
 	dat += "</table>"
-	dat = replacetext(dat, "\n", "") // so it can be placed on paper correctly
-	dat = replacetext(dat, "\t", "")
+	dat = replacetext_char(dat, "\n", "") // so it can be placed on paper correctly
+	dat = replacetext_char(dat, "\t", "")
 	return dat
 
 /datum/controller/subsystem/records/proc/get_manifest_json()

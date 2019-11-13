@@ -98,7 +98,7 @@
 /proc/prob_chance(var/chance)
 	return prob(chance)
 
-// Merge of list.Find() and findtext()
+// Merge of list.Find() and findtext_char()
 /proc/smartfind(var/haystack, var/needle, var/start = 1, var/end = 0)
 	if(haystack && needle)
 		if(isobject(haystack))
@@ -110,13 +110,13 @@
 		else
 			if(istext(haystack))
 				if(length(haystack) >= end && start > 0)
-					return findtext(haystack, needle, start, end)
+					return findtext_char(haystack, needle, start, end)
 
-// Clone of copytext()
+// Clone of copytext_char()
 /proc/docopytext(var/string, var/start = 1, var/end = 0)
 	if(istext(string) && isnum(start) && isnum(end))
 		if(start > 0)
-			return copytext(string, start, end)
+			return copytext_char(string, start, end)
 
 // Clone of length()
 /proc/smartlength(var/container)
@@ -141,8 +141,8 @@ proc/string_tolist(var/string)
 	var/list/L = new/list()
 
 	var/i
-	for(i=1, i<=lentext(string), i++)
-		L.Add(copytext(string, i, i))
+	for(i=1, i<=length_char(string), i++)
+		L.Add(copytext_char(string, i, i))
 
 	return L
 
@@ -154,12 +154,12 @@ proc/string_explode(var/string, var/separator)
 		var/lasti = 1
 		var/list/L = new/list()
 
-		for(i=1, i<=lentext(string)+1, i++)
-			if(copytext(string, i, i+1) == separator) // We found a separator
-				L.Add(copytext(string, lasti, i))
+		for(i=1, i<=length_char(string)+1, i++)
+			if(copytext_char(string, i, i+1) == separator) // We found a separator
+				L.Add(copytext_char(string, lasti, i))
 				lasti = i+1
 
-		L.Add(copytext(string, lasti, lentext(string)+1)) // Adds the last segment
+		L.Add(copytext_char(string, lasti, length_char(string)+1)) // Adds the last segment
 
 		return L
 
@@ -186,10 +186,10 @@ proc/n_reverse(var/string)
 	if(istext(string))
 		var/newstring = ""
 		var/i
-		for(i=lentext(string), i>0, i--)
+		for(i=length_char(string), i>0, i--)
 			if(i>=1000)
 				break
-			newstring = newstring + copytext(string, i, i+1)
+			newstring = newstring + copytext_char(string, i, i+1)
 
 		return newstring
 
@@ -250,14 +250,14 @@ proc/n_inrange(var/num, var/min=-1, var/max=1)
 /proc/string_replacetext(var/haystack,var/a,var/b)
 	if(istext(haystack)&&istext(a)&&istext(b))
 		var/i = 1
-		var/lenh=lentext(haystack)
-		var/lena=lentext(a)
-		//var/lenb=lentext(b)
+		var/lenh=length_char(haystack)
+		var/lena=length_char(a)
+		//var/lenb=length_char(b)
 		var/count = 0
 		var/list/dat = list()
 		while (i < lenh)
-			var/found = findtext(haystack, a, i, 0)
-			//log_misc("findtext([haystack], [a], [i], 0)=[found]")
+			var/found = findtext_char(haystack, a, i, 0)
+			//log_misc("findtext_char([haystack], [a], [i], 0)=[found]")
 			if (found == 0) // Not found
 				break
 			else
@@ -272,7 +272,7 @@ proc/n_inrange(var/num, var/min=-1, var/max=1)
 		if (count == 0)
 			return haystack
 		//var/nlen = lenh + ((lenb - lena) * count)
-		var/buf = copytext(haystack,1,dat[1]) // Prefill
+		var/buf = copytext_char(haystack,1,dat[1]) // Prefill
 		var/lastReadPos = 0
 		for (i = 1, i <= count, i++)
 			var/precopy = dat[i] - lastReadPos-1
@@ -280,12 +280,12 @@ proc/n_inrange(var/num, var/min=-1, var/max=1)
 			//fixed (char* dest = target, src = source)
 			//CharCopy (dest + targetIndex, src + sourceIndex, count);
 			//CharCopy (dest + curPos, source + lastReadPos, precopy);
-			buf+=copytext(haystack,lastReadPos,precopy)
-			log_misc("buf+=copytext([haystack],[lastReadPos],[precopy])")
+			buf+=copytext_char(haystack,lastReadPos,precopy)
+			log_misc("buf+=copytext_char([haystack],[lastReadPos],[precopy])")
 			log_misc("[buf]")
 			lastReadPos = dat[i] + lena
 			//CharCopy (dest + curPos, replace, newValue.length);
 			buf+=b
 			log_misc("[buf]")
-		buf+=copytext(haystack,lastReadPos, 0)
+		buf+=copytext_char(haystack,lastReadPos, 0)
 		return buf

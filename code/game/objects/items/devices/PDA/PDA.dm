@@ -555,7 +555,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					if(FM.img)
 						usr << browse_rsc(FM.img, "pda_news_tmp_photo_[feed["channel"]]_[index].png")
 					// News stories are HTML-stripped but require newline replacement to be properly displayed in NanoUI
-					var/body = replacetext(FM.body, "\n", "<br>")
+					var/body = replacetext_char(FM.body, "\n", "<br>")
 					messages[++messages.len] = list("author" = FM.author, "body" = body, "message_type" = FM.message_type, "time_stamp" = FM.time_stamp, "has_image" = (FM.img != null), "caption" = FM.caption, "index" = index, "likes" = FM.likes, "dislikes" = FM.dislikes)
 			feed["messages"] = messages
 
@@ -706,7 +706,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if (mode == 1)
 					note = html_decode(n)
 					notehtml = note
-					note = replacetext(note, "\n", "<br>")
+					note = replacetext_char(note, "\n", "<br>")
 			else
 				ui.close()
 		if("Toggle Messenger")
@@ -1402,30 +1402,30 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		// Scrub out the tags (replacing a few formatting ones along the way)
 
 		// Find the beginning and end of the first tag.
-		var/tag_start = findtext(raw_scan,"<")
-		var/tag_stop = findtext(raw_scan,">")
+		var/tag_start = findtext_char(raw_scan,"<")
+		var/tag_stop = findtext_char(raw_scan,">")
 
 		// Until we run out of complete tags...
 		while(tag_start&&tag_stop)
-			var/pre = copytext(raw_scan,1,tag_start) // Get the stuff that comes before the tag
-			var/tag = lowertext(copytext(raw_scan,tag_start+1,tag_stop)) // Get the tag so we can do intellegent replacement
-			var/tagend = findtext(tag," ") // Find the first space in the tag if there is one.
+			var/pre = copytext_char(raw_scan,1,tag_start) // Get the stuff that comes before the tag
+			var/tag = lowertext(copytext_char(raw_scan,tag_start+1,tag_stop)) // Get the tag so we can do intellegent replacement
+			var/tagend = findtext_char(tag," ") // Find the first space in the tag if there is one.
 
 			// Anything that's before the tag can just be added as is.
 			formatted_scan = formatted_scan+pre
 
 			// If we have a space after the tag (and presumably attributes) just crop that off.
 			if (tagend)
-				tag=copytext(tag,1,tagend)
+				tag=copytext_char(tag,1,tagend)
 
 			if (tag=="p"||tag=="/p"||tag=="br") // Check if it's I vertical space tag.
 				formatted_scan=formatted_scan+"<br>" // If so, add some padding in.
 
-			raw_scan = copytext(raw_scan,tag_stop+1) // continue on with the stuff after the tag
+			raw_scan = copytext_char(raw_scan,tag_stop+1) // continue on with the stuff after the tag
 
 			// Look for the next tag in what's left
-			tag_start = findtext(raw_scan,"<")
-			tag_stop = findtext(raw_scan,">")
+			tag_start = findtext_char(raw_scan,"<")
+			tag_stop = findtext_char(raw_scan,">")
 
 		// Anything that is left in the page. just tack it on to the end as is
 		formatted_scan=formatted_scan+raw_scan

@@ -73,7 +73,7 @@
 	real_name = name
 	slime_mutation = mutation_table(colour)
 	mutation_chance = rand(25, 35)
-	var/sanitizedcolour = replacetext(colour, " ", "")
+	var/sanitizedcolour = replacetext_char(colour, " ", "")
 	coretype = text2path("/obj/item/slime_extract/[sanitizedcolour]")
 	regenerate_icons()
 

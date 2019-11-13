@@ -30,7 +30,7 @@ proc/gen_configs()
 		else
 			if(findtext_char(line, ".") && !findtext_char(line, "##"))
 				if(server_gen)
-					var/filterline = replacetext(line, " ", "")
+					var/filterline = replacetext_char(line, " ", "")
 					var/serverlink = copytext_char(filterline, findtext_char( filterline, ")") + 1)
 					servers.Add(serverlink)
 					servernames.Add( copytext_char(line, findtext_char(line, "("), findtext_char(line, ")") + 1))

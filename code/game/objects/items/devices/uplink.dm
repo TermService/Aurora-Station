@@ -159,7 +159,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			if(item.can_view(src))
 				var/cost = item.cost(uses)
 				if(!cost) cost = "???"
-				items[++items.len] = list("name" = item.name, "description" = replacetext(item.description(), "\n", "<br>"), "can_buy" = item.can_buy(src), "cost" = cost, "ref" = "\ref[item]")
+				items[++items.len] = list("name" = item.name, "description" = replacetext_char(item.description(), "\n", "<br>"), "can_buy" = item.can_buy(src), "cost" = cost, "ref" = "\ref[item]")
 		nanoui_data["items"] = items
 	else if(nanoui_menu == 2)
 		var/permanentData[0]
@@ -175,7 +175,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 								 // We trade off being able to automatically add shit for more control over what gets passed to json
 								 // and if it's sanitized for html.
 				nanoui_data["exploit"]["nanoui_exploit_record"] = html_encode(L.exploit_record) // Change stuff into html
-				nanoui_data["exploit"]["nanoui_exploit_record"] = replacetext(nanoui_data["exploit"]["nanoui_exploit_record"], "\n", "<br>") // change line breaks into <br>
+				nanoui_data["exploit"]["nanoui_exploit_record"] = replacetext_char(nanoui_data["exploit"]["nanoui_exploit_record"], "\n", "<br>") // change line breaks into <br>
 				nanoui_data["exploit"]["name"] =  html_encode(L.name)
 				nanoui_data["exploit"]["sex"] =  html_encode(L.sex)
 				nanoui_data["exploit"]["age"] =  html_encode(L.age)
@@ -293,8 +293,8 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 				contract["description"] = select_query.item[5]
 
 				contract["description"] = html_encode(contract["description"])
-				contract["description"] = replacetext(contract["description"], "\n", "<br>")
-				contract["description"] = replacetext(contract["description"], ascii2text(13), "")
+				contract["description"] = replacetext_char(contract["description"], "\n", "<br>")
+				contract["description"] = replacetext_char(contract["description"], ascii2text(13), "")
 				contract["reward_other"] = select_query.item[6]
 
 				nanoui_data["contract"] = contract

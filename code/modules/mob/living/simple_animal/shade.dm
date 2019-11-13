@@ -211,7 +211,7 @@
 					valid = 1
 					break
 			if(!valid)
-				message = replacetext(message, word1, pick(words_in_memory))
+				message = replacetext_char(message, word1, pick(words_in_memory))
 		message = slur(message,15)
 		..()
 	else

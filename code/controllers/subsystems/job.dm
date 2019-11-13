@@ -579,13 +579,13 @@
 		if (!length(job))
 			continue
 
-		var/pos = findtext(job, "=")
+		var/pos = findtext_char(job, "=")
 		var/name = null
 		var/value = null
 
 		if(pos)
-			name = copytext(job, 1, pos)
-			value = copytext(job, pos + 1)
+			name = copytext_char(job, 1, pos)
+			value = copytext_char(job, pos + 1)
 		else
 			continue
 

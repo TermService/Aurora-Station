@@ -308,7 +308,7 @@
 	else if(istext(I))
 		var/DT = I
 		for(var/atom/thing in nearby_things)
-			if(findtext(addtext(thing.name, " ", thing.desc), DT, 1, 0))
+			if(findtext_char(addtext(thing.name, " ", thing.desc), DT, 1, 0))
 				valid_things.Add(thing)
 	if(valid_things.len)
 		set_pin_data(IC_OUTPUT, 1, pick(valid_things))
@@ -869,7 +869,7 @@
 						var/atom/thing = i
 						if(ismob(thing) && !isliving(thing))
 							continue
-						if(findtext(addtext(thing.name," ",thing.desc), item, 1, 0) )
+						if(findtext_char(addtext(thing.name," ",thing.desc), item, 1, 0) )
 							valid_things.Add(WEAKREF(thing))
 				else
 					var/atom/A = item

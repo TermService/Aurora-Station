@@ -48,10 +48,10 @@ var/global/list/navbeacons			// no I don't like putting this in, but it will do 
 		var/list/entries = text2list(codes_txt, ";")	// entries are separated by semicolons
 
 		for(var/e in entries)
-			var/index = findtext(e, "=")		// format is "key=value"
+			var/index = findtext_char(e, "=")		// format is "key=value"
 			if(index)
-				var/key = copytext(e, 1, index)
-				var/val = copytext(e, index+1)
+				var/key = copytext_char(e, 1, index)
+				var/val = copytext_char(e, index+1)
 				codes[key] = val
 			else
 				codes[e] = "1"

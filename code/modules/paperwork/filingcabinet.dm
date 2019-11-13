@@ -123,7 +123,7 @@ Mental Status: [R.mental_status]<BR>
 Criminal Status: [R.security.criminal]<BR><BR>
 Crimes: [R.security.crimes]<BR><BR>
 Important Notes:<BR>
-\t[replacetext(R.security.notes, "\n", "<BR>")]<BR>\n<BR>
+\t[replacetext_char(R.security.notes, "\n", "<BR>")]<BR>\n<BR>
 <CENTER><B>Comments/Log</B></CENTER><BR>
 "}
 				for(var/comment in R.security.comments)
@@ -169,7 +169,7 @@ Disabilities: [R.medical.disabilities]<BR><BR>
 Allergies: [R.medical.allergies]<BR>
 Current Diseases: [R.medical.diseases] (per disease info placed in log/comment section)<BR><BR>
 Important Notes:<BR>
-[replacetext(R.medical.notes, "\n", "<BR>")]<BR><BR>
+[replacetext_char(R.medical.notes, "\n", "<BR>")]<BR><BR>
 <CENTER><B>Comments/Log</B></CENTER><BR>
 "}
 				for(var/comment in R.medical.comments)

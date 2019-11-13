@@ -96,9 +96,9 @@
 			return 1
 
 		var/oldtext = html_decode(F.stored_data)
-		oldtext = replacetext(oldtext, "\[editorbr\]", "\n")
+		oldtext = replacetext_char(oldtext, "\[editorbr\]", "\n")
 
-		var/newtext = sanitize(replacetext(input(usr, "Editing file [open_file]. You may use most tags used in paper formatting:", "Text Editor", oldtext) as message|null, "\n", "\[editorbr\]"), MAX_TEXTFILE_LENGTH)
+		var/newtext = sanitize(replacetext_char(input(usr, "Editing file [open_file]. You may use most tags used in paper formatting:", "Text Editor", oldtext) as message|null, "\n", "\[editorbr\]"), MAX_TEXTFILE_LENGTH)
 		if(!newtext)
 			return
 

@@ -539,4 +539,4 @@
 	set name = "Display Initialize() Log"
 	set desc = "Displays a list of things that didn't handle Initialize() properly"
 
-	usr << browse(replacetext(SSatoms.InitLog(), "\n", "<br>"), "window=initlog")
+	usr << browse(replacetext_char(SSatoms.InitLog(), "\n", "<br>"), "window=initlog")

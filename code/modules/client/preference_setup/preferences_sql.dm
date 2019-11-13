@@ -194,7 +194,7 @@
 				i++
 
 			// Remove any potentially damaging commas from the end.
-			query = replacetext(query, ",", "", length(query) - 1)
+			query = replacetext_char(query, ",", "", length(query) - 1)
 
 #ifdef SQL_PREF_DEBUG
 			log_debug("SQL CHARACTER SAVE: Cached query [query].")

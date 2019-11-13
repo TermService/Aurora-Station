@@ -64,7 +64,7 @@ var/datum/controller/subsystem/emergency_shuttle/emergency_shuttle
 
 			if (evac)
 				set_force_countdown(SHUTTLE_FORCETIME)
-				priority_announcement.Announce(replacetext(current_map.emergency_shuttle_docked_message, "%ETD%", round(estimate_launch_time()/60,1)), new_sound = 'sound/AI/emergencyshuttledock.ogg')
+				priority_announcement.Announce(replacetext_char(current_map.emergency_shuttle_docked_message, "%ETD%", round(estimate_launch_time()/60,1)), new_sound = 'sound/AI/emergencyshuttledock.ogg')
 			else
 				set_force_countdown(SHUTTLE_LEAVETIME)
 				var/list/fields = list(
@@ -77,7 +77,7 @@ var/datum/controller/subsystem/emergency_shuttle/emergency_shuttle
 		if (evac)
 			for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
 				if (pod.arming_controller)
-					pod.arming_controller.arm()	
+					pod.arming_controller.arm()
 
 //begins the launch countdown and sets the amount of time left until launch
 /datum/controller/subsystem/emergency_shuttle/proc/set_launch_countdown(var/seconds)
@@ -109,7 +109,7 @@ var/datum/controller/subsystem/emergency_shuttle/emergency_shuttle
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
 
 	evac = 1
-	priority_announcement.Announce(replacetext(current_map.emergency_shuttle_called_message, "%ETA%", round(estimate_arrival_time()/60)), new_sound = 'sound/AI/emergencyshuttlecalled.ogg')
+	priority_announcement.Announce(replacetext_char(current_map.emergency_shuttle_called_message, "%ETA%", round(estimate_arrival_time()/60)), new_sound = 'sound/AI/emergencyshuttlecalled.ogg')
 	for(var/area/A in all_areas)
 		if(istype(A, /area/hallway))
 			A.readyalert()
