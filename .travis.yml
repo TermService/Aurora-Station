@@ -4,7 +4,7 @@ sudo: false
 env:
   global:
     BYOND_MAJOR="513"
-    BYOND_MINOR="1496"
+    BYOND_MINOR="1497"
     MACRO_COUNT=77
     FLYWAY_BUILD="5.2.4"
     NODE_VERSION=10
