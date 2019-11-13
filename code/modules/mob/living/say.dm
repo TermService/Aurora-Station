@@ -41,7 +41,7 @@ var/list/department_radio_keys = list(
 	  ":ш" = "intercom",	".ш" = "intercom",
 	  ":р" = "department",	".р" = "department",
 	  ":с" = "Command",		".с" = "Command",
-	  ":т" = "Science",		".ы" = "Science",
+	  ":т" = "Science",		".т" = "Science",
 	  ":ь" = "Medical",		".ь" = "Medical",
 	  ":у" = "Engineering",	".у" = "Engineering",
 	  ":ы" = "Security",	".ы" = "Security",
